@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VMS - Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">VMS</div>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="profile.html" class="active">Profile</a></li>
+    </ul>
+    <ul class="bottom-links">
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="#" id="logout-btn">Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <h1>User Profile</h1>
+    <form id="profile-form">
+      <input type="text" id="profile-name" placeholder="Full Name">
+      <input type="email" id="profile-email" placeholder="Email">
+      <input type="text" id="profile-phone" placeholder="Phone">
+      <button type="submit">Save Profile</button>
+    </form>
+    <div class="progress-bar">
+      <div id="progress-fill">0%</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

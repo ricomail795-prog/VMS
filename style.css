@@ -1,0 +1,90 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #002244;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  background: #001833;
+}
+.nav-links, .bottom-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.nav-links a, .bottom-links a {
+  display: block;
+  padding: 12px 20px;
+  color: #fff;
+  text-decoration: none;
+}
+.nav-links a:hover, .bottom-links a:hover {
+  background: #004080;
+}
+.nav-links a.active {
+  background: #0055aa;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background: #f9f9f9;
+  overflow-y: auto;
+}
+h1, h2 { color: #002244; }
+
+/* Tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.data-table th, .data-table td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+}
+.data-table th { background: #f0f0f0; }
+
+/* Forms */
+input, button {
+  margin: 5px 0;
+  padding: 8px;
+}
+button {
+  background: #0055aa;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+button:hover { background: #003f7d; }
+
+/* Progress bar */
+.progress-bar {
+  width: 300px;
+  background: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+#progress-fill {
+  background: #0055aa;
+  color: #fff;
+  text-align: center;
+  height: 20px;
+  width: 0%;
+}
