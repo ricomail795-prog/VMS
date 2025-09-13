@@ -1,17 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Reset everything to blank on load
-  localStorage.setItem("users", JSON.stringify([]));
-  localStorage.setItem("currentUser", "null");
-  localStorage.setItem("vessels", JSON.stringify([]));
-  localStorage.setItem("crew", JSON.stringify([]));
-  localStorage.setItem("messages", JSON.stringify([]));
-
   const loginBtn = document.getElementById("login-btn");
   if (loginBtn) {
     loginBtn.addEventListener("click", () => {
       const u = document.getElementById("login-username").value.trim();
       const p = document.getElementById("login-password").value.trim();
-      const users = JSON.parse(localStorage.getItem("users"));
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
       const found = users.find(x => x.username === u && x.password === p);
       if (found) {
         localStorage.setItem("currentUser", JSON.stringify(found));
@@ -25,28 +18,40 @@ document.addEventListener("DOMContentLoaded", () => {
     regBtn.addEventListener("click", () => {
       const u = document.getElementById("register-username").value.trim();
       const p = document.getElementById("register-password").value.trim();
+      const r = document.getElementById("register-role").value;
       if (!u || !p) { alert("Enter details"); return; }
-      let users = JSON.parse(localStorage.getItem("users"));
+      let users = JSON.parse(localStorage.getItem("users") || "[]");
       if (users.find(x => x.username === u)) { alert("User exists"); return; }
-      const newUser = { username: u, password: p };
+      const newUser = { username: u, password: p, role: r };
       users.push(newUser);
       localStorage.setItem("users", JSON.stringify(users));
-      alert("User registered. Please login.");
+      alert("User registered as " + r + ". Please login.");
     });
   }
 
   const logoutBtn = document.getElementById("logout-btn");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
-      localStorage.setItem("currentUser", "null");
+      localStorage.removeItem("currentUser");
       window.location.href = "index.html";
     });
   }
 
+  function renderTable(tbody, items, keys) {
+    tbody.innerHTML = "";
+    items.forEach(it => {
+      let row = "<tr>";
+      keys.forEach(k => { row += `<td>${it[k] || ""}</td>`; });
+      row += "</tr>";
+      tbody.innerHTML += row;
+    });
+  }
+
+  // Vessels
   if (document.getElementById("vessel-form")) {
     const vesselForm = document.getElementById("vessel-form");
     const vesselTable = document.getElementById("vessel-table");
-    let vessels = JSON.parse(localStorage.getItem("vessels"));
+    let vessels = JSON.parse(localStorage.getItem("vessels") || "[]");
     renderTable(vesselTable, vessels, ["name","location","project","status"]);
     vesselForm.addEventListener("submit", e => {
       e.preventDefault();
@@ -63,10 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Crew
   if (document.getElementById("crew-form")) {
     const crewForm = document.getElementById("crew-form");
     const crewTable = document.getElementById("crew-table");
-    let crew = JSON.parse(localStorage.getItem("crew"));
+    let crew = JSON.parse(localStorage.getItem("crew") || "[]");
     renderTable(crewTable, crew, ["username","fullName","rank","vessel"]);
     crewForm.addEventListener("submit", e => {
       e.preventDefault();
@@ -83,10 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Messages
   if (document.getElementById("message-form")) {
     const msgForm = document.getElementById("message-form");
     const msgTable = document.getElementById("message-table");
-    let messages = JSON.parse(localStorage.getItem("messages"));
+    let messages = JSON.parse(localStorage.getItem("messages") || "[]");
     renderTable(msgTable, messages, ["to","subject","body"]);
     msgForm.addEventListener("submit", e => {
       e.preventDefault();
@@ -102,13 +109,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Profile
   if (document.getElementById("profile-form")) {
     const profileForm = document.getElementById("profile-form");
     const nameEl = document.getElementById("profile-name");
     const emailEl = document.getElementById("profile-email");
     const phoneEl = document.getElementById("profile-phone");
     const progressFill = document.getElementById("progress-fill");
-    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    let currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
     if (currentUser && currentUser !== "null") {
       nameEl.value = currentUser.fullName || "";
       emailEl.value = currentUser.email || "";
@@ -120,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentUser.email = emailEl.value;
       currentUser.phone = phoneEl.value;
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      let users = JSON.parse(localStorage.getItem("users"));
+      let users = JSON.parse(localStorage.getItem("users") || "[]");
       users = users.map(u => u.username === currentUser.username ? currentUser : u);
       localStorage.setItem("users", JSON.stringify(users));
       updateProgress();
@@ -135,15 +143,5 @@ document.addEventListener("DOMContentLoaded", () => {
       progressFill.textContent = percent + "%";
     }
     updateProgress();
-  }
-
-  function renderTable(tbody, items, keys) {
-    tbody.innerHTML = "";
-    items.forEach(it => {
-      let row = "<tr>";
-      keys.forEach(k => { row += `<td>${it[k] || ""}</td>`; });
-      row += "</tr>";
-      tbody.innerHTML += row;
-    });
   }
 });

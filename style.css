@@ -9,7 +9,7 @@ body {
   color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   height: 100vh;
 }
 .logo {
@@ -33,8 +33,14 @@ body {
 .nav-links a:hover, .bottom-links a:hover {
   background: #004080;
 }
-.nav-links a.active {
+.nav-links a.active, .bottom-links a.active {
   background: #0055aa;
+  font-weight: bold;
+  color: #e0f0ff;
+}
+.divider {
+  border-top: 1px solid #446;
+  margin: 10px 0;
 }
 .main-content {
   flex: 1;

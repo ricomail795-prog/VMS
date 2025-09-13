@@ -12,7 +12,9 @@
       <li><a href="dashboard.html" class="active">Dashboard</a></li>
       <li><a href="profile.html">Profile</a></li>
     </ul>
+    <div class="divider"></div>
     <ul class="bottom-links">
+      <li><a href="messages.html">Messages</a></li>
       <li><a href="settings.html">Settings</a></li>
       <li><a href="#" id="logout-btn">Logout</a></li>
     </ul>
@@ -49,20 +51,6 @@
         <tr><th>Username</th><th>Full Name</th><th>Rank</th><th>Vessel</th></tr>
       </thead>
       <tbody id="crew-table"></tbody>
-    </table>
-
-    <h2>Messages</h2>
-    <form id="message-form">
-      <input type="text" id="message-to" placeholder="To" required>
-      <input type="text" id="message-subject" placeholder="Subject" required>
-      <input type="text" id="message-body" placeholder="Message" required>
-      <button type="submit">Send Message</button>
-    </form>
-    <table class="data-table">
-      <thead>
-        <tr><th>To</th><th>Subject</th><th>Body</th></tr>
-      </thead>
-      <tbody id="message-table"></tbody>
     </table>
   </div>
   <script src="script.js"></script>
