@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,15 +24,17 @@
 
   <main class="main">
     <h1>Dashboard</h1>
-    <p>Welcome to the Vessel Management System.</p>
 
     <section class="card">
       <h2>Registered Vessels</h2>
       <table class="table">
         <thead>
-          <tr><th>Name</th><th>Location</th><th>Project</th><th>Status</th><th>Days</th><th>Crew</th></tr>
+          <tr>
+            <th>Name</th><th>Location</th><th>Project</th>
+            <th>Status</th><th>Days</th><th>Crew</th>
+          </tr>
         </thead>
-        <tbody id="dash-vessels"></tbody>
+        <tbody id="dash-vessels"><!-- empty by design --></tbody>
       </table>
     </section>
 
@@ -39,9 +42,12 @@
       <h2>Registered Crew</h2>
       <table class="table">
         <thead>
-          <tr><th>Username</th><th>Full Name</th><th>Role</th><th>Rank</th><th>Assigned Vessel</th></tr>
+          <tr>
+            <th>Username</th><th>Full Name</th><th>Role</th>
+            <th>Rank</th><th>Assigned Vessel</th>
+          </tr>
         </thead>
-        <tbody id="dash-crew"></tbody>
+        <tbody id="dash-crew"><!-- empty by design --></tbody>
       </table>
     </section>
   </main>
@@ -49,4 +55,3 @@
   <script src="./script.js?v=1"></script>
 </body>
 </html>
-
