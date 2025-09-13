@@ -1,58 +1,57 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang=”en”>
 <head>
-  <meta charset="UTF-8" />
+  <meta charset=”UTF-8” />
   <title>VMS – Profile</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="favicon.ico" />
-  <link rel="stylesheet" href="style.css?v=1" />
+  <meta name=”viewport” content=”width=device-width, initial-scale=1” />
+  <link rel=”icon” href=”favicon.ico” />
+  <link rel=”stylesheet” href=”style.css?v=1” />
 </head>
 <body>
-  <aside class="sidebar">
-    <div class="logo-badge">VMS</div>
+  <aside class=”sidebar”>
+    <div class=”logo-badge”>VMS</div>
     <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a class="active" href="profile.html">Profile</a>
-      <div class="bottom-nav">
-        <a href="messages.html">Messages</a>
-        <a href="settings.html">Settings</a>
-        <a href="#" id="logout-btn">Logout</a>
+      <a href=”dashboard.html”>Dashboard</a>
+      <a class=”active” href=”profile.html”>Profile</a>
+      <div class=”bottom-nav”>
+        <a href=”messages.html”>Messages</a>
+        <a href=”settings.html”>Settings</a>
+        <a href=”#” id=”logout-btn”>Logout</a>
       </div>
     </nav>
   </aside>
 
-  <main class="main">
+  <main class=”main”>
     <h1>User Profile</h1>
 
-    <section class="card">
+    <section class=”card”>
       <h2>Profile Picture</h2>
-      <input type="file" id="profile-pic" accept="image/*" />
-      <div class="preview">
-        <img id="profile-pic-preview" alt="Profile Preview" />
+      <input type=”file” id=”profile-pic” accept=”image/*” />
+      <div class=”preview”>
+        <img id=”profile-pic-preview” alt=”Profile Preview” />
       </div>
     </section>
 
-    <section class="card">
+    <section class=”card”>
       <h2>Personal Details</h2>
-      <label>First Name</label><input id="first-name" type="text" />
-      <label>Surname</label><input id="surname" type="text" />
-      <label>Address</label><input id="address" type="text" />
-      <label>Telephone</label><input id="telephone" type="text" />
-      <label>Email</label><input id="email" type="email" />
+      <label>First Name</label><input id=”first-name” type=”text” />
+      <label>Surname</label><input id=”surname” type=”text” />
+      <label>Address</label><input id=”address” type=”text” />
+      <label>Telephone</label><input id=”telephone” type=”text” />
+      <label>Email</label><input id=”email” type=”email” />
     </section>
 
-    <section class="card">
+    <section class=”card”>
       <h2>Next of Kin</h2>
-      <label>Relationship</label><input id="kin-relationship" type="text" />
-      <label>Name</label><input id="kin-name" type="text" />
-      <label>Address</label><input id="kin-address" type="text" />
-      <label>Telephone</label><input id="kin-telephone" type="text" />
+      <label>Relationship</label><input id=”kin-relationship” type=”text” />
+      <label>Name</label><input id=”kin-name” type=”text” />
+      <label>Address</label><input id=”kin-address” type=”text” />
+      <label>Telephone</label><input id=”kin-telephone” type=”text” />
     </section>
 
-    <section class="card">
+    <section class=”card”>
       <h2>Certificates</h2>
-      <table class="table" id="certificates-table">
+      <table class=”table” id=”certificates-table”>
         <thead>
           <tr>
             <th>Type</th><th>Number</th><th>Issuing Body</th>
@@ -61,32 +60,33 @@
         </thead>
         <tbody></tbody>
       </table>
-      <button id="add-certificate">Add Certificate</button>
+      <button id=”add-certificate”>Add Certificate</button>
     </section>
 
-    <section class="card">
+    <section class=”card”>
       <h2>Medical Declaration</h2>
-      <label>Doctor Name</label><input id="doctor-name" type="text" />
-      <label>Doctor Address</label><input id="doctor-address" type="text" />
-      <label>Doctor Telephone</label><input id="doctor-telephone" type="text" />
+      <label>Doctor Name</label><input id=”doctor-name” type=”text” />
+      <label>Doctor Address</label><input id=”doctor-address” type=”text” />
+      <label>Doctor Telephone</label><input id=”doctor-telephone” type=”text” />
 
       <label>Have you ever had surgery?</label>
-      <select id="surgery"><option value="">Select</option><option>Yes</option><option>No</option></select>
+      <select id=”surgery”><option value=””>Select</option><option>Yes</option><option>No</option></select>
       <label>Do you have any chronic conditions?</label>
-      <select id="chronic"><option value="">Select</option><option>Yes</option><option>No</option></select>
+      <select id=”chronic”><option value=””>Select</option><option>Yes</option><option>No</option></select>
       <label>Are you currently taking medication?</label>
-      <select id="medication"><option value="">Select</option><option>Yes</option><option>No</option></select>
+      <select id=”medication”><option value=””>Select</option><option>Yes</option><option>No</option></select>
     </section>
 
-    <section class="card">
+    <section class=”card”>
       <h2>Electronic Signature</h2>
-      <canvas id="signature-pad" width="520" height="160"></canvas><br />
-      <button id="clear-signature" type="button">Clear Signature</button>
+      <canvas id=”signature-pad” width=”520” height=”160”></canvas><br />
+      <button id=”clear-signature” type=”button”>Clear Signature</button>
     </section>
 
-    <button id="save-profile-btn" class="primary">Save Profile</button>
+    <button id=”save-profile-btn” class=”primary”>Save Profile</button>
   </main>
 
-  <script src="./script.js?v=1"></script>
+  <script src=”./script.js?v=1”></script>
 </body>
 </html>
+
