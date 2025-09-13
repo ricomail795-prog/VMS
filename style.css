@@ -1,4 +1,4 @@
-/* ===== Global Styles ===== */
+/* ===== Global ===== */
 Body {
   Margin: 0;
   Font-family: Arial, sans-serif;
@@ -6,11 +6,11 @@ Body {
   Min-height: 100vh;
 }
 
-/* ===== Sidebar ===== */
+/* Sidebar */
 .sidebar {
   Width: 220px;
   Background: #003366;
-  Color: #fff;
+  Color: white;
   Display: flex;
   Flex-direction: column;
   Padding-top: 20px;
@@ -35,7 +35,7 @@ Body {
   Background: #004080;
 }
 
-/* ===== Main Content ===== */
+/* Main content */
 .main-content {
   Flex-grow: 1;
   Padding: 20px;
@@ -60,7 +60,7 @@ H2 {
   Color: #004080;
 }
 
-/* ===== Form Styling ===== */
+/* Form inputs */
 Label {
   Display: block;
   Margin-top: 10px;
@@ -78,7 +78,7 @@ Textarea {
   Box-sizing: border-box;
 }
 
-/* ===== Buttons ===== */
+/* Buttons */
 Button {
   Margin-top: 10px;
   Padding: 10px 15px;
@@ -93,23 +93,21 @@ Button:hover {
   Background: #0055aa;
 }
 
-/* ===== Certificates Table ===== */
+/* Tables */
 Table {
   Width: 100%;
   Border-collapse: collapse;
   Margin-top: 10px;
 }
-
 Table, th, td {
   Border: 1px solid #ccc;
 }
-
 Th, td {
   Padding: 8px;
   Text-align: left;
 }
 
-/* ===== Signature Pad ===== */
+/* Signature */
 #signature-pad {
   Margin-top: 10px;
   Border: 1px solid #333;
