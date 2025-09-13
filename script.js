@@ -1,145 +1,242 @@
 
-// ===== Utility =====
-function getUsers() { return JSON.parse(localStorage.getItem("users")) || []; }
-function saveUsers(users) { localStorage.setItem("users", JSON.stringify(users)); }
-function getCurrentUser() { return JSON.parse(localStorage.getItem("currentUser")) || null; }
-function setCurrentUser(user) { localStorage.setItem("currentUser", JSON.stringify(user)); }
-function clearCurrentUser() { localStorage.removeItem("currentUser"); }
+// ---------- Storage helpers ----------
+const LS_USERS = "users";
+const LS_CURRENT = "currentUser";
 
-// ===== DOM Ready =====
+const getUsers = () => JSON.parse(localStorage.getItem(LS_USERS) || "[]");
+const saveUsers = (u) => localStorage.setItem(LS_USERS, JSON.stringify(u));
+const getCurrentUser = () => JSON.parse(localStorage.getItem(LS_CURRENT) || "null");
+const setCurrentUser = (u) => localStorage.setItem(LS_CURRENT, JSON.stringify(u));
+const clearCurrentUser = () => localStorage.removeItem(LS_CURRENT);
+
+// ---------- Boot ----------
 document.addEventListener("DOMContentLoaded", () => {
-  const users = getUsers();
-  let currentUser = getCurrentUser();
+  const path = location.pathname.split("/").pop().toLowerCase() || "index.html";
+  const current = getCurrentUser();
 
-  // Login
+  // Auth guard for app pages
+  const protectedPages = ["dashboard.html","profile.html","messages.html","settings.html"];
+  if (protectedPages.includes(path) && !current) {
+    location.href = "index.html";
+    return;
+  }
+
+  // Attach page-specific behavior
+  if (path === "index.html") initAuthPage();
+  if (path === "dashboard.html") initDashboardPage(current);
+  if (path === "profile.html") initProfilePage(current);
+
+  // Logout button (if present)
+  const logoutBtn = document.getElementById("logout-btn");
+  if (logoutBtn) logoutBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    clearCurrentUser();
+    location.href = "index.html";
+  });
+});
+
+// ---------- Auth page ----------
+function initAuthPage() {
   const loginForm = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
+
   if (loginForm) {
     loginForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const username = document.getElementById("login-username").value.trim();
       const password = document.getElementById("login-password").value.trim();
-      const user = users.find((u) => u.username === username && u.password === password);
-      if (user) { setCurrentUser(user); window.location.href = "dashboard.html"; }
-      else { alert("Invalid credentials"); }
+      const users = getUsers();
+      const found = users.find(u => u.username === username && u.password === password);
+      if (!found) return alert("Invalid credentials.");
+      setCurrentUser(found);
+      location.href = "dashboard.html";
     });
   }
 
-  // Register
-  const registerForm = document.getElementById("registerForm");
   if (registerForm) {
     registerForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const username = document.getElementById("reg-username").value.trim();
       const password = document.getElementById("reg-password").value.trim();
       const role = document.getElementById("reg-role").value;
-      if (!username || !password || !role) { alert("Please complete all fields"); return; }
-      if (users.find((u) => u.username === username)) { alert("Username exists"); return; }
-      const newUser = { username, password, role,
-        profile: { personal:{}, nextOfKin:{}, certificates:[], medical:{}, signature:null }
-      };
-      users.push(newUser); saveUsers(users);
-      alert("Account created. Please login."); registerForm.reset();
+      if (!username || !password || !role) return alert("Please complete all fields.");
+      const users = getUsers();
+      if (users.some(u => u.username === username)) return alert("Username already exists.");
+      users.push({
+        username, password, role,
+        profile: { personal:{}, nextOfKin:{}, certificates:[], medical:{}, signature:null, photo:null }
+      });
+      saveUsers(users);
+      alert("Account created. Please log in.");
+      registerForm.reset();
+    });
+  }
+}
+
+// ---------- Dashboard ----------
+function initDashboardPage(current) {
+  // You can fill these tables later; keeping them empty as requested.
+  const vTBody = document.getElementById("dash-vessels");
+  const cTBody = document.getElementById("dash-crew");
+  if (vTBody) vTBody.innerHTML = ""; // no demo rows
+  if (cTBody) cTBody.innerHTML = ""; // no demo rows
+}
+
+// ---------- Profile ----------
+function initProfilePage(current) {
+  if (!current) return;
+
+  // Load existing
+  const p = current.profile || { personal:{}, nextOfKin:{}, certificates:[], medical:{}, signature:null, photo:null };
+
+  // Photo preview
+  const picInput = document.getElementById("profile-pic");
+  const picPrev = document.getElementById("profile-pic-preview");
+  if (p.photo) picPrev.src = p.photo;
+  if (picInput) {
+    picInput.addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => { picPrev.src = reader.result; };
+      reader.readAsDataURL(file);
     });
   }
 
-  // Logout
-  const logoutBtn = document.getElementById("logout-btn");
-  if (logoutBtn) logoutBtn.addEventListener("click", () => { clearCurrentUser(); window.location.href="index.html"; });
+  // Personal
+  setVal("first-name", p.personal.firstName);
+  setVal("surname", p.personal.surname);
+  setVal("address", p.personal.address);
+  setVal("telephone", p.personal.telephone);
+  setVal("email", p.personal.email);
 
-  // Profile page
-  if (window.location.pathname.includes("profile.html") && currentUser) {
-    loadProfile(currentUser);
-    document.getElementById("save-profile-btn").addEventListener("click", () => saveProfile(currentUser));
-    setupSignaturePad();
-    setupCertificates(currentUser);
+  // Kin
+  setVal("kin-relationship", p.nextOfKin.relationship);
+  setVal("kin-name", p.nextOfKin.name);
+  setVal("kin-address", p.nextOfKin.address);
+  setVal("kin-telephone", p.nextOfKin.telephone);
+
+  // Medical
+  setVal("doctor-name", p.medical.doctorName);
+  setVal("doctor-address", p.medical.doctorAddress);
+  setVal("doctor-telephone", p.medical.doctorTelephone);
+  setVal("surgery", p.medical.surgery);
+  setVal("chronic", p.medical.chronic);
+  setVal("medication", p.medical.medication);
+
+  // Certificates
+  setupCertificatesTable(p.certificates || []);
+
+  // Signature
+  setupSignaturePad(p.signature);
+
+  // Save
+  const saveBtn = document.getElementById("save-profile-btn");
+  saveBtn?.addEventListener("click", () => {
+    const users = getUsers();
+    // build updated profile
+    const updated = {
+      photo: picPrev?.src || null,
+      personal: {
+        firstName: getVal("first-name"),
+        surname: getVal("surname"),
+        address: getVal("address"),
+        telephone: getVal("telephone"),
+        email: getVal("email"),
+      },
+      nextOfKin: {
+        relationship: getVal("kin-relationship"),
+        name: getVal("kin-name"),
+        address: getVal("kin-address"),
+        telephone: getVal("kin-telephone"),
+      },
+      certificates: collectCertificateRows(),
+      medical: {
+        doctorName: getVal("doctor-name"),
+        doctorAddress: getVal("doctor-address"),
+        doctorTelephone: getVal("doctor-telephone"),
+        surgery: getVal("surgery"),
+        chronic: getVal("chronic"),
+        medication: getVal("medication"),
+      },
+      signature: document.getElementById("signature-pad").toDataURL(),
+    };
+
+    // persist
+    current.profile = updated;
+    const idx = users.findIndex(u => u.username === current.username);
+    if (idx !== -1) users[idx] = current;
+    saveUsers(users);
+    setCurrentUser(current);
+    alert("Profile saved.");
+  });
+}
+
+function setVal(id, v) { const el = document.getElementById(id); if (el) el.value = v || ""; }
+function getVal(id) { const el = document.getElementById(id); return el ? el.value.trim() : ""; }
+
+// Certificates
+function setupCertificatesTable(existing) {
+  const tbody = document.querySelector("#certificates-table tbody");
+  const addBtn = document.getElementById("add-certificate");
+  tbody.innerHTML = "";
+  (existing || []).forEach(c => appendCertRow(tbody, c));
+  addBtn?.addEventListener("click", () => appendCertRow(tbody, {}));
+}
+function appendCertRow(tbody, cert) {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td><input type="text" value="${esc(cert.type)}" /></td>
+    <td><input type="text" value="${esc(cert.number)}" /></td>
+    <td><input type="text" value="${esc(cert.issuingBody)}" /></td>
+    <td><input type="date" value="${esc(cert.validFrom)}" /></td>
+    <td><input type="date" value="${esc(cert.validTo)}" /></td>
+    <td><input type="file" /></td>
+    <td><button type="button" class="link danger">Delete</button></td>
+  `;
+  tr.querySelector(".danger").addEventListener("click", () => tr.remove());
+  tbody.appendChild(tr);
+}
+function collectCertificateRows() {
+  const rows = [...document.querySelectorAll("#certificates-table tbody tr")];
+  return rows.map(r => {
+    const inputs = r.querySelectorAll("input");
+    return {
+      type: inputs[0].value.trim(),
+      number: inputs[1].value.trim(),
+      issuingBody: inputs[2].value.trim(),
+      validFrom: inputs[3].value,
+      validTo: inputs[4].value
+    };
+  });
+}
+function esc(v){ return (v || "").toString().replace(/"/g,"&quot;"); }
+
+// Signature
+function setupSignaturePad(existingDataUrl) {
+  const canvas = document.getElementById("signature-pad");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (existingDataUrl) {
+    const img = new Image();
+    img.onload = () => ctx.drawImage(img, 0, 0);
+    img.src = existingDataUrl;
   }
-});
-
-// ===== Load Profile =====
-function loadProfile(user) {
-  const p = user.profile || {};
-  document.getElementById("first-name").value = p.personal?.firstName || "";
-  document.getElementById("surname").value = p.personal?.surname || "";
-  document.getElementById("address").value = p.personal?.address || "";
-  document.getElementById("telephone").value = p.personal?.telephone || "";
-  document.getElementById("email").value = p.personal?.email || "";
-  document.getElementById("kin-relationship").value = p.nextOfKin?.relationship || "";
-  document.getElementById("kin-name").value = p.nextOfKin?.name || "";
-  document.getElementById("kin-address").value = p.nextOfKin?.address || "";
-  document.getElementById("kin-telephone").value = p.nextOfKin?.telephone || "";
-  document.getElementById("doctor-name").value = p.medical?.doctorName || "";
-  document.getElementById("doctor-address").value = p.medical?.doctorAddress || "";
-  document.getElementById("doctor-telephone").value = p.medical?.doctorTelephone || "";
-  if (p.signature) { const ctx = document.getElementById("signature-pad").getContext("2d"); const img = new Image(); img.src = p.signature; img.onload = () => ctx.drawImage(img,0,0); }
-}
-
-// ===== Save Profile =====
-function saveProfile(user) {
-  const users = getUsers();
-  user.profile = {
-    personal: {
-      firstName: document.getElementById("first-name").value,
-      surname: document.getElementById("surname").value,
-      address: document.getElementById("address").value,
-      telephone: document.getElementById("telephone").value,
-      email: document.getElementById("email").value,
-    },
-    nextOfKin: {
-      relationship: document.getElementById("kin-relationship").value,
-      name: document.getElementById("kin-name").value,
-      address: document.getElementById("kin-address").value,
-      telephone: document.getElementById("kin-telephone").value,
-    },
-    certificates: getCertificateData(),
-    medical: {
-      doctorName: document.getElementById("doctor-name").value,
-      doctorAddress: document.getElementById("doctor-address").value,
-      doctorTelephone: document.getElementById("doctor-telephone").value,
-    },
-    signature: document.getElementById("signature-pad").toDataURL(),
-  };
-  const idx = users.findIndex((u)=>u.username===user.username);
-  users[idx] = user; saveUsers(users); setCurrentUser(user);
-  alert("Profile saved successfully!");
-}
-
-// ===== Signature =====
-function setupSignaturePad() {
-  const canvas = document.getElementById("signature-pad"); if (!canvas) return;
-  const ctx = canvas.getContext("2d"); let drawing=false;
-  canvas.addEventListener("mousedown", ()=>drawing=true);
-  canvas.addEventListener("mouseup", ()=>drawing=false);
-  canvas.addEventListener("mousemove", (e)=>{ if(!drawing)return; ctx.fillStyle="#000"; ctx.beginPath(); ctx.arc(e.offsetX,e.offsetY,2,0,Math.PI*2); ctx.fill(); });
-  const clearBtn=document.getElementById("clear-signature");
-  if(clearBtn) clearBtn.addEventListener("click",()=>ctx.clearRect(0,0,canvas.width,canvas.height));
-}
-
-// ===== Certificates =====
-function setupCertificates(user) {
-  const table=document.getElementById("certificates-table").querySelector("tbody");
-  const addBtn=document.getElementById("add-certificate");
-  table.innerHTML=""; (user.profile.certificates||[]).forEach(c=>addCertificateRow(table,c));
-  addBtn.addEventListener("click",()=>addCertificateRow(table,{}));
-}
-function addCertificateRow(table, cert) {
-  const row=table.insertRow();
-  row.innerHTML=`
-    <td><input type="text" value="${cert.type||""}"></td>
-    <td><input type="text" value="${cert.number||""}"></td>
-    <td><input type="text" value="${cert.issuingBody||""}"></td>
-    <td><input type="date" value="${cert.validFrom||""}"></td>
-    <td><input type="date" value="${cert.validTo||""}"></td>
-    <td><input type="file"></td>
-    <td><button type="button" onclick="this.closest('tr').remove()">Delete</button></td>`;
-}
-function getCertificateData() {
-  const rows=document.getElementById("certificates-table").querySelector("tbody").rows;
-  const data=[]; for(let row of rows){data.push({
-    type: row.cells[0].querySelector("input").value,
-    number: row.cells[1].querySelector("input").value,
-    issuingBody: row.cells[2].querySelector("input").value,
-    validFrom: row.cells[3].querySelector("input").value,
-    validTo: row.cells[4].querySelector("input").value,
-  });}
-  return data;
+  let drawing = false;
+  canvas.addEventListener("mousedown", () => drawing = true);
+  canvas.addEventListener("mouseup", () => drawing = false);
+  canvas.addEventListener("mouseleave", () => drawing = false);
+  canvas.addEventListener("mousemove", (e) => {
+    if (!drawing) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    ctx.fillStyle = "#000";
+    ctx.beginPath();
+    ctx.arc(x, y, 2, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  document.getElementById("clear-signature")?.addEventListener("click", () => {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+  });
 }
