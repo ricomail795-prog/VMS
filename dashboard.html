@@ -1,58 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VMS - Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="sidebar">
     <div class="logo">VMS</div>
-    <ul class="nav-links">
-      <li><a href="dashboard.html" class="active">Dashboard</a></li>
-      <li><a href="profile.html">Profile</a></li>
-    </ul>
-    <div class="divider"></div>
-    <ul class="bottom-links">
-      <li><a href="messages.html">Messages</a></li>
-      <li><a href="settings.html">Settings</a></li>
-      <li><a href="#" id="logout-btn">Logout</a></li>
-    </ul>
+    <div class="avatar-container">
+      <img id="sidebar-avatar" class="avatar-circle" alt="Profile Avatar" />
+    </div>
+    <nav>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <a href="messages.html">Messages</a>
+      <a href="settings.html">Settings</a>
+      <a href="#" id="logoutBtn">Logout</a>
+    </div>
   </div>
 
   <div class="main-content">
     <h1>Dashboard</h1>
 
-    <h2>Registered Vessels</h2>
-    <form id="vessel-form">
-      <input type="text" id="vessel-name" placeholder="Vessel Name" required>
-      <input type="text" id="vessel-location" placeholder="Location" required>
-      <input type="text" id="vessel-project" placeholder="Project">
-      <input type="text" id="vessel-status" placeholder="Status">
-      <button type="submit">Add Vessel</button>
-    </form>
-    <table class="data-table">
-      <thead>
-        <tr><th>Name</th><th>Location</th><th>Project</th><th>Status</th></tr>
-      </thead>
-      <tbody id="vessel-table"></tbody>
-    </table>
+    <section>
+      <h2>Vessels</h2>
+      <table id="vesselTable" class="styled-table">
+        <thead>
+          <tr>
+            <th>Vessel Name</th>
+            <th>Status</th>
+            <th>Location</th>
+            <th>Project</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Populated via script.js -->
+        </tbody>
+      </table>
+    </section>
 
-    <h2>Registered Crew</h2>
-    <form id="crew-form">
-      <input type="text" id="crew-username" placeholder="Username" required>
-      <input type="text" id="crew-name" placeholder="Full Name" required>
-      <input type="text" id="crew-rank" placeholder="Rank">
-      <input type="text" id="crew-vessel" placeholder="Assigned Vessel">
-      <button type="submit">Add Crew</button>
-    </form>
-    <table class="data-table">
-      <thead>
-        <tr><th>Username</th><th>Full Name</th><th>Rank</th><th>Vessel</th></tr>
-      </thead>
-      <tbody id="crew-table"></tbody>
-    </table>
+    <section>
+      <h2>Crew</h2>
+      <table id="crewTable" class="styled-table">
+        <thead>
+          <tr>
+            <th>Avatar</th>
+            <th>Name</th>
+            <th>Rank</th>
+            <th>Assigned Vessel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Populated via script.js -->
+        </tbody>
+      </table>
+    </section>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
