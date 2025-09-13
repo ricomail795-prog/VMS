@@ -1,138 +1,100 @@
-/* Global reset */
-Body, html {
+Body {
   Margin: 0;
-  Padding: 0;
   Font-family: Arial, sans-serif;
-  Background: #f4f9fc;
-  Color: #222;
+  Display: flex;
 }
 
-/* Auth pages */
-.auth-container {
-  Display: flex;
-  Height: 100vh;
-  Justify-content: center;
-  Align-items: center;
-}
-.auth-box {
-  Background: white;
-  Padding: 2rem;
-  Border-radius: 8px;
-  Box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  Width: 300px;
-}
-.auth-box h1 {
-  Text-align: center;
-  Margin-bottom: 1rem;
-}
-.auth-box form {
+.sidebar {
+  Width: 200px;
+  Background: #002b5c;
+  Color: white;
+  Min-height: 100vh;
   Display: flex;
   Flex-direction: column;
 }
-.auth-box label {
-  Margin-top: 0.5rem;
+
+.sidebar .logo {
+  Text-align: center;
+  Font-size: 20px;
+  Padding: 15px;
+  Background: #004080;
 }
-.auth-box input, .auth-box select {
-  Padding: 0.5rem;
-  Margin-top: 0.2rem;
+
+.sidebar a {
+  Color: white;
+  Text-decoration: none;
+  Padding: 12px;
+  Display: block;
 }
-.auth-box button {
-  Margin-top: 1rem;
-  Padding: 0.7rem;
-  Background: #0077b6;
+
+.sidebar a.active, .sidebar a:hover {
+  Background: #0059b3;
+}
+
+.sidebar .bottom-links {
+  Margin-top: auto;
+}
+
+.main {
+  Flex-grow: 1;
+  Padding: 20px;
+}
+
+.profile-section {
+  Margin-bottom: 25px;
+  Padding: 15px;
+  Border: 1px solid #ddd;
+  Border-radius: 6px;
+  Background: #f9f9f9;
+}
+
+.form-group {
+  Display: flex;
+  Flex-direction: column;
+  Margin-bottom: 12px;
+}
+
+.form-group label {
+  Font-weight: bold;
+  Margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  Padding: 8px;
+  Border: 1px solid #ccc;
+  Border-radius: 4px;
+}
+
+Table {
+  Width: 100%;
+  Border-collapse: collapse;
+  Margin-top: 10px;
+}
+
+Table, th, td {
+  Border: 1px solid #ccc;
+  Padding: 8px;
+}
+
+#signaturePad {
+  Border: 1px solid #333;
+  Margin-top: 10px;
+  Cursor: crosshair;
+}
+
+.save-btn {
+  Display: block;
+  Margin-top: 20px;
+  Padding: 12px;
+  Background: #004080;
   Color: white;
   Border: none;
   Border-radius: 4px;
   Cursor: pointer;
 }
-.auth-box button:hover {
-  Background: #005f86;
-}
 
-/* Layout with sidebar */
-.sidebar {
-  Width: 220px;
-  Height: 100vh;
-  Background: #023e8a;
-  Color: white;
-  Display: flex;
-  Flex-direction: column;
-  Position: fixed;
-}
-.logo {
-  Font-size: 1.5rem;
-  Font-weight: bold;
-  Text-align: center;
-  Padding: 1rem;
-  Background: #03045e;
-  Border-bottom: 1px solid #0077b6;
-  Border-radius: 50%;
-  Width: 80px;
-  Height: 80px;
-  Margin: 1rem auto;
-  Display: flex;
-  Align-items: center;
-  Justify-content: center;
-}
-.avatar-container {
-  Text-align: center;
-  Margin-bottom: 1rem;
-}
-.avatar-circle {
-  Width: 100px;
-  Height: 100px;
-  Border-radius: 50%;
-  Border: 2px solid white;
-  Object-fit: cover;
-}
-
-/* Sidebar nav */
-.sidebar nav {
-  Flex-grow: 1;
-  Display: flex;
-  Flex-direction: column;
-}
-.sidebar nav a,
-.sidebar-bottom a {
-  Padding: 1rem;
-  Color: white;
-  Text-decoration: none;
-}
-.sidebar nav a.active {
-  Background: #0077b6;
-}
-.sidebar nav a:hover,
-.sidebar-bottom a:hover {
-  Background: #005f86;
-}
-.sidebar-bottom {
-  Border-top: 1px solid #0077b6;
-  Display: flex;
-  Flex-direction: column;
-}
-
-/* Main content */
-.main-content {
-  Margin-left: 220px;
-  Padding: 2rem;
-}
-
-/* Tables */
-.styled-table {
-  Width: 100%;
-  Border-collapse: collapse;
-  Margin-top: 1rem;
-}
-.styled-table th, .styled-table td {
-  Border: 1px solid #ddd;
-  Padding: 0.75rem;
-  Text-align: left;
-}
-.styled-table th {
-  Background: #0077b6;
-  Color: white;
-}
-.styled-table tr:nth-child(even) {
-  Background: #f2f2f2;
+.save-btn:hover {
+  Background: #0059b3;
 }
 
