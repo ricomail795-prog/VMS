@@ -1,86 +1,132 @@
-// Handle Registration
-document.addEventListener("DOMContentLoaded", () => {
-  const regForm = document.getElementById("registerForm");
-  const loginForm = document.getElementById("loginForm");
-  const profileDiv = document.getElementById("profileInfo");
-  const logoutBtn = document.getElementById("logoutBtn");
+// ==================== User Storage Helpers ====================
+function loadUsers() {
+  return JSON.parse(localStorage.getItem("users") || "[]");
+}
+function saveUsers(users) {
+  localStorage.setItem("users", JSON.stringify(users));
+}
+function setCurrentUser(user) {
+  localStorage.setItem("currentUser", JSON.stringify(user));
+}
+function getCurrentUser() {
+  return JSON.parse(localStorage.getItem("currentUser"));
+}
+function clearCurrentUser() {
+  localStorage.removeItem("currentUser");
+}
 
-  // Signature pad
-  const sigCanvas = document.getElementById("signaturePad");
-  if (sigCanvas) {
-    const ctx = sigCanvas.getContext("2d");
-    let drawing = false;
+// ==================== Registration ====================
+const regForm = document.getElementById("registerForm");
+if (regForm) {
+  regForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const username = document.getElementById("reg-username").value.trim();
+    const password = document.getElementById("reg-password").value.trim();
+    const role = document.getElementById("reg-role").value;
+    let users = loadUsers();
 
-    sigCanvas.addEventListener("mousedown", () => (drawing = true));
-    sigCanvas.addEventListener("mouseup", () => (drawing = false));
-    sigCanvas.addEventListener("mousemove", draw);
-    sigCanvas.addEventListener("touchstart", () => (drawing = true));
-    sigCanvas.addEventListener("touchend", () => (drawing = false));
-    sigCanvas.addEventListener("touchmove", draw);
-
-    function draw(e) {
-      if (!drawing) return;
-      e.preventDefault();
-      const rect = sigCanvas.getBoundingClientRect();
-      const x = (e.clientX || e.touches[0].clientX) - rect.left;
-      const y = (e.clientY || e.touches[0].clientY) - rect.top;
-      ctx.fillStyle = "#000";
-      ctx.fillRect(x, y, 2, 2);
+    if (users.find(u => u.username === username)) {
+      alert("Username already exists.");
+      return;
     }
+    const newUser = { username, password, role, profile: {} };
+    users.push(newUser);
+    saveUsers(users);
+    alert("Account created. You can now log in.");
+    regForm.reset();
+  });
+}
 
-    document.getElementById("clearSig").addEventListener("click", () => {
-      ctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
-    });
-  }
-
-  if (regForm) {
-    regForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("regName").value;
-      const email = document.getElementById("regEmail").value;
-      const password = document.getElementById("regPassword").value;
-      const signature = sigCanvas.toDataURL();
-
-      const user = { name, email, password, signature };
-      localStorage.setItem("vmsUser", JSON.stringify(user));
-      alert("Registration successful!");
-      window.location.href = "index.html";
-    });
-  }
-
-  if (loginForm) {
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const email = document.getElementById("loginEmail").value;
-      const password = document.getElementById("loginPassword").value;
-      const user = JSON.parse(localStorage.getItem("vmsUser"));
-
-      if (user && user.email === email && user.password === password) {
-        alert("Login successful!");
-        window.location.href = "profile.html";
-      } else {
-        alert("Invalid credentials!");
-      }
-    });
-  }
-
-  if (profileDiv) {
-    const user = JSON.parse(localStorage.getItem("vmsUser"));
-    if (!user) {
-      window.location.href = "index.html";
+// ==================== Login ====================
+const loginForm = document.getElementById("loginForm");
+if (loginForm) {
+  loginForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const username = document.getElementById("login-username").value.trim();
+    const password = document.getElementById("login-password").value.trim();
+    let users = loadUsers();
+    let user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+      setCurrentUser(user);
+      window.location.href = "dashboard.html";
     } else {
-      profileDiv.innerHTML = `
-        <p><strong>Name:</strong> ${user.name}</p>
-        <p><strong>Email:</strong> ${user.email}</p>
-        <p><strong>Signature:</strong><br><img src="${user.signature}" alt="Signature" /></p>
-      `;
+      alert("Invalid login details.");
     }
+  });
+}
+
+// ==================== Logout ====================
+const logoutBtn = document.getElementById("logoutBtn");
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    clearCurrentUser();
+    window.location.href = "index.html";
+  });
+}
+
+// ==================== Dashboard Content ====================
+if (window.location.pathname.includes("dashboard.html")) {
+  const vesselsTable = document.querySelector("#vessel-list");
+  const crewTable = document.querySelector("#crew-list");
+  const messagesTable = document.querySelector("#message-list");
+
+  if (vesselsTable) vesselsTable.innerHTML = "<tr><td colspan='6'>No vessels yet</td></tr>";
+  if (crewTable) crewTable.innerHTML = "<tr><td colspan='5'>No crew yet</td></tr>";
+  if (messagesTable) messagesTable.innerHTML = "<tr><td colspan='5'>No messages yet</td></tr>";
+}
+
+// ==================== Profile Save ====================
+const saveProfileBtn = document.getElementById("save-profile");
+if (saveProfileBtn) {
+  saveProfileBtn.addEventListener("click", () => {
+    const user = getCurrentUser();
+    if (!user) return;
+    user.profile = {
+      firstName: document.getElementById("first-name")?.value || "",
+      surname: document.getElementById("surname")?.value || "",
+      address: document.getElementById("address")?.value || "",
+      telephone: document.getElementById("telephone")?.value || "",
+      email: document.getElementById("email")?.value || "",
+      kinName: document.getElementById("kin-name")?.value || "",
+      doctor: {
+        name: document.getElementById("doctor-name")?.value || "",
+        address: document.getElementById("doctor-address")?.value || "",
+        telephone: document.getElementById("doctor-telephone")?.value || ""
+      }
+    };
+    let users = loadUsers();
+    let idx = users.findIndex(u => u.username === user.username);
+    if (idx !== -1) {
+      users[idx] = user;
+      saveUsers(users);
+      setCurrentUser(user);
+      alert("Profile saved!");
+    }
+  });
+}
+
+// ==================== Signature Pad ====================
+const signaturePad = document.getElementById("signature-pad");
+if (signaturePad) {
+  const ctx = signaturePad.getContext("2d");
+  let drawing = false;
+
+  signaturePad.addEventListener("mousedown", () => (drawing = true));
+  signaturePad.addEventListener("mouseup", () => (drawing = false, ctx.beginPath()));
+  signaturePad.addEventListener("mousemove", draw);
+
+  function draw(e) {
+    if (!drawing) return;
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#000";
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
   }
 
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("vmsUser");
-      window.location.href = "index.html";
-    });
-  }
-});
+  document.getElementById("clear-signature")?.addEventListener("click", () => {
+    ctx.clearRect(0, 0, signaturePad.width, signaturePad.height);
+  });
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VMS - Messages</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo-badge">VMS</div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+    <div class="bottom-nav">
+      <a href="messages.html" class="active">Messages</a>
+      <a href="settings.html">Settings</a>
+      <a href="#" id="logoutBtn">Logout</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <h2>Messages</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>When</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Subject</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="message-list">
+        <!-- Messages will be loaded here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
