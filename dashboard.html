@@ -1,26 +1,52 @@
 <!DOCTYPE html>
-<html lang=”en”>
+<html lang="en">
 <head>
-  <meta charset=”UTF-8”>
+  <meta charset="UTF-8" />
   <title>VMS – Dashboard</title>
-  <link rel=”stylesheet” href=”style.css”>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css?v=1" />
 </head>
 <body>
-  <div class=”sidebar”>
-    <div class=”logo”>VMS</div>
-    <a href=”dashboard.html” class=”active”>Dashboard</a>
-    <a href=”profile.html”>Profile</a>
-    <a href=”messages.html”>Messages</a>
-    <a href=”settings.html”>Settings</a>
-    <a href=”#” id=”logout-btn”>Logout</a>
-  </div>
+  <aside class="sidebar">
+    <div class="logo-badge">VMS</div>
+    <nav>
+      <a class="active" href="dashboard.html">Dashboard</a>
+      <a href="profile.html">Profile</a>
+      <div class="bottom-nav">
+        <a href="messages.html">Messages</a>
+        <a href="settings.html">Settings</a>
+        <a href="#" id="logout-btn">Logout</a>
+      </div>
+    </nav>
+  </aside>
 
-  <div class=”main-content”>
+  <main class="main">
     <h1>Dashboard</h1>
     <p>Welcome to the Vessel Management System.</p>
-  </div>
 
-  <script src=”script.js”></script>
+    <section class="card">
+      <h2>Registered Vessels</h2>
+      <table class="table">
+        <thead>
+          <tr><th>Name</th><th>Location</th><th>Project</th><th>Status</th><th>Days</th><th>Crew</th></tr>
+        </thead>
+        <tbody id="dash-vessels"></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Registered Crew</h2>
+      <table class="table">
+        <thead>
+          <tr><th>Username</th><th>Full Name</th><th>Role</th><th>Rank</th><th>Assigned Vessel</th></tr>
+        </thead>
+        <tbody id="dash-crew"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="./script.js?v=1"></script>
 </body>
 </html>
 
