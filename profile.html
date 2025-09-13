@@ -2,72 +2,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VMS - Profile</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="sidebar">
     <div class="logo">VMS</div>
-    <div class="avatar-container">
-      <img id="sidebar-avatar" class="avatar-circle" alt="Profile Avatar" />
-    </div>
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="profile.html" class="active">Profile</a>
-    </nav>
-    <div class="sidebar-bottom">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html" class="active">Profile</a>
+    <div class="bottom-links">
       <a href="messages.html">Messages</a>
       <a href="settings.html">Settings</a>
       <a href="#" id="logoutBtn">Logout</a>
     </div>
   </div>
 
-  <div class="main-content">
+  <div class="main">
     <h1>User Profile</h1>
 
     <!-- Profile Picture -->
     <section class="profile-section">
-      <h2>Profile Picture <span id="badge-profilePic" class="badge">Incomplete</span></h2>
-      <input type="file" id="profilePicUpload" accept="image/*" />
-      <div class="preview-square">
-        <img id="profilePicPreview" alt="Profile Preview" />
-      </div>
+      <h2>Profile Picture</h2>
+      <input type="file" id="profilePicInput" accept="image/*">
+      <div id="profilePicPreview"></div>
     </section>
 
     <!-- Personal Details -->
     <section class="profile-section">
-      <h2>Personal Details <span id="badge-personal" class="badge">Incomplete</span></h2>
-      <label>First Name</label>
-      <input type="text" id="firstName" />
-      <label>Surname</label>
-      <input type="text" id="surname" />
-      <label>Address</label>
-      <input type="text" id="address" />
-      <label>Telephone</label>
-      <input type="text" id="telephone" />
-      <label>Email</label>
-      <input type="email" id="email" />
+      <h2>Personal Details</h2>
+      <div class="form-group"><label>First Name</label><input type="text"></div>
+      <div class="form-group"><label>Surname</label><input type="text"></div>
+      <div class="form-group"><label>Address</label><input type="text"></div>
+      <div class="form-group"><label>Telephone</label><input type="text"></div>
+      <div class="form-group"><label>Email</label><input type="email"></div>
     </section>
 
     <!-- Next of Kin -->
     <section class="profile-section">
-      <h2>Next of Kin <span id="badge-nok" class="badge">Incomplete</span></h2>
-      <label>Relationship</label>
-      <input type="text" id="nokRelationship" />
-      <label>Name</label>
-      <input type="text" id="nokName" />
-      <label>Address</label>
-      <input type="text" id="nokAddress" />
-      <label>Telephone</label>
-      <input type="text" id="nokTelephone" />
+      <h2>Next of Kin</h2>
+      <div class="form-group"><label>Relationship</label><input type="text"></div>
+      <div class="form-group"><label>Name</label><input type="text"></div>
+      <div class="form-group"><label>Address</label><input type="text"></div>
+      <div class="form-group"><label>Telephone</label><input type="text"></div>
     </section>
 
     <!-- Certificates -->
     <section class="profile-section">
-      <h2>Certificates <span id="badge-cert" class="badge">Incomplete</span></h2>
-      <table id="certTable" class="styled-table">
+      <h2>Certificates</h2>
+      <table>
         <thead>
           <tr>
             <th>Type</th>
@@ -79,56 +63,39 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody id="certTable"></tbody>
       </table>
-      <button id="addCertBtn">Add Certificate</button>
+      <button onclick="addCertificate()">Add Certificate</button>
     </section>
 
     <!-- Medical Declaration -->
     <section class="profile-section">
-      <h2>Medical Declaration <span id="badge-medical" class="badge">Incomplete</span></h2>
-      <label>Doctor Name</label>
-      <input type="text" id="doctorName" />
-      <label>Doctor Address</label>
-      <input type="text" id="doctorAddress" />
-      <label>Doctor Telephone</label>
-      <input type="text" id="doctorTelephone" />
-
-      <div class="medical-questions">
-        <p>Have you ever had surgery?</p>
-        <select id="q1"><option value="">Select</option><option>Yes</option><option>No</option></select>
-
-        <p>Do you have any chronic conditions?</p>
-        <select id="q2"><option value="">Select</option><option>Yes</option><option>No</option></select>
-
-        <p>Are you currently taking medication?</p>
-        <select id="q3"><option value="">Select</option><option>Yes</option><option>No</option></select>
+      <h2>Medical Declaration</h2>
+      <div class="form-group"><label>Doctor Name</label><input type="text"></div>
+      <div class="form-group"><label>Doctor Address</label><input type="text"></div>
+      <div class="form-group"><label>Doctor Telephone</label><input type="text"></div>
+      <div class="form-group"><label>Have you ever had surgery?</label>
+        <select><option>Yes</option><option>No</option></select>
+      </div>
+      <div class="form-group"><label>Do you have any chronic conditions?</label>
+        <select><option>Yes</option><option>No</option></select>
+      </div>
+      <div class="form-group"><label>Are you currently taking medication?</label>
+        <select><option>Yes</option><option>No</option></select>
       </div>
     </section>
 
-    <!-- Final Declaration & Signature -->
+    <!-- Signature -->
     <section class="profile-section">
-      <h2>Final Declaration & Signature <span id="badge-declaration" class="badge">Incomplete</span></h2>
-      <label>
-        <input type="checkbox" id="finalDeclaration" />
-        I confirm that the above information is true.
-      </label>
-      <label>Type Full Name</label>
-      <input type="text" id="declaredName" />
-
-      <p>Draw your signature below:</p>
-      <canvas id="signaturePad" width="300" height="100" style="border:1px solid #ccc;"></canvas>
-      <button type="button" id="clearSignature">Clear</button>
-      <div class="preview-signature">
-        <img id="signaturePreview" alt="Signature Preview" />
+      <h2>Electronic Signature</h2>
+      <canvas id="signaturePad" width="400" height="150"></canvas>
+      <div>
+        <button type="button" onclick="clearSignature()">Clear</button>
+        <button type="button" onclick="saveSignature()">Save</button>
       </div>
     </section>
 
-    <!-- Progress Bar and Save -->
-    <div class="progress-container">
-      <div id="progressBar" class="progress-bar">0%</div>
-    </div>
-    <button id="saveProfileBtn">Save Profile</button>
+    <button class="save-btn">Save Profile</button>
   </div>
 
   <script src="script.js"></script>
