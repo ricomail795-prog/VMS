@@ -1,117 +1,79 @@
-/* ===== Global ===== */
-Body {
-  Margin: 0;
-  Font-family: Arial, sans-serif;
-  Display: flex;
-  Min-height: 100vh;
+:root {
+  --nav-bg:#0b3a66;
+  --nav-bg-dark:#072a4a;
+  --nav-text:#fff;
+  --primary:#0b3a66;
+  --primary-dark:#072a4a;
+  --card-bg:#fff;
+  --page-bg:#f5f7fb;
+  --border:#d9e0ea;
 }
 
-/* Sidebar */
+•	{ box-sizing: border-box; }
+Html, body { height:100%; }
+Body { margin:0; font-family: system-ui, Arial, sans-serif; color:#1b2a41; }
+
+/* Auth */
+.auth-wrap {
+  Max-width: 420px; margin: 4rem auto; padding: 0 1rem; text-align:center;
+}
+.auth-wrap h1 { margin-bottom:1rem; color:var(--primary); }
+.card {
+  Text-align:left; background:var(--card-bg); border:1px solid var(--border);
+  Border-radius:10px; padding:1rem; margin-bottom:1rem;
+}
+.card h2 { margin:0 0 .75rem; color:var(--primary); font-size:1.1rem; }
+.card label { display:block; font-weight:600; margin-top:.5rem; }
+.card input, .card select {
+  Width:100%; padding:.6rem .7rem; border:1px solid var(--border);
+  Border-radius:8px; margin-top:.25rem;
+}
+.card button {
+  Width:100%; margin-top:.9rem; padding:.7rem; border:0; border-radius:8px;
+  Background:var(--primary); color:#fff; font-weight:700; cursor:pointer;
+}
+.card button:hover { background:var(--primary-dark); }
+
+/* App layout */
 .sidebar {
-  Width: 220px;
-  Background: #003366;
-  Color: white;
-  Display: flex;
-  Flex-direction: column;
-  Padding-top: 20px;
+  Position:fixed; left:0; top:0; bottom:0; width:220px; background:var(--nav-bg);
+  Color:var(--nav-text); display:flex; flex-direction:column; padding:14px 10px;
 }
-
-.sidebar .logo {
-  Font-size: 22px;
-  Text-align: center;
-  Margin-bottom: 20px;
-  Font-weight: bold;
+.logo-badge {
+  Margin:4px 10px 12px; background:#fff; color:var(--primary);
+  Width:48px; height:48px; border-radius:999px; display:grid; place-items:center;
+  Font-weight:800; letter-spacing:.5px;
 }
-
+.sidebar nav { display:flex; flex-direction:column; height:100%; }
 .sidebar a {
-  Color: white;
-  Padding: 12px;
-  Text-decoration: none;
-  Display: block;
+  Color:#e9f1fb; text-decoration:none; padding:10px 12px; border-radius:8px; margin:2px 6px;
 }
+.sidebar a.active, .sidebar a:hover { background:var(--nav-bg-dark); }
+.bottom-nav { margin-top:auto; border-top:1px solid rgba(255,255,255,.15); padding-top:6px; }
 
-.sidebar a.active,
-.sidebar a:hover {
-  Background: #004080;
+.main {
+  Margin-left:220px; padding:22px; background:var(--page-bg); min-height:100vh;
 }
+H1 { margin:0 0 14px; color:var(--primary); }
+H2 { margin:0 0 10px; color:#143b63; }
+.card { background:#fff; border:1px solid var(--border); border-radius:12px; padding:14px; }
 
-/* Main content */
-.main-content {
-  Flex-grow: 1;
-  Padding: 20px;
-  Background: #f4f7fa;
+Label { display:block; font-weight:600; margin-top:.6rem; }
+Input, select, textarea {
+  Width:100%; padding:.65rem .7rem; border:1px solid var(--border);
+  Border-radius:8px; margin-top:.3rem; background:#fff;
 }
+Button.primary, button { background:var(--primary); color:#fff; border:0; border-radius:8px; padding:.7rem 1rem; cursor:pointer; }
+Button:hover { background:var(--primary-dark); }
 
-H1 {
-  Margin-bottom: 20px;
-  Color: #003366;
-}
+.table { width:100%; border-collapse:collapse; }
+.table th, .table td { border:1px solid var(--border); padding:.55rem .6rem; }
+.table thead th { background:#eef3fb; }
 
-Section {
-  Background: #fff;
-  Padding: 15px;
-  Margin-bottom: 20px;
-  Border: 1px solid #ddd;
-  Border-radius: 6px;
-}
-
-H2 {
-  Margin-top: 0;
-  Color: #004080;
-}
-
-/* Form inputs */
-Label {
-  Display: block;
-  Margin-top: 10px;
-  Font-weight: bold;
-}
-
-Input,
-Select,
-Textarea {
-  Width: 100%;
-  Padding: 8px;
-  Margin-top: 5px;
-  Border: 1px solid #ccc;
-  Border-radius: 4px;
-  Box-sizing: border-box;
-}
-
-/* Buttons */
-Button {
-  Margin-top: 10px;
-  Padding: 10px 15px;
-  Background: #003366;
-  Color: white;
-  Border: none;
-  Border-radius: 4px;
-  Cursor: pointer;
-}
-
-Button:hover {
-  Background: #0055aa;
-}
-
-/* Tables */
-Table {
-  Width: 100%;
-  Border-collapse: collapse;
-  Margin-top: 10px;
-}
-Table, th, td {
-  Border: 1px solid #ccc;
-}
-Th, td {
-  Padding: 8px;
-  Text-align: left;
-}
-
-/* Signature */
+/* Signature canvas */
 #signature-pad {
-  Margin-top: 10px;
-  Border: 1px solid #333;
-  Background: #fff;
-  Cursor: crosshair;
+  Width:100%; max-width:520px; height:160px; border:1px solid var(--border);
+  Background:#fff; border-radius:8px;
 }
+.preview img { max-width:160px; height:auto; display:block; margin-top:.5rem; border-radius:10px; border:1px solid var(--border); }
 
