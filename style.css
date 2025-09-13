@@ -1,167 +1,119 @@
+/* ===== Global Styles ===== */
+Body {
+  Margin: 0;
+  Font-family: Arial, sans-serif;
+  Display: flex;
+  Min-height: 100vh;
+}
 
-// script.js
+/* ===== Sidebar ===== */
+.sidebar {
+  Width: 220px;
+  Background: #003366;
+  Color: #fff;
+  Display: flex;
+  Flex-direction: column;
+  Padding-top: 20px;
+}
 
-// ========== LOGIN & REGISTER ==========
-document.addEventListener("DOMContentLoaded", () => {
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+.sidebar .logo {
+  Font-size: 22px;
+  Text-align: center;
+  Margin-bottom: 20px;
+  Font-weight: bold;
+}
 
-  // Handle login
-  const loginBtn = document.getElementById("login-btn");
-  if (loginBtn) {
-    loginBtn.addEventListener("click", () => {
-      const username = document.getElementById("login-username").value.trim();
-      const password = document.getElementById("login-password").value.trim();
+.sidebar a {
+  Color: white;
+  Padding: 12px;
+  Text-decoration: none;
+  Display: block;
+}
 
-      const user = users.find(
-        (u) => u.username === username && u.password === password
-      );
+.sidebar a.active,
+.sidebar a:hover {
+  Background: #004080;
+}
 
-      if (user) {
-        localStorage.setItem("currentUser", JSON.stringify(user));
-        window.location.href = "dashboard.html";
-      } else {
-        alert("Invalid username or password");
-      }
-    });
-  }
+/* ===== Main Content ===== */
+.main-content {
+  Flex-grow: 1;
+  Padding: 20px;
+  Background: #f4f7fa;
+}
 
-  // Handle register
-  const registerBtn = document.getElementById("register-btn");
-  if (registerBtn) {
-    registerBtn.addEventListener("click", () => {
-      const username = document.getElementById("register-username").value.trim();
-      const password = document.getElementById("register-password").value.trim();
-      const role = document.getElementById("register-role").value;
+H1 {
+  Margin-bottom: 20px;
+  Color: #003366;
+}
 
-      if (!username || !password || !role) {
-        alert("Please fill all fields.");
-        return;
-      }
+Section {
+  Background: #fff;
+  Padding: 15px;
+  Margin-bottom: 20px;
+  Border: 1px solid #ddd;
+  Border-radius: 6px;
+}
 
-      if (users.find((u) => u.username === username)) {
-        alert("Username already exists.");
-        return;
-      }
+H2 {
+  Margin-top: 0;
+  Color: #004080;
+}
 
-      const newUser = {
-        username,
-        password,
-        role,
-        profile: {
-          personal: {},
-          nextOfKin: {},
-          certificates: [],
-          medical: {},
-          signature: null,
-        },
-      };
+/* ===== Form Styling ===== */
+Label {
+  Display: block;
+  Margin-top: 10px;
+  Font-weight: bold;
+}
 
-      users.push(newUser);
-      localStorage.setItem("users", JSON.stringify(users));
-      alert("Account created. Please login.");
-    });
-  }
+Input,
+Select,
+Textarea {
+  Width: 100%;
+  Padding: 8px;
+  Margin-top: 5px;
+  Border: 1px solid #ccc;
+  Border-radius: 4px;
+  Box-sizing: border-box;
+}
 
-  // Auto-redirect if already logged in
-  if (window.location.pathname.includes("index.html") && currentUser) {
-    window.location.href = "dashboard.html";
-  }
+/* ===== Buttons ===== */
+Button {
+  Margin-top: 10px;
+  Padding: 10px 15px;
+  Background: #003366;
+  Color: white;
+  Border: none;
+  Border-radius: 4px;
+  Cursor: pointer;
+}
 
-  // Handle logout
-  const logoutBtn = document.getElementById("logout-btn");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("currentUser");
-      window.location.href = "index.html";
-    });
-  }
+Button:hover {
+  Background: #0055aa;
+}
 
-  // ========== PROFILE PAGE ==========
-  if (window.location.pathname.includes("profile.html") && currentUser) {
-    // Prefill data if exists
-    const profile = currentUser.profile || {};
+/* ===== Certificates Table ===== */
+Table {
+  Width: 100%;
+  Border-collapse: collapse;
+  Margin-top: 10px;
+}
 
-    // Personal details
-    document.getElementById("first-name").value = profile.personal?.firstName || "";
-    document.getElementById("surname").value = profile.personal?.surname || "";
-    document.getElementById("address").value = profile.personal?.address || "";
-    document.getElementById("telephone").value = profile.personal?.telephone || "";
-    document.getElementById("email").value = profile.personal?.email || "";
+Table, th, td {
+  Border: 1px solid #ccc;
+}
 
-    // Next of Kin
-    document.getElementById("kin-relationship").value = profile.nextOfKin?.relationship || "";
-    document.getElementById("kin-name").value = profile.nextOfKin?.name || "";
-    document.getElementById("kin-address").value = profile.nextOfKin?.address || "";
-    document.getElementById("kin-telephone").value = profile.nextOfKin?.telephone || "";
+Th, td {
+  Padding: 8px;
+  Text-align: left;
+}
 
-    // Medical
-    document.getElementById("doctor-name").value = profile.medical?.doctorName || "";
-    document.getElementById("doctor-address").value = profile.medical?.doctorAddress || "";
-    document.getElementById("doctor-telephone").value = profile.medical?.doctorTelephone || "";
+/* ===== Signature Pad ===== */
+#signature-pad {
+  Margin-top: 10px;
+  Border: 1px solid #333;
+  Background: #fff;
+  Cursor: crosshair;
+}
 
-    if (profile.signature) {
-      const ctx = document.getElementById("signature-pad").getContext("2d");
-      const img = new Image();
-      img.src = profile.signature;
-      img.onload = () => ctx.drawImage(img, 0, 0);
-    }
-
-    // Save profile
-    document.getElementById("save-profile-btn").addEventListener("click", () => {
-      const updatedProfile = {
-        personal: {
-          firstName: document.getElementById("first-name").value,
-          surname: document.getElementById("surname").value,
-          address: document.getElementById("address").value,
-          telephone: document.getElementById("telephone").value,
-          email: document.getElementById("email").value,
-        },
-        nextOfKin: {
-          relationship: document.getElementById("kin-relationship").value,
-          name: document.getElementById("kin-name").value,
-          address: document.getElementById("kin-address").value,
-          telephone: document.getElementById("kin-telephone").value,
-        },
-        certificates: profile.certificates || [],
-        medical: {
-          doctorName: document.getElementById("doctor-name").value,
-          doctorAddress: document.getElementById("doctor-address").value,
-          doctorTelephone: document.getElementById("doctor-telephone").value,
-        },
-        signature: document.getElementById("signature-pad").toDataURL(),
-      };
-
-      currentUser.profile = updatedProfile;
-
-      // Update localStorage
-      const index = users.findIndex((u) => u.username === currentUser.username);
-      users[index] = currentUser;
-      localStorage.setItem("users", JSON.stringify(users));
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-
-      alert("Profile saved successfully!");
-    });
-
-    // Signature pad setup
-    const canvas = document.getElementById("signature-pad");
-    if (canvas) {
-      const ctx = canvas.getContext("2d");
-      let drawing = false;
-
-      canvas.addEventListener("mousedown", () => (drawing = true));
-      canvas.addEventListener("mouseup", () => (drawing = false));
-      canvas.addEventListener("mousemove", (e) => {
-        if (!drawing) return;
-        ctx.fillStyle = "#000";
-        ctx.beginPath();
-        ctx.arc(e.offsetX, e.offsetY, 2, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      document.getElementById("clear-signature").addEventListener("click", () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-      });
-    }
-  }
-});
