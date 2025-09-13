@@ -1,52 +1,42 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang=”en”>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VMS - Login</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset=”UTF-8”>
+  <title>VMS Login</title>
+  <link rel=”stylesheet” href=”style.css”>
 </head>
 <body>
-  <div class="auth-container">
-    <div class="auth-box">
-      <h1>VMS</h1>
+  <div class=”container”>
+    <h1>VMS</h1>
 
-      <!-- Login form -->
-      <form id="loginForm">
-        <h2>Login</h2>
-        <label for="login-username">Username</label>
-        <input type="text" id="login-username" required />
+    <!-- ================= Login ================= 
+    <form id=”loginForm”>
+      <h2>Login</h2>
+      <label>Username</label>
+      <input type=”text” id=”login-username” required>
+      <label>Password</label>
+      <input type=”password” id=”login-password” required>
+      <button type=”submit”>Login</button>
+    </form>
 
-        <label for="login-password">Password</label>
-        <input type="password" id="login-password" required />
-
-        <button type="submit">Login</button>
-      </form>
-
-      <hr />
-
-      <!-- Register form -->
-      <form id="registerForm">
-        <h2>Register</h2>
-        <label for="reg-username">Username</label>
-        <input type="text" id="reg-username" required />
-
-        <label for="reg-password">Password</label>
-        <input type="password" id="reg-password" required />
-
-        <label for="reg-role">Role</label>
-        <select id="reg-role" required>
-          <option value="">Select role</option>
-          <option value="admin">Admin</option>
-          <option value="crew">Crew</option>
-        </select>
-
-        <button type="submit">Create Account</button>
-      </form>
-    </div>
+    <!-- ================= Register ================= 
+    <form id=”registerForm”>
+      <h2>Register</h2>
+      <label>Username</label>
+      <input type=”text” id=”reg-username” required>
+      <label>Password</label>
+      <input type=”password” id=”reg-password” required>
+      <label>Role</label>
+      <select id=”reg-role” required>
+        <option value=””>Select role</option>
+        <option value=”admin”>Admin</option>
+        <option value=”crew”>Crew</option>
+      </select>
+      <button type=”submit”>Create Account</button>
+    </form>
   </div>
 
-  <script src="script.js"></script>
+  <script src=”script.js”></script>
 </body>
 </html>
+
