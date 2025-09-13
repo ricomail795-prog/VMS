@@ -109,4 +109,41 @@ fieldset textarea {
   margin-bottom: 10px;
   padding: 6px;
 }
+/* Profile form fields stacked vertically */
+fieldset label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+fieldset input,
+fieldset select,
+fieldset textarea {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 10px;
+  padding: 6px;
+}
+/* Save Profile button */
+#save-profile {
+  Display: block;
+  Width: 100%;
+  Max-width: 200px;
+  Margin: 20px auto;
+  Padding: 10px 15px;
+  Font-size: 1em;
+  Font-weight: bold;
+  Color: #fff;
+  Background-color: #003366;
+  Border: none;
+  Border-radius: 6px;
+  Cursor: pointer;
+  Transition: background-color 0.3s ease;
+}
+
+#save-profile:hover {
+  Background-color: #0055aa;
+}
+
 
