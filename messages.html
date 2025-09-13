@@ -1,54 +1,26 @@
 <!DOCTYPE html>
 <html lang=”en”>
 <head>
-  <meta charset=”UTF-8” />
-  <meta name=”viewport” content=”width=device-width, initial-scale=1.0” />
+  <meta charset=”UTF-8”>
   <title>VMS – Messages</title>
-  <link rel=”stylesheet” href=”style.css” />
+  <link rel=”stylesheet” href=”style.css”>
 </head>
 <body>
   <div class=”sidebar”>
     <div class=”logo”>VMS</div>
-    <div class=”avatar-container”>
-      <img id=”sidebar-avatar” class=”avatar-circle” alt=”Profile Avatar” />
-    </div>
-    <nav>
-      <a href=”dashboard.html”>Dashboard</a>
-      <a href=”profile.html”>Profile</a>
-    </nav>
-    <div class=”sidebar-bottom”>
-      <a href=”messages.html” class=”active”>Messages</a>
-      <a href=”settings.html”>Settings</a>
-      <a href=”#” id=”logoutBtn”>Logout</a>
-    </div>
+    <a href=”dashboard.html”>Dashboard</a>
+    <a href=”profile.html”>Profile</a>
+    <a href=”messages.html” class=”active”>Messages</a>
+    <a href=”settings.html”>Settings</a>
+    <a href=”#” id=”logout-btn”>Logout</a>
   </div>
 
   <div class=”main-content”>
     <h1>Messages</h1>
-
-    <form id=”messageForm”>
-      <label for=”messageSubject”>Subject</label>
-      <input type=”text” id=”messageSubject” required />
-
-      <label for=”messageBody”>Message</label>
-      <textarea id=”messageBody” rows=”4” required></textarea>
-
-      <button type=”submit”>Send</button>
-    </form>
-
-    <h2>Inbox</h2>
-    <table id=”messagesTable” class=”styled-table”>
-      <thead>
-        <tr>
-          <th>Status</th>
-          <th>Subject</th>
-          <th>Message</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!—Populated by script.js 
-      </tbody>
+    <p>Messaging system placeholder.</p>
+    <table class=”styled-table”>
+      <thead><tr><th>Status</th><th>Subject</th><th>Message</th><th>Date</th></tr></thead>
+      <tbody></tbody>
     </table>
   </div>
 
