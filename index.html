@@ -2,36 +2,43 @@
 <html lang=”en”>
 <head>
   <meta charset=”UTF-8”>
-  <title>VMS Login</title>
+  <title>VMS – Login & Register</title>
   <link rel=”stylesheet” href=”style.css”>
 </head>
 <body>
-  <div class=”container”>
+  <div class=”auth-container”>
     <h1>VMS</h1>
 
-    <!-- ================= Login ================= 
+    <!—Login 
     <form id=”loginForm”>
       <h2>Login</h2>
-      <label>Username</label>
+      <label for=”login-username”>Username</label>
       <input type=”text” id=”login-username” required>
-      <label>Password</label>
+
+      <label for=”login-password”>Password</label>
       <input type=”password” id=”login-password” required>
+
       <button type=”submit”>Login</button>
     </form>
 
-    <!-- ================= Register ================= 
+    <hr>
+
+    <!—Register 
     <form id=”registerForm”>
       <h2>Register</h2>
-      <label>Username</label>
+      <label for=”reg-username”>Username</label>
       <input type=”text” id=”reg-username” required>
-      <label>Password</label>
+
+      <label for=”reg-password”>Password</label>
       <input type=”password” id=”reg-password” required>
-      <label>Role</label>
+
+      <label for=”reg-role”>Role</label>
       <select id=”reg-role” required>
-        <option value=””>Select role</option>
+        <option value=””>Select Role</option>
         <option value=”admin”>Admin</option>
         <option value=”crew”>Crew</option>
       </select>
+
       <button type=”submit”>Create Account</button>
     </form>
   </div>
