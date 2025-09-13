@@ -3,8 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Profile</title>
+  <title>VMS - Profile</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,46 +11,60 @@
     <div class="logo">VMS</div>
     <a href="dashboard.html">Dashboard</a>
     <a href="profile.html" class="active">Profile</a>
-    <div class="bottom-links">
-      <a href="messages.html">Messages</a>
-      <a href="settings.html">Settings</a>
-      <a href="#" id="logoutBtn">Logout</a>
-    </div>
+    <a href="messages.html">Messages</a>
+    <a href="settings.html">Settings</a>
+    <a href="#" id="logout-btn">Logout</a>
   </div>
 
-  <div class="main">
+  <div class="main-content">
     <h1>User Profile</h1>
 
     <!-- Profile Picture -->
-    <section class="profile-section">
+    <section>
       <h2>Profile Picture</h2>
-      <input type="file" id="profilePicInput" accept="image/*">
-      <div id="profilePicPreview"></div>
+      <input type="file" id="profile-pic" accept="image/*">
+      <div id="profile-pic-preview"></div>
     </section>
 
     <!-- Personal Details -->
-    <section class="profile-section">
+    <section>
       <h2>Personal Details</h2>
-      <div class="form-group"><label>First Name</label><input type="text"></div>
-      <div class="form-group"><label>Surname</label><input type="text"></div>
-      <div class="form-group"><label>Address</label><input type="text"></div>
-      <div class="form-group"><label>Telephone</label><input type="text"></div>
-      <div class="form-group"><label>Email</label><input type="email"></div>
+      <label>First Name</label>
+      <input type="text" id="first-name">
+
+      <label>Surname</label>
+      <input type="text" id="surname">
+
+      <label>Address</label>
+      <input type="text" id="address">
+
+      <label>Telephone</label>
+      <input type="text" id="telephone">
+
+      <label>Email</label>
+      <input type="email" id="email">
     </section>
 
     <!-- Next of Kin -->
-    <section class="profile-section">
+    <section>
       <h2>Next of Kin</h2>
-      <div class="form-group"><label>Relationship</label><input type="text"></div>
-      <div class="form-group"><label>Name</label><input type="text"></div>
-      <div class="form-group"><label>Address</label><input type="text"></div>
-      <div class="form-group"><label>Telephone</label><input type="text"></div>
+      <label>Relationship</label>
+      <input type="text" id="kin-relationship">
+
+      <label>Name</label>
+      <input type="text" id="kin-name">
+
+      <label>Address</label>
+      <input type="text" id="kin-address">
+
+      <label>Telephone</label>
+      <input type="text" id="kin-telephone">
     </section>
 
     <!-- Certificates -->
-    <section class="profile-section">
+    <section>
       <h2>Certificates</h2>
-      <table>
+      <table id="certificates-table" border="1" cellpadding="5" cellspacing="0">
         <thead>
           <tr>
             <th>Type</th>
@@ -63,39 +76,42 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody id="certTable"></tbody>
+        <tbody></tbody>
       </table>
-      <button onclick="addCertificate()">Add Certificate</button>
+      <button id="add-certificate">Add Certificate</button>
     </section>
 
     <!-- Medical Declaration -->
-    <section class="profile-section">
+    <section>
       <h2>Medical Declaration</h2>
-      <div class="form-group"><label>Doctor Name</label><input type="text"></div>
-      <div class="form-group"><label>Doctor Address</label><input type="text"></div>
-      <div class="form-group"><label>Doctor Telephone</label><input type="text"></div>
-      <div class="form-group"><label>Have you ever had surgery?</label>
-        <select><option>Yes</option><option>No</option></select>
-      </div>
-      <div class="form-group"><label>Do you have any chronic conditions?</label>
-        <select><option>Yes</option><option>No</option></select>
-      </div>
-      <div class="form-group"><label>Are you currently taking medication?</label>
-        <select><option>Yes</option><option>No</option></select>
-      </div>
+      <label>Doctor Name</label>
+      <input type="text" id="doctor-name">
+
+      <label>Doctor Address</label>
+      <input type="text" id="doctor-address">
+
+      <label>Doctor Telephone</label>
+      <input type="text" id="doctor-telephone">
+
+      <label>Have you ever had surgery?</label>
+      <select id="surgery"><option value="">Select</option><option>Yes</option><option>No</option></select>
+
+      <label>Do you have any chronic conditions?</label>
+      <select id="chronic"><option value="">Select</option><option>Yes</option><option>No</option></select>
+
+      <label>Are you currently taking medication?</label>
+      <select id="medication"><option value="">Select</option><option>Yes</option><option>No</option></select>
     </section>
 
     <!-- Signature -->
-    <section class="profile-section">
+    <section>
       <h2>Electronic Signature</h2>
-      <canvas id="signaturePad" width="400" height="150"></canvas>
-      <div>
-        <button type="button" onclick="clearSignature()">Clear</button>
-        <button type="button" onclick="saveSignature()">Save</button>
-      </div>
+      <canvas id="signature-pad" width="400" height="150" style="border:1px solid #ccc;"></canvas><br>
+      <button id="clear-signature">Clear Signature</button>
     </section>
 
-    <button class="save-btn">Save Profile</button>
+    <!-- Save -->
+    <button id="save-profile-btn">Save Profile</button>
   </div>
 
   <script src="script.js"></script>
