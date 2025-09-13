@@ -3,8 +3,6 @@ body {
   font-family: Arial, sans-serif;
   display: flex;
 }
-
-/* Sidebar */
 .sidebar {
   width: 220px;
   background: #002244;
@@ -38,8 +36,6 @@ body {
 .nav-links a.active {
   background: #0055aa;
 }
-
-/* Main content */
 .main-content {
   flex: 1;
   padding: 20px;
@@ -47,8 +43,6 @@ body {
   overflow-y: auto;
 }
 h1, h2 { color: #002244; }
-
-/* Tables */
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -59,8 +53,6 @@ h1, h2 { color: #002244; }
   padding: 8px 12px;
 }
 .data-table th { background: #f0f0f0; }
-
-/* Forms */
 input, button {
   margin: 5px 0;
   padding: 8px;
@@ -72,8 +64,6 @@ button {
   cursor: pointer;
 }
 button:hover { background: #003f7d; }
-
-/* Progress bar */
 .progress-bar {
   width: 300px;
   background: #ddd;

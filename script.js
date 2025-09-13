@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  if (!localStorage.getItem("users")) localStorage.setItem("users", JSON.stringify([]));
-  if (!localStorage.getItem("currentUser")) localStorage.setItem("currentUser", "null");
-  if (!localStorage.getItem("vessels")) localStorage.setItem("vessels", JSON.stringify([]));
-  if (!localStorage.getItem("crew")) localStorage.setItem("crew", JSON.stringify([]));
-  if (!localStorage.getItem("messages")) localStorage.setItem("messages", JSON.stringify([]));
+  // Reset everything to blank on load
+  localStorage.setItem("users", JSON.stringify([]));
+  localStorage.setItem("currentUser", "null");
+  localStorage.setItem("vessels", JSON.stringify([]));
+  localStorage.setItem("crew", JSON.stringify([]));
+  localStorage.setItem("messages", JSON.stringify([]));
 
   const loginBtn = document.getElementById("login-btn");
   if (loginBtn) {
