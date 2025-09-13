@@ -1,100 +1,167 @@
-Body {
-  Margin: 0;
-  Font-family: Arial, sans-serif;
-  Display: flex;
-}
 
-.sidebar {
-  Width: 200px;
-  Background: #002b5c;
-  Color: white;
-  Min-height: 100vh;
-  Display: flex;
-  Flex-direction: column;
-}
+// script.js
 
-.sidebar .logo {
-  Text-align: center;
-  Font-size: 20px;
-  Padding: 15px;
-  Background: #004080;
-}
+// ========== LOGIN & REGISTER ==========
+document.addEventListener("DOMContentLoaded", () => {
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-.sidebar a {
-  Color: white;
-  Text-decoration: none;
-  Padding: 12px;
-  Display: block;
-}
+  // Handle login
+  const loginBtn = document.getElementById("login-btn");
+  if (loginBtn) {
+    loginBtn.addEventListener("click", () => {
+      const username = document.getElementById("login-username").value.trim();
+      const password = document.getElementById("login-password").value.trim();
 
-.sidebar a.active, .sidebar a:hover {
-  Background: #0059b3;
-}
+      const user = users.find(
+        (u) => u.username === username && u.password === password
+      );
 
-.sidebar .bottom-links {
-  Margin-top: auto;
-}
+      if (user) {
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Invalid username or password");
+      }
+    });
+  }
 
-.main {
-  Flex-grow: 1;
-  Padding: 20px;
-}
+  // Handle register
+  const registerBtn = document.getElementById("register-btn");
+  if (registerBtn) {
+    registerBtn.addEventListener("click", () => {
+      const username = document.getElementById("register-username").value.trim();
+      const password = document.getElementById("register-password").value.trim();
+      const role = document.getElementById("register-role").value;
 
-.profile-section {
-  Margin-bottom: 25px;
-  Padding: 15px;
-  Border: 1px solid #ddd;
-  Border-radius: 6px;
-  Background: #f9f9f9;
-}
+      if (!username || !password || !role) {
+        alert("Please fill all fields.");
+        return;
+      }
 
-.form-group {
-  Display: flex;
-  Flex-direction: column;
-  Margin-bottom: 12px;
-}
+      if (users.find((u) => u.username === username)) {
+        alert("Username already exists.");
+        return;
+      }
 
-.form-group label {
-  Font-weight: bold;
-  Margin-bottom: 5px;
-}
+      const newUser = {
+        username,
+        password,
+        role,
+        profile: {
+          personal: {},
+          nextOfKin: {},
+          certificates: [],
+          medical: {},
+          signature: null,
+        },
+      };
 
-.form-group input,
-.form-group select {
-  Padding: 8px;
-  Border: 1px solid #ccc;
-  Border-radius: 4px;
-}
+      users.push(newUser);
+      localStorage.setItem("users", JSON.stringify(users));
+      alert("Account created. Please login.");
+    });
+  }
 
-Table {
-  Width: 100%;
-  Border-collapse: collapse;
-  Margin-top: 10px;
-}
+  // Auto-redirect if already logged in
+  if (window.location.pathname.includes("index.html") && currentUser) {
+    window.location.href = "dashboard.html";
+  }
 
-Table, th, td {
-  Border: 1px solid #ccc;
-  Padding: 8px;
-}
+  // Handle logout
+  const logoutBtn = document.getElementById("logout-btn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("currentUser");
+      window.location.href = "index.html";
+    });
+  }
 
-#signaturePad {
-  Border: 1px solid #333;
-  Margin-top: 10px;
-  Cursor: crosshair;
-}
+  // ========== PROFILE PAGE ==========
+  if (window.location.pathname.includes("profile.html") && currentUser) {
+    // Prefill data if exists
+    const profile = currentUser.profile || {};
 
-.save-btn {
-  Display: block;
-  Margin-top: 20px;
-  Padding: 12px;
-  Background: #004080;
-  Color: white;
-  Border: none;
-  Border-radius: 4px;
-  Cursor: pointer;
-}
+    // Personal details
+    document.getElementById("first-name").value = profile.personal?.firstName || "";
+    document.getElementById("surname").value = profile.personal?.surname || "";
+    document.getElementById("address").value = profile.personal?.address || "";
+    document.getElementById("telephone").value = profile.personal?.telephone || "";
+    document.getElementById("email").value = profile.personal?.email || "";
 
-.save-btn:hover {
-  Background: #0059b3;
-}
+    // Next of Kin
+    document.getElementById("kin-relationship").value = profile.nextOfKin?.relationship || "";
+    document.getElementById("kin-name").value = profile.nextOfKin?.name || "";
+    document.getElementById("kin-address").value = profile.nextOfKin?.address || "";
+    document.getElementById("kin-telephone").value = profile.nextOfKin?.telephone || "";
 
+    // Medical
+    document.getElementById("doctor-name").value = profile.medical?.doctorName || "";
+    document.getElementById("doctor-address").value = profile.medical?.doctorAddress || "";
+    document.getElementById("doctor-telephone").value = profile.medical?.doctorTelephone || "";
+
+    if (profile.signature) {
+      const ctx = document.getElementById("signature-pad").getContext("2d");
+      const img = new Image();
+      img.src = profile.signature;
+      img.onload = () => ctx.drawImage(img, 0, 0);
+    }
+
+    // Save profile
+    document.getElementById("save-profile-btn").addEventListener("click", () => {
+      const updatedProfile = {
+        personal: {
+          firstName: document.getElementById("first-name").value,
+          surname: document.getElementById("surname").value,
+          address: document.getElementById("address").value,
+          telephone: document.getElementById("telephone").value,
+          email: document.getElementById("email").value,
+        },
+        nextOfKin: {
+          relationship: document.getElementById("kin-relationship").value,
+          name: document.getElementById("kin-name").value,
+          address: document.getElementById("kin-address").value,
+          telephone: document.getElementById("kin-telephone").value,
+        },
+        certificates: profile.certificates || [],
+        medical: {
+          doctorName: document.getElementById("doctor-name").value,
+          doctorAddress: document.getElementById("doctor-address").value,
+          doctorTelephone: document.getElementById("doctor-telephone").value,
+        },
+        signature: document.getElementById("signature-pad").toDataURL(),
+      };
+
+      currentUser.profile = updatedProfile;
+
+      // Update localStorage
+      const index = users.findIndex((u) => u.username === currentUser.username);
+      users[index] = currentUser;
+      localStorage.setItem("users", JSON.stringify(users));
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+      alert("Profile saved successfully!");
+    });
+
+    // Signature pad setup
+    const canvas = document.getElementById("signature-pad");
+    if (canvas) {
+      const ctx = canvas.getContext("2d");
+      let drawing = false;
+
+      canvas.addEventListener("mousedown", () => (drawing = true));
+      canvas.addEventListener("mouseup", () => (drawing = false));
+      canvas.addEventListener("mousemove", (e) => {
+        if (!drawing) return;
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.arc(e.offsetX, e.offsetY, 2, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      document.getElementById("clear-signature").addEventListener("click", () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
+    }
+  }
+});
