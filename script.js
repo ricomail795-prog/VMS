@@ -50,36 +50,37 @@ if (regForm) {
     showConfirmation("✔ Account created! You can now log in.", "success");
     regForm.reset();
   });
+}
 
 // ==================== Login ====================
 const loginForm = document.getElementById("loginForm");
 if (loginForm) {
-    loginForm.addEventListener("submit", e => {
-        e.preventDefault();
+  loginForm.addEventListener("submit", e => {
+    e.preventDefault();
 
-        const username = document.getElementById("login-username").value.trim();
-        const password = document.getElementById("login-password").value.trim();
+    const username = document.getElementById("login-username").value.trim();
+    const password = document.getElementById("login-password").value.trim();
 
-        const users = getUsers();
-        const user = users.find(u => u.username === username && u.password === password);
+    const users = getUsers();
+    const user = users.find(u => u.username === username && u.password === password);
 
-        if (user) {
-            setCurrentUser(user); // save session
-            logActivity(`User logged in as ${user.role}`, "success", username);
-            showConfirmation(`✔ Welcome back, ${username}!`, "success");
+    if (user) {
+      setCurrentUser(user);
+      logActivity(`User logged in as ${user.role}`, "success", username);
+      showConfirmation(`✔ Welcome back, ${username}!`, "success");
 
-            // redirect based on role
-            if (user.role === "admin") {
-                window.location.href = "dashboard.html";
-            } else if (user.role === "crew") {
-                window.location.href = "messages.html";
-            } else if (user.role === "manager") {
-                window.location.href = "profile.html";
-            }
-        } else {
-            showConfirmation("❌ Invalid username or password", "error");
-        }
-    });
+      // Redirect based on role
+      if (user.role === "admin") {
+        window.location.href = "dashboard.html";
+      } else if (user.role === "crew") {
+        window.location.href = "messages.html";
+      } else if (user.role === "manager") {
+        window.location.href = "profile.html";
+      }
+    } else {
+      showConfirmation("❌ Invalid username or password", "error");
+    }
+  });
 }
 
 // ==================== Logs ====================
@@ -94,13 +95,13 @@ function logActivity(message, type = "success", userOverride = null) {
     user: username
   };
 
-  // User-specific recent log
+  // User-specific log (20 entries)
   let userLogs = JSON.parse(localStorage.getItem(`recentActivity_${username}`)) || [];
   userLogs.unshift(entry);
   if (userLogs.length > 20) userLogs = userLogs.slice(0, 20);
   localStorage.setItem(`recentActivity_${username}`, JSON.stringify(userLogs));
 
-  // Global log
+  // Global log (1000 per user)
   let globalLogs = JSON.parse(localStorage.getItem("globalActivity")) || {};
   if (!globalLogs[username]) globalLogs[username] = [];
   globalLogs[username].unshift(entry);
@@ -114,7 +115,7 @@ function logActivity(message, type = "success", userOverride = null) {
 }
 
 function renderActivityLog() {
-  // Only for per-user recent log display (optional UI)
+  // Optional per-user log viewer
 }
 
 function renderGlobalLog() {
