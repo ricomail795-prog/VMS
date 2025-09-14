@@ -1,5 +1,5 @@
 // =============================
-// Local Storage Helpers
+// Storage Helpers
 // =============================
 function saveUsers(users) {
   localStorage.setItem("users", JSON.stringify(users));
@@ -21,20 +21,86 @@ function clearCurrentUser() {
 // Translation System
 // =============================
 const translations = {
-  en: { login: "Login", createAccount: "Create Account", username: "Username", password: "Password", role: "Role", preferredLanguage: "Preferred Language", register: "Register", logout: "Logout", dashboard: "Dashboard", messages: "Messages", settings: "Settings", registeredVessels: "Registered Vessels", registeredCrew: "Registered Crew", latestMessages: "Latest Messages" },
-  fr: { login: "Connexion", createAccount: "Créer un compte", username: "Nom d'utilisateur", password: "Mot de passe", role: "Rôle", preferredLanguage: "Langue Préférée", register: "S'inscrire", logout: "Déconnexion", dashboard: "Tableau de bord", messages: "Messages", settings: "Paramètres", registeredVessels: "Navires enregistrés", registeredCrew: "Équipage enregistré", latestMessages: "Derniers messages" },
-  es: { login: "Iniciar sesión", createAccount: "Crear cuenta", username: "Usuario", password: "Contraseña", role: "Rol", preferredLanguage: "Idioma preferido", register: "Registrar", logout: "Cerrar sesión", dashboard: "Tablero", messages: "Mensajes", settings: "Configuraciones", registeredVessels: "Buques registrados", registeredCrew: "Tripulación registrada", latestMessages: "Últimos mensajes" },
-  de: { login: "Anmelden", createAccount: "Konto erstellen", username: "Benutzername", password: "Passwort", role: "Rolle", preferredLanguage: "Bevorzugte Sprache", register: "Registrieren", logout: "Abmelden", dashboard: "Armaturenbrett", messages: "Nachrichten", settings: "Einstellungen", registeredVessels: "Registrierte Schiffe", registeredCrew: "Registrierte Besatzung", latestMessages: "Neueste Nachrichten" },
-  id: { login: "Masuk", createAccount: "Buat Akun", username: "Nama Pengguna", password: "Kata Sandi", role: "Peran", preferredLanguage: "Bahasa Pilihan", register: "Daftar", logout: "Keluar", dashboard: "Dasbor", messages: "Pesan", settings: "Pengaturan", registeredVessels: "Kapal Terdaftar", registeredCrew: "Awak Terdaftar", latestMessages: "Pesan Terbaru" }
-  // You can expand with more languages as needed
+  en: {
+    login: "Login",
+    createAccount: "Create Account",
+    username: "Username",
+    password: "Password",
+    role: "Role",
+    preferredLanguage: "Preferred Language",
+    register: "Register",
+    logout: "Logout",
+    dashboard: "Dashboard",
+    messages: "Messages",
+    settings: "Settings",
+    profile: "Profile"
+  },
+  fr: {
+    login: "Connexion",
+    createAccount: "Créer un compte",
+    username: "Nom d'utilisateur",
+    password: "Mot de passe",
+    role: "Rôle",
+    preferredLanguage: "Langue Préférée",
+    register: "S'inscrire",
+    logout: "Déconnexion",
+    dashboard: "Tableau de bord",
+    messages: "Messages",
+    settings: "Paramètres",
+    profile: "Profil"
+  },
+  es: {
+    login: "Iniciar sesión",
+    createAccount: "Crear cuenta",
+    username: "Usuario",
+    password: "Contraseña",
+    role: "Rol",
+    preferredLanguage: "Idioma preferido",
+    register: "Registrar",
+    logout: "Cerrar sesión",
+    dashboard: "Tablero",
+    messages: "Mensajes",
+    settings: "Configuraciones",
+    profile: "Perfil"
+  },
+  de: {
+    login: "Anmelden",
+    createAccount: "Konto erstellen",
+    username: "Benutzername",
+    password: "Passwort",
+    role: "Rolle",
+    preferredLanguage: "Bevorzugte Sprache",
+    register: "Registrieren",
+    logout: "Abmelden",
+    dashboard: "Übersicht",
+    messages: "Nachrichten",
+    settings: "Einstellungen",
+    profile: "Profil"
+  },
+  id: {
+    login: "Masuk",
+    createAccount: "Buat Akun",
+    username: "Nama Pengguna",
+    password: "Kata Sandi",
+    role: "Peran",
+    preferredLanguage: "Bahasa Pilihan",
+    register: "Daftar",
+    logout: "Keluar",
+    dashboard: "Dasbor",
+    messages: "Pesan",
+    settings: "Pengaturan",
+    profile: "Profil"
+  }
 };
 
-// Apply translation on page load
+// Apply translation to page
 function applyLanguage(lang) {
   if (!translations[lang]) return;
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    el.textContent = translations[lang][key] || key;
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
   });
 }
 
@@ -70,7 +136,7 @@ if (regForm) {
       return;
     }
 
-    const newUser = { username, password, role, lang, autoLogout: 30 }; // default 30min
+    const newUser = { username, password, role, lang, autoLogout: 30 };
     users.push(newUser);
     saveUsers(users);
 
@@ -102,26 +168,20 @@ if (loginForm) {
     applyLanguage(user.lang);
     logActivity(`User logged in as ${user.role}`, "success", username);
 
-    // Redirect by role
-    if (user.role === "admin") {
-      window.location.href = "dashboard.html";
-    } else if (user.role === "crew") {
-      window.location.href = "messages.html";
-    } else if (user.role === "manager") {
-      window.location.href = "profile.html";
-    }
+    // Redirect (all roles go to dashboard for now)
+    window.location.href = "dashboard.html";
   });
 }
 
 // =============================
-// Auto Logout System
+// Auto Logout
 // =============================
 function startAutoLogout() {
   const user = getCurrentUser();
   if (!user) return;
 
   let timeout;
-  const logoutTime = (user.autoLogout || 30) * 60 * 1000; // in ms, safety 12hr cap
+  const logoutTime = (user.autoLogout || 30) * 60 * 1000; // ms
   const maxTime = 12 * 60 * 60 * 1000;
 
   function resetTimer() {
@@ -139,3 +199,44 @@ function startAutoLogout() {
   resetTimer();
 }
 startAutoLogout();
+
+// =============================
+// Settings Page Hooks
+// =============================
+function updateLanguage() {
+  const user = getCurrentUser();
+  const selectedLang = document.getElementById("language").value;
+  if (user && selectedLang) {
+    user.lang = selectedLang;
+    let users = getUsers();
+    const idx = users.findIndex(u => u.username === user.username);
+    if (idx !== -1) {
+      users[idx] = user;
+      saveUsers(users);
+      setCurrentUser(user);
+    }
+    applyLanguage(selectedLang);
+    alert("Language updated!");
+  }
+}
+
+function updateAutoLogout() {
+  const user = getCurrentUser();
+  const selected = document.getElementById("autoLogout").value;
+  if (user && selected) {
+    user.autoLogout = parseInt(selected);
+    let users = getUsers();
+    const idx = users.findIndex(u => u.username === user.username);
+    if (idx !== -1) {
+      users[idx] = user;
+      saveUsers(users);
+      setCurrentUser(user);
+    }
+    alert("Auto logout time updated!");
+  }
+}
+
+function logout() {
+  clearCurrentUser();
+  window.location.href = "index.html";
+}

@@ -7,23 +7,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Banner -->
   <div class="banner">
     <img src="logo.svg" alt="VMS Logo" class="logo">
   </div>
 
   <div class="auth-wrap">
-    <h2>Login</h2>
+    <!-- Login -->
+    <h2 data-i18n="login">Login</h2>
     <form id="loginForm" class="card">
-      <label>Username</label>
+      <label for="login-username" data-i18n="username">Username</label>
       <input id="login-username" type="text" required>
-      <label>Password</label>
+      <label for="login-password" data-i18n="password">Password</label>
       <input id="login-password" type="password" required>
-      <button type="submit">Login</button>
+      <button type="submit" data-i18n="login">Login</button>
     </form>
 
-    <h2>Create Account</h2>
+    <!-- Register -->
+    <h2 data-i18n="createAccount">Create Account</h2>
     <form id="registerForm" class="card">
-      <label>Preferred Language</label>
+      <label for="reg-lang" data-i18n="preferredLanguage">Preferred Language</label>
       <select id="reg-lang" required>
         <option value="">Select language</option>
         <option value="en">English</option>
@@ -32,21 +35,23 @@
         <option value="de">German</option>
         <option value="it">Italian</option>
         <option value="id">Indonesian</option>
-        <!-- More languages can be added -->
+        <!-- More languages -->
       </select>
 
-      <label>Username</label>
+      <label for="reg-username" data-i18n="username">Username</label>
       <input id="reg-username" type="text" required>
-      <label>Password</label>
+      <label for="reg-password" data-i18n="password">Password</label>
       <input id="reg-password" type="password" required>
-      <label>Role</label>
+
+      <label for="reg-role" data-i18n="role">Role</label>
       <select id="reg-role" required>
         <option value="">Select role</option>
         <option value="admin">Admin</option>
         <option value="crew">Crew</option>
         <option value="manager">Manager</option>
       </select>
-      <button type="submit">Register</button>
+
+      <button type="submit" data-i18n="register">Register</button>
     </form>
   </div>
 

@@ -7,47 +7,59 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Banner -->
-  <header class="banner">
-    <img src="logo.svg" alt="VMS Logo" class="logo">
-  </header>
+  <div class="layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <h2 class="logo">VMS</h2>
+      <ul>
+        <li><a href="dashboard.html" data-i18n="dashboard">Dashboard</a></li>
+        <li><a href="messages.html" data-i18n="messages">Messages</a></li>
+        <li><a href="profile.html" data-i18n="profile">Profile</a></li>
+        <li><a href="settings.html" data-i18n="settings">Settings</a></li>
+        <li><a href="#" id="logoutBtn" data-i18n="logout" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
 
-  <div class="dashboard">
-    <h1>Messages</h1>
+    <!-- Main Content -->
+    <main class="content">
+      <h1 data-i18n="messages">Messages</h1>
 
-    <h2>Inbox</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>When</th>
-          <th>From</th>
-          <th>Subject</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>2025-09-14</td>
-          <td>admin</td>
-          <td>Welcome aboard</td>
-          <td>Unread</td>
-        </tr>
-      </tbody>
-    </table>
+      <h2>Inbox</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>When</th>
+            <th data-i18n="username">From</th>
+            <th>Subject</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2025-09-14</td>
+            <td>admin</td>
+            <td>Welcome aboard</td>
+            <td>Unread</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <h2>Send Message</h2>
-    <form id="sendMessageForm" class="card">
-      <label for="toUser">To</label>
-      <input id="toUser" type="text" required>
+      <h2>Send Message</h2>
+      <form id="sendMessageForm" class="card">
+        <label for="toUser">To</label>
+        <input id="toUser" type="text" required>
 
-      <label for="subject">Subject</label>
-      <input id="subject" type="text" required>
+        <label for="subject">Subject</label>
+        <input id="subject" type="text" required>
 
-      <label for="body">Message</label>
-      <textarea id="body" rows="5" required></textarea>
+        <label for="body">Message</label>
+        <textarea id="body" rows="5" required></textarea>
 
-      <button type="submit">Send</button>
-    </form>
+        <button type="submit">Send</button>
+      </form>
+    </main>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

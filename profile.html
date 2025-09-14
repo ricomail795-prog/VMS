@@ -7,41 +7,53 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Banner -->
-  <header class="banner">
-    <img src="logo.svg" alt="VMS Logo" class="logo">
-  </header>
+  <div class="layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <h2 class="logo">VMS</h2>
+      <ul>
+        <li><a href="dashboard.html" data-i18n="dashboard">Dashboard</a></li>
+        <li><a href="messages.html" data-i18n="messages">Messages</a></li>
+        <li><a href="profile.html" data-i18n="profile">Profile</a></li>
+        <li><a href="settings.html" data-i18n="settings">Settings</a></li>
+        <li><a href="#" id="logoutBtn" data-i18n="logout" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
 
-  <div class="dashboard">
-    <h1>Profile</h1>
+    <!-- Main Content -->
+    <main class="content">
+      <h1 data-i18n="profile">Profile</h1>
 
-    <form id="profileForm" class="card">
-      <label for="fullName">Full Name</label>
-      <input id="fullName" type="text" placeholder="Enter full name">
+      <form id="profileForm" class="card">
+        <label for="fullName">Full Name</label>
+        <input id="fullName" type="text" placeholder="Enter full name">
 
-      <label for="nationality">Nationality</label>
-      <input id="nationality" type="text" placeholder="Enter nationality">
+        <label for="nationality">Nationality</label>
+        <input id="nationality" type="text" placeholder="Enter nationality">
 
-      <label for="preferredLanguage">Preferred Language</label>
-      <select id="preferredLanguage">
-        <option value="en">English</option>
-        <option value="fr">French</option>
-        <option value="es">Spanish</option>
-        <option value="id">Indonesian</option>
-        <option value="de">German</option>
-        <!-- add more -->
-      </select>
+        <label for="preferredLanguage" data-i18n="preferredLanguage">Preferred Language</label>
+        <select id="preferredLanguage">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+          <option value="id">Indonesian</option>
+        </select>
 
-      <label for="autoLogout">Auto Logout</label>
-      <select id="autoLogout">
-        <option value="15">15 minutes</option>
-        <option value="30" selected>30 minutes</option>
-        <option value="60">1 hour</option>
-        <option value="720">Stay logged in (12h cap)</option>
-      </select>
+        <label for="autoLogout">Auto Logout</label>
+        <select id="autoLogout">
+          <option value="15">15 minutes</option>
+          <option value="30" selected>30 minutes</option>
+          <option value="60">1 hour</option>
+          <option value="720">Stay logged in (12h cap)</option>
+        </select>
 
-      <button type="submit">Save Changes</button>
-    </form>
+        <button type="submit">Save Changes</button>
+      </form>
+    </main>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
