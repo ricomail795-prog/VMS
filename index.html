@@ -1,83 +1,202 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VMS - Login</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <!-- Header Banner -->
-  <div class="banner">
-    <img src="logo.svg" alt="VMS Logo" class="logo">
-  </div>
+// =====================
+// Local Storage Helpers
+// =====================
+function saveUsers(users) {
+  localStorage.setItem("users", JSON.stringify(users));
+}
 
-  <div class="auth-wrap">
-    <h2>Login</h2>
-    <form id="loginForm" class="card">
-      <label for="login-username">Username</label>
-      <input id="login-username" type="text" required />
+function getUsers() {
+  return JSON.parse(localStorage.getItem("users")) || [];
+}
 
-      <label for="login-password">Password</label>
-      <input id="login-password" type="password" required />
+function setCurrentUser(user) {
+  localStorage.setItem("currentUser", JSON.stringify(user));
+}
 
-      <button type="submit">Login</button>
-    </form>
+function getCurrentUser() {
+  return JSON.parse(localStorage.getItem("currentUser"));
+}
 
-    <h2>Create Account</h2>
-    <form id="registerForm" class="card">
-      <label for="reg-lang">Preferred Language</label>
-      <select id="reg-lang" required>
-        <option value="" disabled selected>Select language</option>
-        <option value="en">English</option>
-        <option value="ar">Arabic</option>
-        <option value="bn">Bengali</option>
-        <option value="zh">Chinese (Simplified)</option>
-        <option value="zh-TW">Chinese (Traditional)</option>
-        <option value="nl">Dutch</option>
-        <option value="fr">French</option>
-        <option value="de">German</option>
-        <option value="el">Greek</option>
-        <option value="he">Hebrew</option>
-        <option value="hi">Hindi</option>
-        <option value="hu">Hungarian</option>
-        <option value="id">Indonesian</option>
-        <option value="it">Italian</option>
-        <option value="ja">Japanese</option>
-        <option value="ko">Korean</option>
-        <option value="ms">Malay</option>
-        <option value="fa">Persian (Farsi)</option>
-        <option value="pl">Polish</option>
-        <option value="pt">Portuguese</option>
-        <option value="ro">Romanian</option>
-        <option value="ru">Russian</option>
-        <option value="es">Spanish</option>
-        <option value="sv">Swedish</option>
-        <option value="ta">Tamil</option>
-        <option value="th">Thai</option>
-        <option value="tr">Turkish</option>
-        <option value="uk">Ukrainian</option>
-        <option value="vi">Vietnamese</option>
-      </select>
+function clearCurrentUser() {
+  localStorage.removeItem("currentUser");
+}
 
-      <label for="reg-username">Username</label>
-      <input id="reg-username" type="text" required />
+// =====================
+// Translation System
+// =====================
+const translations = {
+  en: {
+    login: "Login",
+    createAccount: "Create Account",
+    username: "Username",
+    password: "Password",
+    role: "Role",
+    preferredLanguage: "Preferred Language",
+    register: "Register",
+    dashboard: "Dashboard",
+    messages: "Messages",
+    settings: "Settings",
+    logout: "Logout",
+    registeredVessels: "Registered Vessels",
+    registeredCrew: "Registered Crew",
+    latestMessages: "Latest Messages",
+  },
+  fr: {
+    login: "Connexion",
+    createAccount: "Créer un compte",
+    username: "Nom d'utilisateur",
+    password: "Mot de passe",
+    role: "Rôle",
+    preferredLanguage: "Langue Préférée",
+    register: "S'inscrire",
+    dashboard: "Tableau de bord",
+    messages: "Messages",
+    settings: "Paramètres",
+    logout: "Déconnexion",
+    registeredVessels: "Navires enregistrés",
+    registeredCrew: "Équipage enregistré",
+    latestMessages: "Derniers messages",
+  },
+  es: {
+    login: "Iniciar sesión",
+    createAccount: "Crear cuenta",
+    username: "Usuario",
+    password: "Contraseña",
+    role: "Rol",
+    preferredLanguage: "Idioma preferido",
+    register: "Registrar",
+    dashboard: "Tablero",
+    messages: "Mensajes",
+    settings: "Configuraciones",
+    logout: "Cerrar sesión",
+    registeredVessels: "Buques registrados",
+    registeredCrew: "Tripulación registrada",
+    latestMessages: "Últimos mensajes",
+  },
+  id: {
+    login: "Masuk",
+    createAccount: "Buat Akun",
+    username: "Nama Pengguna",
+    password: "Kata Sandi",
+    role: "Peran",
+    preferredLanguage: "Bahasa Pilihan",
+    register: "Daftar",
+    dashboard: "Dasbor",
+    messages: "Pesan",
+    settings: "Pengaturan",
+    logout: "Keluar",
+    registeredVessels: "Kapal Terdaftar",
+    registeredCrew: "Awak Terdaftar",
+    latestMessages: "Pesan Terbaru",
+  }
+};
 
-      <label for="reg-password">Password</label>
-      <input id="reg-password" type="password" required />
+// Apply translation to UI
+function applyLanguage(lang) {
+  if (!translations[lang]) return;
 
-      <label for="reg-role">Role</label>
-      <select id="reg-role" required>
-        <option value="">Select role</option>
-        <option value="admin">Admin</option>
-        <option value="crew">Crew</option>
-        <option value="manager">Manager</option>
-      </select>
+  // Login header
+  const loginHeader = document.querySelector("h2");
+  if (loginHeader) loginHeader.textContent = translations[lang].login;
 
-      <button type="submit">Register</button>
-    </form>
-  </div>
+  // Register header
+  const regHeader = document.querySelector("h2:nth-of-type(2)");
+  if (regHeader) regHeader.textContent = translations[lang].createAccount;
 
-  <script src="script.js"></script>
-</body>
-</html>
+  // Labels
+  const labels = document.querySelectorAll("label");
+  labels.forEach(label => {
+    if (label.htmlFor.includes("username")) label.textContent = translations[lang].username;
+    if (label.htmlFor.includes("password")) label.textContent = translations[lang].password;
+    if (label.htmlFor.includes("role")) label.textContent = translations[lang].role;
+    if (label.htmlFor.includes("lang")) label.textContent = translations[lang].preferredLanguage;
+  });
+
+  // Buttons
+  const buttons = document.querySelectorAll("button[type=submit]");
+  if (buttons[0]) buttons[0].textContent = translations[lang].login;
+  if (buttons[1]) buttons[1].textContent = translations[lang].register;
+}
+
+// =====================
+// Activity Log
+// =====================
+function logActivity(message, type = "info", userOverride = null) {
+  const logs = JSON.parse(localStorage.getItem("activityLog")) || [];
+  const current = getCurrentUser();
+  const username = userOverride || (current ? current.username : "System");
+
+  const entry = {
+    time: new Date().toLocaleString(),
+    message,
+    type,
+    user: username
+  };
+
+  logs.push(entry);
+  localStorage.setItem("activityLog", JSON.stringify(logs));
+}
+
+// =====================
+// Registration
+// =====================
+const regForm = document.getElementById("registerForm");
+if (regForm) {
+  regForm.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const lang = document.getElementById("reg-lang").value;
+    const username = document.getElementById("reg-username").value.trim();
+    const password = document.getElementById("reg-password").value.trim();
+    const role = document.getElementById("reg-role").value;
+
+    let users = getUsers();
+    if (users.some(u => u.username === username)) {
+      alert("⚠ Username already exists!");
+      return;
+    }
+
+    const newUser = { username, password, role, lang };
+    users.push(newUser);
+    saveUsers(users);
+
+    logActivity(`Registered new account (${role})`, "success", username);
+    alert("✅ Account created! You can now log in.");
+
+    regForm.reset();
+  });
+}
+
+// =====================
+// Login
+// =====================
+const loginForm = document.getElementById("loginForm");
+if (loginForm) {
+  loginForm.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const username = document.getElementById("login-username").value.trim();
+    const password = document.getElementById("login-password").value.trim();
+
+    const users = getUsers();
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (!user) {
+      alert("❌ Invalid username or password!");
+      return;
+    }
+
+    setCurrentUser(user);
+    logActivity(`User logged in as ${user.role}`, "success", username);
+    applyLanguage(user.lang);
+
+    // Redirect by role
+    if (user.role === "admin") {
+      window.location.href = "dashboard.html";
+    } else if (user.role === "crew") {
+      window.location.href = "messages.html";
+    } else if (user.role === "manager") {
+      window.location.href = "profile.html";
+    }
+  });
+}
