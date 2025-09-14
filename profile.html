@@ -4,32 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VMS - Profile</title>
-
-  <!-- Dynamic cache busting -->
   <script>
+    // Dynamic cache busting
     const version = new Date().getTime();
     document.write(`<link rel="stylesheet" href="style.css?v=${version}">`);
+    document.write(`<script src="script.js?v=${version}"><\/script>`);
   </script>
 </head>
 <body>
   <!-- Top Banner -->
   <header class="top-banner">
-    <h1>VMS Profile</h1>
+    <h1>VMS</h1>
   </header>
 
+  <!-- Layout -->
   <div class="dashboard-layout">
     <!-- Sidebar -->
     <nav class="sidebar">
       <div class="logo">
-        <img src="logo.svg" alt="VMS Logo" />
+        <img src="logo.svg" alt="VMS Logo">
       </div>
-
       <ul class="nav-links">
         <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="profile.html" class="active">Profile</a></li>
         <li><a href="users.html">Users</a></li>
       </ul>
-
       <ul class="nav-bottom">
         <li><a href="messages.html">Messages <span id="unread-badge" class="badge"></span></a></li>
         <li><a href="settings.html">Settings</a></li>
@@ -42,28 +41,23 @@
       <h2>User Profile</h2>
       <form id="profileForm" class="card">
         <label for="firstName">First Name</label>
-        <input type="text" id="firstName" required />
+        <input type="text" id="firstName" required>
 
         <label for="surname">Surname</label>
-        <input type="text" id="surname" required />
+        <input type="text" id="surname" required>
 
         <label for="address">Address</label>
-        <input type="text" id="address" />
+        <input type="text" id="address">
 
         <label for="email">Email</label>
-        <input type="email" id="email" />
+        <input type="email" id="email" required>
 
         <label for="phone">Phone</label>
-        <input type="tel" id="phone" />
+        <input type="tel" id="phone">
 
         <button type="submit">Save Changes</button>
       </form>
     </main>
   </div>
-
-  <!-- JS -->
-  <script>
-    document.write(`<script src="script.js?v=${version}"><\/script>`);
-  </script>
 </body>
 </html>
