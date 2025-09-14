@@ -1,161 +1,108 @@
-/* General layout */
+/* Reset & Base */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f5f7fa;
+  background-color: #f9f9f9;
   color: #333;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
 }
 
-/* Banner */
+/* Banner (for login/register pages) */
 .banner {
-  width: 100%;
-  background-color: #1a3c7a; /* Matches login/register button color */
+  background-color: #1e3a8a;
   padding: 10px;
   text-align: center;
 }
-
-.banner .logo {
-  max-height: 50px;
+.logo {
+  height: 40px;
 }
 
-/* Authentication forms */
+/* Auth Forms */
 .auth-wrap {
-  margin-top: 20px;
-  width: 100%;
   max-width: 400px;
-}
-
-.card {
-  background: #fff;
+  margin: 40px auto;
   padding: 20px;
-  margin: 15px 0;
+}
+.card {
+  background: white;
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
 }
-
 .card label {
+  display: block;
   margin-top: 10px;
-  font-weight: bold;
 }
-
-.card input, 
-.card select {
-  padding: 10px;
+.card input, .card select, .card textarea, .card button {
+  width: 100%;
+  padding: 8px;
   margin-top: 5px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
 }
-
 .card button {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #1a3c7a; /* Consistent blue */
+  background-color: #1e3a8a;
   color: white;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
 }
-
 .card button:hover {
-  background-color: #163568;
+  background-color: #0d2857;
 }
 
-/* Dashboard layout */
-.dashboard {
-  margin: 20px;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.dashboard h2 {
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 5px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-}
-
-table, th, td {
-  border: 1px solid #ddd;
-}
-
-th, td {
-  padding: 10px;
-  text-align: left;
-}
-
-th {
-  background: #f0f0f0;
-}
-
-/* Confirmation + error messages */
-.confirmation {
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.confirmation.success {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.confirmation.error {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-/* Sidebar Layout */
-.layout {
-  display: flex;
-  min-height: 100vh;
-}
-
+/* Layout with Sidebar */
 .sidebar {
-  width: 220px;
-  background-color: #1e3a8a; /* same blue as buttons */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100vh;
+  background-color: #1e3a8a;
   color: white;
-  padding: 20px;
+  padding: 20px 10px;
 }
-
-.sidebar h2.logo {
-  margin: 0 0 20px;
-  font-size: 20px;
+.sidebar h2 {
   text-align: center;
+  margin-bottom: 20px;
 }
-
 .sidebar ul {
   list-style: none;
   padding: 0;
 }
-
 .sidebar ul li {
-  margin-bottom: 15px;
+  margin: 10px 0;
 }
-
 .sidebar ul li a {
   color: white;
   text-decoration: none;
-  font-size: 16px;
   display: block;
+  padding: 8px;
+  border-radius: 4px;
 }
-
 .sidebar ul li a:hover {
-  text-decoration: underline;
+  background-color: #0d2857;
 }
 
-.content {
-  flex: 1;
+.main-content {
+  margin-left: 200px; /* leave room for sidebar */
   padding: 20px;
+  min-height: 100vh;
   background: #f9f9f9;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: white;
+}
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+table th {
+  background-color: #f0f0f0;
 }

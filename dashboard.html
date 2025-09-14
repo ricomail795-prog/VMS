@@ -7,97 +7,95 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="layout">
-    <!-- Sidebar -->
-    <nav class="sidebar">
-      <h2 class="logo">VMS</h2>
-      <ul>
-        <li><a href="dashboard.html" data-i18n="dashboard">Dashboard</a></li>
-        <li><a href="messages.html" data-i18n="messages">Messages</a></li>
-        <li><a href="profile.html" data-i18n="profile">Profile</a></li>
-        <li><a href="settings.html" data-i18n="settings">Settings</a></li>
-        <li><a href="#" id="logoutBtn" data-i18n="logout" onclick="logout()">Logout</a></li>
-      </ul>
-    </nav>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2 data-i18n="dashboard">VMS</h2>
+    <ul>
+      <li><a href="dashboard.html" data-i18n="dashboard">Dashboard</a></li>
+      <li><a href="messages.html" data-i18n="messages">Messages</a></li>
+      <li><a href="profile.html" data-i18n="profile">Profile</a></li>
+      <li><a href="settings.html" data-i18n="settings">Settings</a></li>
+      <li><a href="index.html" onclick="clearCurrentUser()" data-i18n="logout">Logout</a></li>
+    </ul>
+  </div>
 
-    <!-- Main Content -->
-    <main class="content">
-      <h1 data-i18n="dashboard">Dashboard</h1>
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1 data-i18n="dashboard">Dashboard</h1>
 
-      <section>
-        <h2>Registered Vessels</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Location</th>
-              <th>Project</th>
-              <th>Status</th>
-              <th>Days</th>
-              <th>Crew</th>
-            </tr>
-          </thead>
-          <tbody id="vesselTable">
-            <tr>
-              <td>Example Vessel</td>
-              <td>North Sea</td>
-              <td>Survey</td>
-              <td>Active</td>
-              <td>120</td>
-              <td>15</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+    <section>
+      <h2 data-i18n="registeredVessels">Registered Vessels</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Project</th>
+            <th>Status</th>
+            <th>Days</th>
+            <th>Crew</th>
+          </tr>
+        </thead>
+        <tbody id="vesselsTable">
+          <tr>
+            <td>Example Vessel</td>
+            <td>North Sea</td>
+            <td>Survey</td>
+            <td>Active</td>
+            <td>120</td>
+            <td>15</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-      <section>
-        <h2>Registered Crew</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Full Name</th>
-              <th>Role</th>
-              <th>Rank</th>
-              <th>Assigned Vessel</th>
-            </tr>
-          </thead>
-          <tbody id="crewTable">
-            <tr>
-              <td>crew01</td>
-              <td>John Smith</td>
-              <td>Crew</td>
-              <td>Engineer</td>
-              <td>Example Vessel</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+    <section>
+      <h2 data-i18n="registeredCrew">Registered Crew</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Full Name</th>
+            <th>Role</th>
+            <th>Rank</th>
+            <th>Assigned Vessel</th>
+          </tr>
+        </thead>
+        <tbody id="crewTable">
+          <tr>
+            <td>crew01</td>
+            <td>John Smith</td>
+            <td>Crew</td>
+            <td>Engineer</td>
+            <td>Example Vessel</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-      <section>
-        <h2>Latest Messages</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>When</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Subject</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="messagesTable">
-            <tr>
-              <td>2025-09-14</td>
-              <td>crew01</td>
-              <td>admin</td>
-              <td>Engine Report</td>
-              <td>Unread</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-    </main>
+    <section>
+      <h2 data-i18n="latestMessages">Latest Messages</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>When</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Subject</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="messagesTable">
+          <tr>
+            <td>2025-09-14</td>
+            <td>crew01</td>
+            <td>admin</td>
+            <td>Engine Report</td>
+            <td>Unread</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   </div>
 
   <script src="script.js"></script>

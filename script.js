@@ -1,6 +1,4 @@
-// =============================
-// Storage Helpers
-// =============================
+// ===== Local Storage Helpers =====
 function saveUsers(users) {
   localStorage.setItem("users", JSON.stringify(users));
 }
@@ -17,9 +15,7 @@ function clearCurrentUser() {
   localStorage.removeItem("currentUser");
 }
 
-// =============================
-// Translation System
-// =============================
+// ===== Translation System =====
 const translations = {
   en: {
     login: "Login",
@@ -29,25 +25,29 @@ const translations = {
     role: "Role",
     preferredLanguage: "Preferred Language",
     register: "Register",
-    logout: "Logout",
     dashboard: "Dashboard",
     messages: "Messages",
     settings: "Settings",
-    profile: "Profile"
+    logout: "Logout",
+    registeredVessels: "Registered Vessels",
+    registeredCrew: "Registered Crew",
+    latestMessages: "Latest Messages",
   },
   fr: {
     login: "Connexion",
     createAccount: "Créer un compte",
-    username: "Nom d'utilisateur",
+    username: "Nom d’utilisateur",
     password: "Mot de passe",
     role: "Rôle",
     preferredLanguage: "Langue Préférée",
-    register: "S'inscrire",
-    logout: "Déconnexion",
+    register: "S’inscrire",
     dashboard: "Tableau de bord",
     messages: "Messages",
     settings: "Paramètres",
-    profile: "Profil"
+    logout: "Déconnexion",
+    registeredVessels: "Navires enregistrés",
+    registeredCrew: "Équipage enregistré",
+    latestMessages: "Derniers messages",
   },
   es: {
     login: "Iniciar sesión",
@@ -57,25 +57,13 @@ const translations = {
     role: "Rol",
     preferredLanguage: "Idioma preferido",
     register: "Registrar",
-    logout: "Cerrar sesión",
     dashboard: "Tablero",
     messages: "Mensajes",
     settings: "Configuraciones",
-    profile: "Perfil"
-  },
-  de: {
-    login: "Anmelden",
-    createAccount: "Konto erstellen",
-    username: "Benutzername",
-    password: "Passwort",
-    role: "Rolle",
-    preferredLanguage: "Bevorzugte Sprache",
-    register: "Registrieren",
-    logout: "Abmelden",
-    dashboard: "Übersicht",
-    messages: "Nachrichten",
-    settings: "Einstellungen",
-    profile: "Profil"
+    logout: "Cerrar sesión",
+    registeredVessels: "Barcos registrados",
+    registeredCrew: "Tripulación registrada",
+    latestMessages: "Últimos mensajes",
   },
   id: {
     login: "Masuk",
@@ -85,70 +73,67 @@ const translations = {
     role: "Peran",
     preferredLanguage: "Bahasa Pilihan",
     register: "Daftar",
-    logout: "Keluar",
     dashboard: "Dasbor",
     messages: "Pesan",
     settings: "Pengaturan",
-    profile: "Profil"
+    logout: "Keluar",
+    registeredVessels: "Kapal Terdaftar",
+    registeredCrew: "Awak Terdaftar",
+    latestMessages: "Pesan Terbaru",
   }
 };
 
-// Apply translation to page
+// Apply translations
 function applyLanguage(lang) {
-  if (!translations[lang]) return;
+  const t = translations[lang];
+  if (!t) return;
+
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    if (translations[lang][key]) {
-      el.textContent = translations[lang][key];
-    }
+    if (t[key]) el.textContent = t[key];
   });
+
+  localStorage.setItem("selectedLanguage", lang);
 }
 
-// =============================
-// Activity Log
-// =============================
-function logActivity(message, type = "info", userOverride = null) {
-  const logs = JSON.parse(localStorage.getItem("activityLog")) || {};
-  const user = userOverride || (getCurrentUser() ? getCurrentUser().username : "System");
+// Load language on page load
+window.addEventListener("load", () => {
+  const savedLang = localStorage.getItem("selectedLanguage") || "en";
+  applyLanguage(savedLang);
 
-  if (!logs[user]) logs[user] = [];
-  logs[user].push({ time: new Date().toLocaleString(), message, type });
+  const langSelect = document.getElementById("reg-lang");
+  if (langSelect) langSelect.value = savedLang;
 
-  if (logs[user].length > 1000) logs[user].shift(); // cap 1000 entries
-  localStorage.setItem("activityLog", JSON.stringify(logs));
-}
+  const settingsLang = document.getElementById("settings-lang");
+  if (settingsLang) settingsLang.value = savedLang;
+});
 
-// =============================
-// Registration
-// =============================
+// ===== Registration =====
 const regForm = document.getElementById("registerForm");
 if (regForm) {
   regForm.addEventListener("submit", e => {
     e.preventDefault();
-    const lang = document.getElementById("reg-lang").value;
     const username = document.getElementById("reg-username").value.trim();
     const password = document.getElementById("reg-password").value.trim();
     const role = document.getElementById("reg-role").value;
+    const lang = document.getElementById("reg-lang").value;
 
     let users = getUsers();
     if (users.some(u => u.username === username)) {
-      alert("✗ Username already exists");
+      alert("❌ Username already exists!");
       return;
     }
 
-    const newUser = { username, password, role, lang, autoLogout: 30 };
+    const newUser = { username, password, role, lang };
     users.push(newUser);
     saveUsers(users);
 
-    logActivity(`Registered new account (${role})`, "success", username);
-    alert("✓ Account created. You can now log in.");
+    alert("✔ Account created! You can now log in.");
     regForm.reset();
   });
 }
 
-// =============================
-// Login
-// =============================
+// ===== Login =====
 const loginForm = document.getElementById("loginForm");
 if (loginForm) {
   loginForm.addEventListener("submit", e => {
@@ -160,83 +145,19 @@ if (loginForm) {
     const user = users.find(u => u.username === username && u.password === password);
 
     if (!user) {
-      alert("✗ Invalid username or password");
+      alert("❌ Invalid username or password!");
       return;
     }
 
     setCurrentUser(user);
     applyLanguage(user.lang);
-    logActivity(`User logged in as ${user.role}`, "success", username);
 
-    // Redirect (all roles go to dashboard for now)
-    window.location.href = "dashboard.html";
+    if (user.role === "admin") {
+      window.location.href = "dashboard.html";
+    } else if (user.role === "crew") {
+      window.location.href = "messages.html";
+    } else if (user.role === "manager") {
+      window.location.href = "profile.html";
+    }
   });
-}
-
-// =============================
-// Auto Logout
-// =============================
-function startAutoLogout() {
-  const user = getCurrentUser();
-  if (!user) return;
-
-  let timeout;
-  const logoutTime = (user.autoLogout || 30) * 60 * 1000; // ms
-  const maxTime = 12 * 60 * 60 * 1000;
-
-  function resetTimer() {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      clearCurrentUser();
-      alert("You have been logged out due to inactivity.");
-      window.location.href = "index.html";
-    }, Math.min(logoutTime, maxTime));
-  }
-
-  ["click","mousemove","keydown"].forEach(evt =>
-    document.addEventListener(evt, resetTimer)
-  );
-  resetTimer();
-}
-startAutoLogout();
-
-// =============================
-// Settings Page Hooks
-// =============================
-function updateLanguage() {
-  const user = getCurrentUser();
-  const selectedLang = document.getElementById("language").value;
-  if (user && selectedLang) {
-    user.lang = selectedLang;
-    let users = getUsers();
-    const idx = users.findIndex(u => u.username === user.username);
-    if (idx !== -1) {
-      users[idx] = user;
-      saveUsers(users);
-      setCurrentUser(user);
-    }
-    applyLanguage(selectedLang);
-    alert("Language updated!");
-  }
-}
-
-function updateAutoLogout() {
-  const user = getCurrentUser();
-  const selected = document.getElementById("autoLogout").value;
-  if (user && selected) {
-    user.autoLogout = parseInt(selected);
-    let users = getUsers();
-    const idx = users.findIndex(u => u.username === user.username);
-    if (idx !== -1) {
-      users[idx] = user;
-      saveUsers(users);
-      setCurrentUser(user);
-    }
-    alert("Auto logout time updated!");
-  }
-}
-
-function logout() {
-  clearCurrentUser();
-  window.location.href = "index.html";
 }
