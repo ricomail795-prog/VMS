@@ -89,3 +89,56 @@ button:hover {
   padding: 10px;
   text-align: center;
 }
+/* Dashboard Layout */
+.dashboard-layout {
+  display: flex;
+  height: calc(100vh - 60px); /* full height minus banner */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #002244;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 10px;
+}
+
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar img {
+  max-width: 100px;
+}
+
+.sidebar .nav-links,
+.sidebar .nav-bottom {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px;
+  margin: 6px 0;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #004080;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 30px;
+  background-color: #f4f6f8;
+}
