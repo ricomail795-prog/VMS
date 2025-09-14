@@ -12,13 +12,20 @@
   </script>
 </head>
 <body>
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <h1>VMS</h1>
+  </header>
+
   <!-- Notification + Logout Warning Banners -->
   <div id="notification-bar" style="display:none;" class="notification"></div>
   <div id="logout-warning" style="display:none;" class="warning"></div>
 
-  <div class="auth-wrap">
-    <!-- Preferred Language -->
-    <label for="page-lang" id="lang-label">Preferred Language</label>
+  <!-- Auth Container -->
+  <div class="auth-container">
+
+    <!-- Language Selector -->
+    <label for="page-lang" id="lang-label">Select Language</label>
     <select id="page-lang" required>
       <option value="en" selected>English</option>
       <option value="es">Spanish</option>
@@ -73,9 +80,7 @@
     </form>
   </div>
 
-  <!-- Dynamic cache busting for JS -->
-  <script>
-    document.write(`<script src="script.js?v=${version}"><\/script>`);
-  </script>
+  <!-- JS -->
+  <script src="script.js?v=${version}"></script>
 </body>
 </html>
