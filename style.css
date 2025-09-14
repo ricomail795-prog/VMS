@@ -1,149 +1,63 @@
-/* update *?/* General layout */
+/* General layout */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  display: flex;
-  height: 100vh;
+  background-color: #f4f6f8;
+  color: #333;
 }
 
-/* Sidebar */
-.sidebar {
-  width: 200px;
+h2 {
+  color: #003366;
+}
+
+/* Auth forms */
+.auth-wrap {
+  margin: 40px auto;
+  max-width: 400px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+label {
+  display: block;
+  margin: 8px 0 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
   background-color: #003366;
   color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.sidebar .logo-badge {
-  background: #005599;
-  text-align: center;
-  padding: 1rem;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  margin: 1rem auto;
-  line-height: 80px;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.sidebar nav a,
-.sidebar .bottom-nav a {
-  display: block;
+  border: none;
   padding: 10px 15px;
-  color: white;
-  text-decoration: none;
-}
-
-.sidebar nav a.active,
-.sidebar nav a:hover,
-.sidebar .bottom-nav a:hover {
-  background-color: #004080;
-}
-
-/* Content */
-.content {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-/* Tables */
-table {
-  border-collapse: collapse;
+  border-radius: 4px;
+  cursor: pointer;
   width: 100%;
-  margin-bottom: 20px;
 }
 
-table, th, td {
-  border: 1px solid #ccc;
+button:hover {
+  background-color: #005599;
 }
 
-th, td {
-  padding: 8px;
-  text-align: left;
+/* Night mode */
+body.night-mode {
+  background-color: #121212;
+  color: #e0e0e0;
 }
 
-th {
-  background-color: #f0f0f0;
+body.night-mode .card {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
 }
-
-/* Auth page */
-.auth-wrap {
-  margin: auto;
-  width: 300px;
-}
-
-.auth-wrap h2 {
-  text-align: center;
-}
-
-.auth-wrap form {
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 20px;
-}
-
-.auth-wrap input,
-.auth-wrap select,
-.auth-wrap button {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
-}
-/* Profile form fields stacked vertically */
-fieldset label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-fieldset input,
-fieldset select,
-fieldset textarea {
-  display: block;
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 10px;
-  padding: 6px;
-}
-/* Profile form fields stacked vertically */
-fieldset label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-fieldset input,
-fieldset select,
-fieldset textarea {
-  display: block;
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 10px;
-  padding: 6px;
-}
-/* Save Profile button */
-#save-profile {
-  Display: block;
-  Width: 100%;
-  Max-width: 200px;
-  Margin: 20px auto;
-  Padding: 10px 15px;
-  Font-size: 1em;
-  Font-weight: bold;
-  Color: #fff;
-  Background-color: #003366;
-  Border: none;
-  Border-radius: 6px;
-  Cursor: pointer;
-  Transition: background-color 0.3s ease;
-}
-
-#save-profile:hover {
-  Background-color: #0055aa;
-}
-
-
