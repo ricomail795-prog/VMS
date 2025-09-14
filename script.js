@@ -50,31 +50,36 @@ if (regForm) {
     showConfirmation("✔ Account created! You can now log in.", "success");
     regForm.reset();
   });
-}
 
 // ==================== Login ====================
 const loginForm = document.getElementById("loginForm");
 if (loginForm) {
-  loginForm.addEventListener("submit", e => {
-    e.preventDefault();
+    loginForm.addEventListener("submit", e => {
+        e.preventDefault();
 
-    const username = document.getElementById("login-username").value.trim();
-    const password = document.getElementById("login-password").value.trim();
+        const username = document.getElementById("login-username").value.trim();
+        const password = document.getElementById("login-password").value.trim();
 
-    const users = getUsers();
-    const user = users.find(u => u.username === username && u.password === password);
+        const users = getUsers();
+        const user = users.find(u => u.username === username && u.password === password);
 
-    if (!user) {
-      showConfirmation("❌ Invalid username or password", "error");
-      return;
-    }
+        if (user) {
+            setCurrentUser(user); // save session
+            logActivity(`User logged in as ${user.role}`, "success", username);
+            showConfirmation(`✔ Welcome back, ${username}!`, "success");
 
-    setCurrentUser(user);
-    logActivity("User logged in", "success", username);
-
-    showConfirmation(`✔ Welcome back, ${username}`, "success");
-    // redirect to dashboard if you want
-  });
+            // redirect based on role
+            if (user.role === "admin") {
+                window.location.href = "dashboard.html";
+            } else if (user.role === "crew") {
+                window.location.href = "messages.html";
+            } else if (user.role === "manager") {
+                window.location.href = "profile.html";
+            }
+        } else {
+            showConfirmation("❌ Invalid username or password", "error");
+        }
+    });
 }
 
 // ==================== Logs ====================
