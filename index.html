@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VMS - Login</title>
-  <link rel="stylesheet" href="style.css? v=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="auth-wrap">
@@ -12,34 +12,38 @@
     <form id="loginForm" class="card">
       <label>Username</label>
       <input id="login-username" type="text" required />
+
       <label>Password</label>
       <input id="login-password" type="password" required />
+
       <button type="submit">Login</button>
     </form>
 
     <h2>Create Account</h2>
     <form id="registerForm" class="card">
+      <label>Preferred Language</label>
+      <select id="reg-lang" required>
+        <option value="">Select language</option>
+        <option value="en" selected>English</option>
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="it">Italian</option>
+        <option value="id">Indonesian</option>
+      </select>
+
       <label>Username</label>
       <input id="reg-username" type="text" required />
+
       <label>Password</label>
       <input id="reg-password" type="password" required />
-      
+
       <label>Role</label>
       <select id="reg-role" required>
         <option value="">Select role</option>
         <option value="admin">Admin</option>
         <option value="crew">Crew</option>
         <option value="manager">Manager</option>
-      </select>
-
-      <label>Preferred Language</label>
-      <select id="reg-lang" required>
-        <option value="">Select language</option>
-        <option value="en">English</option>
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-        <option value="de">German</option>
-        <!-- more ISO languages can be added here -->
       </select>
 
       <button type="submit">Register</button>
