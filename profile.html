@@ -2,112 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VMS - Profile</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="sidebar">
-    <div class="logo-badge">VMS</div>
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="profile.html" class="active">Profile</a>
-    </nav>
-    <div class="bottom-nav">
-      <a href="messages.html">Messages</a>
-      <a href="settings.html">Settings</a>
-      <a href="#" id="logoutBtn">Logout</a>
-    </div>
+  <!-- Banner -->
+  <header class="banner">
+    <img src="logo.svg" alt="VMS Logo" class="logo">
+  </header>
+
+  <div class="dashboard">
+    <h1>Profile</h1>
+
+    <form id="profileForm" class="card">
+      <label for="fullName">Full Name</label>
+      <input id="fullName" type="text" placeholder="Enter full name">
+
+      <label for="nationality">Nationality</label>
+      <input id="nationality" type="text" placeholder="Enter nationality">
+
+      <label for="preferredLanguage">Preferred Language</label>
+      <select id="preferredLanguage">
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+        <option value="id">Indonesian</option>
+        <option value="de">German</option>
+        <!-- add more -->
+      </select>
+
+      <label for="autoLogout">Auto Logout</label>
+      <select id="autoLogout">
+        <option value="15">15 minutes</option>
+        <option value="30" selected>30 minutes</option>
+        <option value="60">1 hour</option>
+        <option value="720">Stay logged in (12h cap)</option>
+      </select>
+
+      <button type="submit">Save Changes</button>
+    </form>
   </div>
-
-  <div class="content">
-    <h2>User Profile</h2>
-
-    <!-- Profile Picture -->
-    <fieldset>
-      <legend>Profile Picture</legend>
-      <input type="file" id="profile-pic" accept="image/*">
-      <div id="profile-pic-preview"></div>
-    </fieldset>
-
-    <!-- Personal Details -->
-    <fieldset>
-      <legend>Personal Details</legend>
-      <label>First Name</label>
-      <input type="text" id="first-name">
-      <label>Surname</label>
-      <input type="text" id="surname">
-      <label>Address</label>
-      <input type="text" id="address">
-      <label>Telephone</label>
-      <input type="text" id="telephone">
-      <label>Email</label>
-      <input type="email" id="email">
-    </fieldset>
-
-    <!-- Next of Kin -->
-    <fieldset>
-      <legend>Next of Kin</legend>
-      <label>Relationship</label>
-      <input type="text" id="kin-relationship">
-      <label>Name</label>
-      <input type="text" id="kin-name">
-      <label>Address</label>
-      <input type="text" id="kin-address">
-      <label>Telephone</label>
-      <input type="text" id="kin-telephone">
-    </fieldset>
-
-    <!-- Certificates -->
-    <fieldset>
-      <legend>Certificates</legend>
-      <table>
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>Number</th>
-            <th>Issuing Body</th>
-            <th>Valid From</th>
-            <th>Valid To</th>
-            <th>Upload</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="cert-list"></tbody>
-      </table>
-      <button id="add-cert">Add Certificate</button>
-    </fieldset>
-
-    <!-- Medical Declaration -->
-    <fieldset>
-      <legend>Medical Declaration</legend>
-      <label>Doctor Name</label>
-      <input type="text" id="doctor-name">
-      <label>Doctor Address</label>
-      <input type="text" id="doctor-address">
-      <label>Doctor Telephone</label>
-      <input type="text" id="doctor-telephone">
-
-      <label>Have you ever had surgery?</label>
-      <select id="q-surgery"><option value="yes">Yes</option><option value="no">No</option></select>
-
-      <label>Do you have any chronic conditions?</label>
-      <select id="q-chronic"><option value="yes">Yes</option><option value="no">No</option></select>
-
-      <label>Are you currently taking medication?</label>
-      <select id="q-medication"><option value="yes">Yes</option><option value="no">No</option></select>
-    </fieldset>
-
-    <!-- Signature -->
-    <fieldset>
-      <legend>Electronic Signature</legend>
-      <canvas id="signature-pad" width="400" height="150" style="border:1px solid #ccc"></canvas>
-      <button type="button" id="clear-signature">Clear</button>
-    </fieldset>
-
-    <button id="save-profile">Save Profile</button>
-  </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
