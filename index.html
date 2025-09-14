@@ -1,49 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VMS - Login</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=1.1" />
 </head>
 <body>
-  <!-- Banner -->
-  <div class="banner">
-    <img src="logo.svg" alt="VMS Logo" class="logo">
-  </div>
+  <!-- Notification + logout warning banners -->
+  <div id="notification-bar" style="display:none;" class="notification"></div>
+  <div id="logout-warning" style="display:none;" class="warning"></div>
 
   <div class="auth-wrap">
+    <!-- Preferred Language for whole page -->
+    <label id="lang-label">Preferred Language</label>
+    <select id="page-lang" required>
+      <option value="en">English</option>
+      <option value="es">Spanish</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <option value="it">Italian</option>
+      <option value="id">Indonesian</option>
+    </select>
+
     <!-- Login -->
-    <h2 data-i18n="login">Login</h2>
+    <h2 id="login-title">Login</h2>
     <form id="loginForm" class="card">
-      <label for="login-username" data-i18n="username">Username</label>
-      <input id="login-username" type="text" required>
-      <label for="login-password" data-i18n="password">Password</label>
-      <input id="login-password" type="password" required>
-      <button type="submit" data-i18n="login">Login</button>
+      <label id="login-username-label">Username</label>
+      <input id="login-username" type="text" required />
+
+      <label id="login-password-label">Password</label>
+      <input id="login-password" type="password" required />
+
+      <button type="submit" id="login-btn">Login</button>
     </form>
 
-    <!-- Register -->
-    <h2 data-i18n="createAccount">Create Account</h2>
+    <!-- Create Account -->
+    <h2 id="create-account-title">Create Account</h2>
     <form id="registerForm" class="card">
-      <label for="reg-lang" data-i18n="preferredLanguage">Preferred Language</label>
-      <select id="reg-lang" required>
-        <option value="">Select language</option>
-        <option value="en">English</option>
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-        <option value="de">German</option>
-        <option value="it">Italian</option>
-        <option value="id">Indonesian</option>
-        <!-- More languages -->
-      </select>
+      <label id="username-label">Username</label>
+      <input id="reg-username" type="text" required />
 
-      <label for="reg-username" data-i18n="username">Username</label>
-      <input id="reg-username" type="text" required>
-      <label for="reg-password" data-i18n="password">Password</label>
-      <input id="reg-password" type="password" required>
-
-      <label for="reg-role" data-i18n="role">Role</label>
+      <label id="password-label">Password</label>
+      <input id="reg-password" type="password" required />
+      
+      <label id="role-label">Role</label>
       <select id="reg-role" required>
         <option value="">Select role</option>
         <option value="admin">Admin</option>
@@ -51,10 +52,10 @@
         <option value="manager">Manager</option>
       </select>
 
-      <button type="submit" data-i18n="register">Register</button>
+      <button type="submit" id="register-btn">Register</button>
     </form>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=1.1"></script>
 </body>
 </html>

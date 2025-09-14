@@ -1,4 +1,6 @@
-git add script.js && git commit -m "Fix login to redirect users based on role" && git push <svg xmlns="http://www.w3.org/2000/svg" width="300" height="80">
-  <rect width="100%" height="100%" fill="#003366"/>
-  <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle" alignment-baseline="middle">VMS</text>
-</svg> main
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <rect width="120" height="120" rx="20" fill="#2C3E50"/>
+  <path d="M60 25 L95 95 H25 L60 25Z" fill="#3498DB"/>
+  <circle cx="60" cy="65" r="12" fill="#ECF0F1"/>
+  <text x="50%" y="115" text-anchor="middle" fill="#ECF0F1" font-size="14" font-family="Arial" font-weight="bold">VMS</text>
+</svg>

@@ -1,75 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VMS - Profile</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile</title>
+  <link rel="stylesheet" href="style.css?v=1.1" />
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>VMS</h2>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="messages.html">Messages</a>
-    <a href="profile.html" class="active">Profile</a>
-    <a href="settings.html">Settings</a>
-    <a href="index.html">Logout</a>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">
+        <img src="logo.svg" alt="VMS Logo" />
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html" class="active">Profile</a></li>
+        <li><a href="users.html">Users</a></li>
+      </ul>
+
+      <ul class="nav-bottom">
+        <li>
+          <a href="messages.html">
+            Messages <span id="unread-badge" class="badge"></span>
+          </a>
+        </li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="index.html" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>My Profile</h1>
+
+      <form id="profileForm" class="card">
+        <!-- Username -->
+        <label for="profile-username">Username</label>
+        <input id="profile-username" type="text" />
+
+        <!-- Password -->
+        <label for="profile-password">Password</label>
+        <input id="profile-password" type="password" />
+
+        <!-- Role (readonly) -->
+        <label for="profile-role">Role</label>
+        <input id="profile-role" type="text" disabled />
+
+        <!-- Language (readonly, editable in Settings) -->
+        <label for="profile-lang">Language</label>
+        <input id="profile-lang" type="text" disabled />
+
+        <!-- Theme (readonly, editable in Settings) -->
+        <label for="profile-theme">Theme</label>
+        <input id="profile-theme" type="text" disabled />
+
+        <button type="button" id="save-profile">Save Profile</button>
+      </form>
+    </main>
   </div>
 
-  <!-- Language dropdown -->
-  <div class="language-selector">
-    <label for="lang-select">🌐</label>
-    <select id="lang-select">
-      <option value="en" selected>English</option>
-      <option value="es">Español</option>
-      <option value="fr">Français</option>
-      <option value="id">Bahasa Indonesia</option>
-      <option value="de">Deutsch</option>
-      <option value="it">Italiano</option>
-      <option value="pt">Português</option>
-      <option value="ru">Русский</option>
-      <option value="zh">中文</option>
-      <option value="ar">العربية</option>
-    </select>
-  </div>
-
-  <!-- Main content -->
-  <div class="main-content">
-    <h1>Profile</h1>
-
-    <form id="profile-form">
-      <label for="fullName">Full Name:</label>
-      <input type="text" id="fullName" placeholder="Enter full name">
-
-      <label for="nationality">Nationality:</label>
-      <input type="text" id="nationality" placeholder="Enter nationality">
-
-      <label for="preferredLanguage">Preferred Language:</label>
-      <select id="preferredLanguage">
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="fr">Français</option>
-        <option value="id">Bahasa Indonesia</option>
-        <option value="de">Deutsch</option>
-        <option value="it">Italiano</option>
-        <option value="pt">Português</option>
-        <option value="ru">Русский</option>
-        <option value="zh">中文</option>
-        <option value="ar">العربية</option>
-      </select>
-
-      <label for="autoLogout">Auto Logout:</label>
-      <select id="autoLogout">
-        <option value="15">15 minutes</option>
-        <option value="30" selected>30 minutes</option>
-        <option value="60">1 hour</option>
-        <option value="720">Stay logged in (12h cap)</option>
-      </select>
-
-      <button type="submit">Save Changes</button>
-    </form>
-  </div>
+  <script src="script.js?v=1.1"></script>
 </body>
 </html>

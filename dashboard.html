@@ -1,105 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VMS - Dashboard</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css?v=1.1" />
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>VMS</h2>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="messages.html">Messages</a>
-    <a href="profile.html">Profile</a>
-    <a href="settings.html">Settings</a>
-    <a href="index.html">Logout</a>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">
+        <img src="logo.svg" alt="VMS Logo" />
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="users.html">Users</a></li>
+      </ul>
+
+      <ul class="nav-bottom">
+        <li>
+          <a href="messages.html">
+            Messages <span id="unread-badge" class="badge"></span>
+          </a>
+        </li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="index.html" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Welcome to the VMS Dashboard</h1>
+      <p>This is your control panel.</p>
+    </main>
   </div>
 
-  <!-- Language dropdown -->
-  <div class="language-selector">
-    <label for="lang-select">🌐</label>
-    <select id="lang-select">
-      <option value="en" selected>English</option>
-      <option value="es">Español</option>
-      <option value="fr">Français</option>
-      <option value="id">Bahasa Indonesia</option>
-      <option value="de">Deutsch</option>
-      <option value="it">Italiano</option>
-      <option value="pt">Português</option>
-      <option value="ru">Русский</option>
-      <option value="zh">中文</option>
-      <option value="ar">العربية</option>
-    </select>
-  </div>
-
-  <!-- Main content -->
-  <div class="main-content">
-    <h1>Dashboard</h1>
-
-    <section>
-      <h2>Registered Vessels</h2>
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Project</th>
-          <th>Status</th>
-          <th>Days</th>
-          <th>Crew</th>
-        </tr>
-        <tr>
-          <td>Example Vessel</td>
-          <td>North Sea</td>
-          <td>Survey</td>
-          <td>Active</td>
-          <td>120</td>
-          <td>15</td>
-        </tr>
-      </table>
-    </section>
-
-    <section>
-      <h2>Registered Crew</h2>
-      <table>
-        <tr>
-          <th>Username</th>
-          <th>Full Name</th>
-          <th>Role</th>
-          <th>Rank</th>
-          <th>Assigned Vessel</th>
-        </tr>
-        <tr>
-          <td>crew01</td>
-          <td>John Smith</td>
-          <td>Crew</td>
-          <td>Engineer</td>
-          <td>Example Vessel</td>
-        </tr>
-      </table>
-    </section>
-
-    <section>
-      <h2>Latest Messages</h2>
-      <table>
-        <tr>
-          <th>When</th>
-          <th>From</th>
-          <th>To</th>
-          <th>Subject</th>
-          <th>Status</th>
-        </tr>
-        <tr>
-          <td>2025-09-14</td>
-          <td>crew01</td>
-          <td>admin</td>
-          <td>Engine Report</td>
-          <td>Unread</td>
-        </tr>
-      </table>
-    </section>
-  </div>
+  <script src="script.js?v=1.1"></script>
 </body>
 </html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Management</title>
+  <link rel="stylesheet" href="style.css?v=1.1" />
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">
+        <img src="logo.svg" alt="VMS Logo" />
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="users.html" class="active">Users</a></li>
+      </ul>
+
+      <ul class="nav-bottom">
+        <li>
+          <a href="messages.html">
+            Messages <span id="unread-badge" class="badge"></span>
+          </a>
+        </li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="index.html" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>User Management</h1>
+
+      <!-- User Table -->
+      <div class="card">
+        <h3>Existing Users</h3>
+        <table id="user-table" border="1" cellspacing="0" cellpadding="8" style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Role</th>
+              <th>Language</th>
+            </tr>
+          </thead>
+          <tbody id="user-table-body">
+            <!-- Filled by script.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Create User -->
+      <div class="card" style="margin-top:20px;">
+        <h3>Create User</h3>
+        <form id="admin-create-user-form">
+          <label for="new-username">Username</label>
+          <input id="new-username" type="text" required />
+
+          <label for="new-password">Password</label>
+          <input id="new-password" type="password" required />
+
+          <label for="new-role">Role</label>
+          <select id="new-role" required>
+            <option value="admin">Admin</option>
+            <option value="crew">Crew</option>
+            <option value="manager">Manager</option>
+          </select>
+
+          <button type="submit">Create User</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js?v=1.1"></script>
+</body>
+</html>

@@ -1,84 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VMS - Messages</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages</title>
+  <link rel="stylesheet" href="style.css?v=1.1" />
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>VMS</h2>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="messages.html" class="active">Messages <span id="unread-count"></span></a>
-    <a href="profile.html">Profile</a>
-    <a href="settings.html">Settings</a>
-    <a href="index.html">Logout</a>
-  </div>
-
-  <!-- Language dropdown -->
-  <div class="language-selector">
-    <label for="lang-select">🌐</label>
-    <select id="lang-select">
-      <option value="en" selected>English</option>
-      <option value="es">Español</option>
-      <option value="fr">Français</option>
-      <option value="id">Bahasa Indonesia</option>
-      <option value="de">Deutsch</option>
-      <option value="it">Italiano</option>
-      <option value="pt">Português</option>
-      <option value="ru">Русский</option>
-      <option value="zh">中文</option>
-      <option value="ar">العربية</option>
-    </select>
-  </div>
-
-  <!-- Main content -->
-  <div class="main-content">
-    <h1>Messages</h1>
-
-    <!-- Inbox -->
-    <section>
-      <h2>Inbox</h2>
-      <table>
-        <tr>
-          <th>When</th>
-          <th>From</th>
-          <th>Subject</th>
-          <th>Status</th>
-        </tr>
-        <tbody id="inbox-table">
-          <tr>
-            <td>2025-09-14</td>
-            <td>Admin</td>
-            <td>Welcome</td>
-            <td>Unread</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+  <div class="messages-wrap">
+    <h2>Messages</h2>
 
     <!-- Send Message -->
-    <section>
-      <h2>Send Message</h2>
-      <form id="send-message-form">
-        <label for="toUser">To:</label>
-        <input type="text" id="toUser" placeholder="Recipient username" required>
+    <form id="message-form" class="card">
+      <label for="message-text">Message</label>
+      <textarea id="message-text" rows="3" placeholder="Type your message..."></textarea>
 
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" placeholder="Message subject" required>
+      <!-- File attachments -->
+      <label for="file-input">Attach File(s)</label>
+      <input type="file" id="file-input" multiple />
 
-        <label for="body">Message:</label>
-        <textarea id="body" rows="5" placeholder="Write your message here..." required></textarea>
+      <!-- Attach screenshot -->
+      <button type="button" id="attach-screenshot">Attach Screenshot</button>
 
-        <label for="file-attach">Attach File:</label>
-        <input type="file" id="file-attach" multiple>
+      <!-- Recipient -->
+      <label for="message-recipient">Recipient</label>
+      <select id="message-recipient">
+        <option value="admin">Admin</option>
+        <option value="crew">Crew</option>
+        <option value="manager">Manager</option>
+      </select>
 
-        <button type="submit">Send</button>
-      </form>
-    </section>
+      <button type="submit">Send</button>
+    </form>
+
+    <!-- Messages List -->
+    <div id="messages-list" class="card" style="margin-top:20px;">
+      <p>No messages yet.</p>
+    </div>
   </div>
+
+  <script src="script.js?v=1.1"></script>
 </body>
 </html>
