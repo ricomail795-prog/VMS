@@ -5,55 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VMS - Profile</title>
   <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="layout">
-    <!-- Sidebar -->
-    <nav class="sidebar">
-      <h2 class="logo">VMS</h2>
-      <ul>
-        <li><a href="dashboard.html" data-i18n="dashboard">Dashboard</a></li>
-        <li><a href="messages.html" data-i18n="messages">Messages</a></li>
-        <li><a href="profile.html" data-i18n="profile">Profile</a></li>
-        <li><a href="settings.html" data-i18n="settings">Settings</a></li>
-        <li><a href="#" id="logoutBtn" data-i18n="logout" onclick="logout()">Logout</a></li>
-      </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="content">
-      <h1 data-i18n="profile">Profile</h1>
-
-      <form id="profileForm" class="card">
-        <label for="fullName">Full Name</label>
-        <input id="fullName" type="text" placeholder="Enter full name">
-
-        <label for="nationality">Nationality</label>
-        <input id="nationality" type="text" placeholder="Enter nationality">
-
-        <label for="preferredLanguage" data-i18n="preferredLanguage">Preferred Language</label>
-        <select id="preferredLanguage">
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="de">German</option>
-          <option value="it">Italian</option>
-          <option value="id">Indonesian</option>
-        </select>
-
-        <label for="autoLogout">Auto Logout</label>
-        <select id="autoLogout">
-          <option value="15">15 minutes</option>
-          <option value="30" selected>30 minutes</option>
-          <option value="60">1 hour</option>
-          <option value="720">Stay logged in (12h cap)</option>
-        </select>
-
-        <button type="submit">Save Changes</button>
-      </form>
-    </main>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>VMS</h2>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="messages.html">Messages</a>
+    <a href="profile.html" class="active">Profile</a>
+    <a href="settings.html">Settings</a>
+    <a href="index.html">Logout</a>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Language dropdown -->
+  <div class="language-selector">
+    <label for="lang-select">🌐</label>
+    <select id="lang-select">
+      <option value="en" selected>English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="id">Bahasa Indonesia</option>
+      <option value="de">Deutsch</option>
+      <option value="it">Italiano</option>
+      <option value="pt">Português</option>
+      <option value="ru">Русский</option>
+      <option value="zh">中文</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+
+  <!-- Main content -->
+  <div class="main-content">
+    <h1>Profile</h1>
+
+    <form id="profile-form">
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" placeholder="Enter full name">
+
+      <label for="nationality">Nationality:</label>
+      <input type="text" id="nationality" placeholder="Enter nationality">
+
+      <label for="preferredLanguage">Preferred Language:</label>
+      <select id="preferredLanguage">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="id">Bahasa Indonesia</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
+        <option value="pt">Português</option>
+        <option value="ru">Русский</option>
+        <option value="zh">中文</option>
+        <option value="ar">العربية</option>
+      </select>
+
+      <label for="autoLogout">Auto Logout:</label>
+      <select id="autoLogout">
+        <option value="15">15 minutes</option>
+        <option value="30" selected>30 minutes</option>
+        <option value="60">1 hour</option>
+        <option value="720">Stay logged in (12h cap)</option>
+      </select>
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
 </body>
 </html>

@@ -5,61 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VMS - Messages</title>
   <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="layout">
-    <!-- Sidebar -->
-    <nav class="sidebar">
-      <h2 class="logo">VMS</h2>
-      <ul>
-        <li><a href="dashboard.html" data-i18n="dashboard">Dashboard</a></li>
-        <li><a href="messages.html" data-i18n="messages">Messages</a></li>
-        <li><a href="profile.html" data-i18n="profile">Profile</a></li>
-        <li><a href="settings.html" data-i18n="settings">Settings</a></li>
-        <li><a href="#" id="logoutBtn" data-i18n="logout" onclick="logout()">Logout</a></li>
-      </ul>
-    </nav>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>VMS</h2>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="messages.html" class="active">Messages <span id="unread-count"></span></a>
+    <a href="profile.html">Profile</a>
+    <a href="settings.html">Settings</a>
+    <a href="index.html">Logout</a>
+  </div>
 
-    <!-- Main Content -->
-    <main class="content">
-      <h1 data-i18n="messages">Messages</h1>
+  <!-- Language dropdown -->
+  <div class="language-selector">
+    <label for="lang-select">🌐</label>
+    <select id="lang-select">
+      <option value="en" selected>English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="id">Bahasa Indonesia</option>
+      <option value="de">Deutsch</option>
+      <option value="it">Italiano</option>
+      <option value="pt">Português</option>
+      <option value="ru">Русский</option>
+      <option value="zh">中文</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
 
+  <!-- Main content -->
+  <div class="main-content">
+    <h1>Messages</h1>
+
+    <!-- Inbox -->
+    <section>
       <h2>Inbox</h2>
       <table>
-        <thead>
-          <tr>
-            <th>When</th>
-            <th data-i18n="username">From</th>
-            <th>Subject</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
+        <tr>
+          <th>When</th>
+          <th>From</th>
+          <th>Subject</th>
+          <th>Status</th>
+        </tr>
+        <tbody id="inbox-table">
           <tr>
             <td>2025-09-14</td>
-            <td>admin</td>
-            <td>Welcome aboard</td>
+            <td>Admin</td>
+            <td>Welcome</td>
             <td>Unread</td>
           </tr>
         </tbody>
       </table>
+    </section>
 
+    <!-- Send Message -->
+    <section>
       <h2>Send Message</h2>
-      <form id="sendMessageForm" class="card">
-        <label for="toUser">To</label>
-        <input id="toUser" type="text" required>
+      <form id="send-message-form">
+        <label for="toUser">To:</label>
+        <input type="text" id="toUser" placeholder="Recipient username" required>
 
-        <label for="subject">Subject</label>
-        <input id="subject" type="text" required>
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" placeholder="Message subject" required>
 
-        <label for="body">Message</label>
-        <textarea id="body" rows="5" required></textarea>
+        <label for="body">Message:</label>
+        <textarea id="body" rows="5" placeholder="Write your message here..." required></textarea>
+
+        <label for="file-attach">Attach File:</label>
+        <input type="file" id="file-attach" multiple>
 
         <button type="submit">Send</button>
       </form>
-    </main>
+    </section>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
