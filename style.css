@@ -85,3 +85,20 @@ button:hover {
   letter-spacing: 1px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
+/* Center auth container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+/* Style the card (login/register boxes) */
+.auth-wrap {
+  background: #ffffff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  width: 320px;
+}
