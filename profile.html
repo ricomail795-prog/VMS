@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile</title>
-  <link rel="stylesheet" href="style.css?v=1.1" />
+
+  <!-- Dynamic cache busting -->
+  <script>
+    const version = new Date().getTime();
+    document.write(`<link rel="stylesheet" href="style.css?v=${version}">`);
+  </script>
 </head>
 <body>
   <div class="dashboard-layout">
@@ -33,34 +38,31 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <h1>My Profile</h1>
-
+      <h1>User Profile</h1>
       <form id="profileForm" class="card">
-        <!-- Username -->
-        <label for="profile-username">Username</label>
-        <input id="profile-username" type="text" />
+        <label>First Name</label>
+        <input type="text" id="firstName" required />
 
-        <!-- Password -->
-        <label for="profile-password">Password</label>
-        <input id="profile-password" type="password" />
+        <label>Surname</label>
+        <input type="text" id="surname" required />
 
-        <!-- Role (readonly) -->
-        <label for="profile-role">Role</label>
-        <input id="profile-role" type="text" disabled />
+        <label>Address</label>
+        <input type="text" id="address" />
 
-        <!-- Language (readonly, editable in Settings) -->
-        <label for="profile-lang">Language</label>
-        <input id="profile-lang" type="text" disabled />
+        <label>Email</label>
+        <input type="email" id="email" />
 
-        <!-- Theme (readonly, editable in Settings) -->
-        <label for="profile-theme">Theme</label>
-        <input id="profile-theme" type="text" disabled />
+        <label>Phone</label>
+        <input type="tel" id="phone" />
 
-        <button type="button" id="save-profile">Save Profile</button>
+        <button type="submit">Save Changes</button>
       </form>
     </main>
   </div>
 
-  <script src="script.js?v=1.1"></script>
+  <!-- Dynamic cache busting for JS -->
+  <script>
+    document.write(`<script src="script.js?v=${version}"><\/script>`);
+  </script>
 </body>
 </html>

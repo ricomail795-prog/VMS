@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css?v=1.1" />
+
+  <!-- Dynamic cache busting -->
+  <script>
+    const version = new Date().getTime();
+    document.write(`<link rel="stylesheet" href="style.css?v=${version}">`);
+  </script>
 </head>
 <body>
   <div class="dashboard-layout">
@@ -38,6 +43,9 @@
     </main>
   </div>
 
-  <script src="script.js?v=1.1"></script>
+  <!-- Dynamic cache busting for JS -->
+  <script>
+    document.write(`<script src="script.js?v=${version}"><\/script>`);
+  </script>
 </body>
 </html>

@@ -1,44 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Messages</title>
-  <link rel="stylesheet" href="style.css?v=1.1" />
+
+  <!-- Dynamic cache busting -->
+  <script>
+    const version = new Date().getTime();
+    document.write(`<link rel="stylesheet" href="style.css?v=${version}">`);
+  </script>
 </head>
 <body>
-  <div class="messages-wrap">
-    <h2>Messages</h2>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">
+        <img src="logo.svg" alt="VMS Logo" />
+      </div>
 
-    <!-- Send Message -->
-    <form id="message-form" class="card">
-      <label for="message-text">Message</label>
-      <textarea id="message-text" rows="3" placeholder="Type your message..."></textarea>
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="users.html">Users</a></li>
+      </ul>
 
-      <!-- File attachments -->
-      <label for="file-input">Attach File(s)</label>
-      <input type="file" id="file-input" multiple />
+      <ul class="nav-bottom">
+        <li>
+          <a href="messages.html" class="active">
+            Messages <span id="unread-badge" class="badge"></span>
+          </a>
+        </li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="index.html" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
 
-      <!-- Attach screenshot -->
-      <button type="button" id="attach-screenshot">Attach Screenshot</button>
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Messages</h1>
 
-      <!-- Recipient -->
-      <label for="message-recipient">Recipient</label>
-      <select id="message-recipient">
-        <option value="admin">Admin</option>
-        <option value="crew">Crew</option>
-        <option value="manager">Manager</option>
-      </select>
+      <!-- Inbox -->
+      <section id="inbox" class="card">
+        <h2>Inbox</h2>
+        <ul id="messageList">
+          <!-- Messages will appear here -->
+        </ul>
+      </section>
 
-      <button type="submit">Send</button>
-    </form>
+      <!-- Compose -->
+      <section id="compose" class="card">
+        <h2>New Message</h2>
+        <form id="messageForm">
+          <label>To (Username)</label>
+          <input type="text" id="recipient" required />
 
-    <!-- Messages List -->
-    <div id="messages-list" class="card" style="margin-top:20px;">
-      <p>No messages yet.</p>
-    </div>
+          <label>Subject</label>
+          <input type="text" id="subject" required />
+
+          <label>Message</label>
+          <textarea id="messageBody" required></textarea>
+
+          <label>Attach File</label>
+          <input type="file" id="attachment" multiple />
+
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
   </div>
 
-  <script src="script.js?v=1.1"></script>
+  <!-- Dynamic cache busting for JS -->
+  <script>
+    document.write(`<script src="script.js?v=${version}"><\/script>`);
+  </script>
 </body>
 </html>

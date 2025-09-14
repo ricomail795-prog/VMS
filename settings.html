@@ -1,55 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings</title>
-  <link rel="stylesheet" href="style.css?v=1.1" />
+
+  <!-- Dynamic cache busting -->
+  <script>
+    const version = new Date().getTime();
+    document.write(`<link rel="stylesheet" href="style.css?v=${version}">`);
+  </script>
 </head>
 <body>
-  <div class="settings-wrap">
-    <h2>Settings</h2>
-    <form id="settingsForm" class="card">
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">
+        <img src="logo.svg" alt="VMS Logo" />
+      </div>
 
-      <!-- Preferred Language -->
-      <label for="settings-lang">Preferred Language</label>
-      <select id="settings-lang">
-        <option value="en">English</option>
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-        <option value="de">German</option>
-        <option value="it">Italian</option>
-        <option value="id">Indonesian</option>
-      </select>
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="users.html">Users</a></li>
+      </ul>
 
-      <!-- Auto Logout -->
-      <label for="auto-logout">Auto Logout</label>
-      <select id="auto-logout">
-        <option value="15">15 Minutes</option>
-        <option value="30">30 Minutes</option>
-        <option value="60">1 Hour</option>
-        <option value="0">Stay Logged In (max 12h)</option>
-      </select>
+      <ul class="nav-bottom">
+        <li><a href="messages.html">Messages <span id="unread-badge" class="badge"></span></a></li>
+        <li><a href="settings.html" class="active">Settings</a></li>
+        <li><a href="index.html" onclick="logout()">Logout</a></li>
+      </ul>
+    </nav>
 
-      <!-- Theme -->
-      <label for="theme-toggle">Theme</label>
-      <select id="theme-toggle">
-        <option value="day">Day Mode</option>
-        <option value="night">Night Mode</option>
-      </select>
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Settings</h1>
 
-      <!-- Screenshot -->
-      <label for="screenshot">Screenshot</label>
-      <button type="button" id="take-screenshot">Take Screenshot</button>
-      <div id="screenshot-preview"></div>
+      <section class="card">
+        <h2>Preferences</h2>
+        <form id="settingsForm">
+          <!-- Language Preference -->
+          <label for="pref-lang">Preferred Language</label>
+          <select id="pref-lang">
+            <option value="en" selected>English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="it">Italian</option>
+            <option value="id">Indonesian</option>
+            <!-- more can be added -->
+          </select>
 
-      <!-- Save Button -->
-      <button type="button" id="save-settings" class="btn">Save Settings</button>
-    </form>
+          <!-- Auto Logout Time -->
+          <label for="logout-time">Auto Logout Time</label>
+          <select id="logout-time">
+            <option value="15">15 minutes</option>
+            <option value="30">30 minutes</option>
+            <option value="60">1 hour</option>
+            <option value="720">Stay logged in (max 12 hours)</option>
+          </select>
+
+          <button type="submit">Save Settings</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Tools</h2>
+        <!-- Screenshot Button -->
+        <button onclick="takeScreenshot()">Take Screenshot</button>
+      </section>
+    </main>
   </div>
 
-  <!-- Screenshot library -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script src="script.js?v=1.1"></script>
+  <!-- Dynamic cache busting for JS -->
+  <script>
+    document.write(`<script src="script.js?v=${version}"><\/script>`);
+  </script>
 </body>
 </html>
