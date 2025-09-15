@@ -1,1 +1,55 @@
-<!-- index.html placeholder -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VMS - Login</title>
+  <link rel="stylesheet" href="style.css?v=1.0">
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form id="login-form" class="auth-form">
+      <label for="login-email">Email</label>
+      <input type="email" id="login-email" placeholder="Enter your email" required />
+      <label for="login-password">Password</label>
+      <input type="password" id="login-password" placeholder="Enter your password" required />
+      <button type="submit" class="btn-primary">Login</button>
+    </form>
+    <div class="auth-links">
+      <a href="#" onclick="toggleSection('register-section')">Create Account</a> | 
+      <a href="#" onclick="toggleSection('reset-section')">Forgot Password?</a>
+    </div>
+
+    <div id="register-section" class="auth-section">
+      <h2>Create Account</h2>
+      <form id="register-form" class="auth-form">
+        <label for="register-email">Email</label>
+        <input type="email" id="register-email" placeholder="Enter your email" required />
+        <label for="register-password">Password</label>
+        <input type="password" id="register-password" placeholder="Enter your password" required />
+        <button type="submit" class="btn-primary">Register</button>
+      </form>
+      <div class="auth-links">
+        <a href="#" onclick="toggleSection('login-form')">Back to Login</a>
+      </div>
+    </div>
+
+    <div id="reset-section" class="auth-section">
+      <h2>Reset Password</h2>
+      <form id="reset-form" class="auth-form">
+        <label for="reset-email">Email</label>
+        <input type="email" id="reset-email" placeholder="Enter your email" required />
+        <button type="submit" class="btn-primary">Send Reset Email</button>
+      </form>
+      <div class="auth-links">
+        <a href="#" onclick="toggleSection('login-form')">Back to Login</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="banner" class="banner"></div>
+
+  <script type="module" src="script.js?v=1.0"></script>
+</body>
+</html>
