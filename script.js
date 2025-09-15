@@ -1,31 +1,34 @@
-/****************************************
+/******************************************
  * Firebase Setup
- ****************************************/
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { 
-  getAuth, 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  sendPasswordResetEmail, 
-  signOut 
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+ ******************************************/
 
-// ✅ Replace with your Firebase config
+// Import Firebase (Modular SDK)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } 
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getAnalytics } 
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDJ8GbgNdLO6OcGKCzTjxDI7edp8Jq-_0w",
+  authDomain: "vms-app-6a0c3.firebaseapp.com",
+  projectId: "vms-app-6a0c3",
+  storageBucket: "vms-app-6a0c3.appspot.com",
+  messagingSenderId: "868366477824",
+  appId: "1:868366477824:web:05588a6d013a372f0606e5",
+  measurementId: "G-NBZBPJQ3QR"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
-/****************************************
- * Banner Notifications
- ****************************************/
+/******************************************
+ * Banner Notifications (keep your logic here)
+ ******************************************/
+
 function showBanner(message, type = "info") {
   const bar = document.getElementById("banner");
   if (!bar) return;
