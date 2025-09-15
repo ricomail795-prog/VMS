@@ -4,38 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile - VMS</title>
-  <link rel="stylesheet" href="style.css">
+  <!-- Cache-busting version -->
+  <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body>
-  <!-- Top Banner -->
-  <header class="topbar">
-    <h1>VMS Profile</h1>
-  </header>
+  <!-- Topbar -->
+  <div class="topbar">
+    <h1>VMS</h1>
+  </div>
 
-  <!-- Sidebar + Content -->
+  <!-- Layout wrapper -->
   <div class="layout">
     <!-- Sidebar -->
-    <nav class="sidebar">
-      <ul class="top-links">
-        <li><a href="dashboard.html">Dashboard</a></li>
-      </ul>
-      <ul class="bottom-links">
-        <li><a href="profile.html" class="active">Profile</a></li>
-        <li><a href="messages.html">Messages</a></li>
-        <li><a href="settings.html">Settings</a></li>
-        <li><a href="#" id="logout-btn">Logout</a></li>
-      </ul>
-    </nav>
+    <div class="sidebar">
+      <a href="dashboard.html">Dashboard</a>
+      <div class="bottom-links">
+        <a href="profile.html" class="active">Profile</a>
+        <a href="messages.html">Messages</a>
+        <a href="settings.html">Settings</a>
+        <a href="#" id="logout-btn">Logout</a>
+      </div>
+    </div>
 
-    <!-- Main Content -->
-    <main class="content">
+    <!-- Main content -->
+    <div class="content">
       <h2>Your Profile</h2>
       <form id="profile-form">
-        <label for="first-name">First Name</label>
-        <input type="text" id="first-name" placeholder="Enter first name">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" placeholder="Enter first name">
 
-        <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" placeholder="Enter last name">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" placeholder="Enter last name">
 
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="Enter email">
@@ -44,13 +43,14 @@
         <input type="text" id="address" placeholder="Enter address">
 
         <label for="phone">Phone</label>
-        <input type="tel" id="phone" placeholder="Enter phone number">
+        <input type="text" id="phone" placeholder="Enter phone number">
 
         <button type="submit">Save Profile</button>
       </form>
-    </main>
+    </div>
   </div>
 
-  <script src="script.js" type="module"></script>
+  <!-- Script with cache busting -->
+  <script src="script.js?v=1.1" type="module"></script>
 </body>
 </html>

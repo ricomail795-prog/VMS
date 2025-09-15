@@ -3,46 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Messages - VMS</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Settings - VMS</title>
+  <!-- Cache-busting version -->
+  <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body>
-  <!-- Top Banner -->
-  <header class="topbar">
-    <h1>VMS Messages</h1>
-  </header>
-
-  <!-- Sidebar + Content -->
-  <div class="layout">
-    <!-- Sidebar -->
-    <nav class="sidebar">
-      <ul class="top-links">
-        <li><a href="dashboard.html">Dashboard</a></li>
-      </ul>
-      <ul class="bottom-links">
-        <li><a href="profile.html">Profile</a></li>
-        <li><a href="messages.html" class="active">Messages</a></li>
-        <li><a href="settings.html">Settings</a></li>
-        <li><a href="#" id="logout-btn">Logout</a></li>
-      </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="content">
-      <h2>Messages</h2>
-
-      <div id="messages-list">
-        <p>No messages yet.</p>
-      </div>
-
-      <form id="message-form">
-        <label for="message-input">Send a new message</label>
-        <textarea id="message-input" placeholder="Type your message here..."></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </main>
+  <!-- Topbar -->
+  <div class="topbar">
+    <h1>VMS</h1>
   </div>
 
-  <script src="script.js" type="module"></script>
+  <!-- Layout wrapper -->
+  <div class="layout">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="dashboard.html">Dashboard</a>
+      <div class="bottom-links">
+        <a href="profile.html">Profile</a>
+        <a href="messages.html">Messages</a>
+        <a href="settings.html" class="active">Settings</a>
+        <a href="#" id="logout-btn">Logout</a>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="content">
+      <h2>Settings</h2>
+      <form id="settings-form">
+        <label for="language">Preferred Language</label>
+        <select id="language">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+        </select>
+
+        <label for="theme">Theme</label>
+        <select id="theme">
+          <option value="day">Day Mode</option>
+          <option value="night">Night Mode</option>
+        </select>
+
+        <label for="autologout">Auto Logout</label>
+        <select id="autologout">
+          <option value="5">5 minutes</option>
+          <option value="15" selected>15 minutes</option>
+          <option value="30">30 minutes</option>
+        </select>
+
+        <button type="submit">Save Settings</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script with cache busting -->
+  <script src="script.js?v=1.1" type="module"></script>
 </body>
 </html>

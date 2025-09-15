@@ -4,45 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Messages - VMS</title>
-  <link rel="stylesheet" href="style.css">
+  <!-- Cache-busting version -->
+  <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body>
-  <!-- Top Banner -->
-  <header class="topbar">
-    <h1>VMS Messages</h1>
-  </header>
+  <!-- Topbar -->
+  <div class="topbar">
+    <h1>VMS</h1>
+  </div>
 
-  <!-- Sidebar + Content -->
+  <!-- Layout wrapper -->
   <div class="layout">
     <!-- Sidebar -->
-    <nav class="sidebar">
-      <ul class="top-links">
-        <li><a href="dashboard.html">Dashboard</a></li>
-      </ul>
-      <ul class="bottom-links">
-        <li><a href="profile.html">Profile</a></li>
-        <li><a href="messages.html" class="active">Messages</a></li>
-        <li><a href="settings.html">Settings</a></li>
-        <li><a href="#" id="logout-btn">Logout</a></li>
-      </ul>
-    </nav>
+    <div class="sidebar">
+      <a href="dashboard.html">Dashboard</a>
+      <div class="bottom-links">
+        <a href="profile.html">Profile</a>
+        <a href="messages.html" class="active">Messages</a>
+        <a href="settings.html">Settings</a>
+        <a href="#" id="logout-btn">Logout</a>
+      </div>
+    </div>
 
-    <!-- Main Content -->
-    <main class="content">
+    <!-- Main content -->
+    <div class="content">
       <h2>Messages</h2>
-
       <div id="messages-list">
         <p>No messages yet.</p>
       </div>
 
+      <h3>Send a new message</h3>
       <form id="message-form">
-        <label for="message-input">Send a new message</label>
         <textarea id="message-input" placeholder="Type your message here..."></textarea>
         <button type="submit">Send</button>
       </form>
-    </main>
+    </div>
   </div>
 
-  <script src="script.js" type="module"></script>
+  <!-- Script with cache busting -->
+  <script src="script.js?v=1.1" type="module"></script>
 </body>
 </html>
