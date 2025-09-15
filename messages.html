@@ -8,37 +8,36 @@
 </head>
 <body>
   <!-- Top Banner -->
-  <div class="top-banner">
-    <h1>VMS</h1>
-  </div>
+  <header class="topbar">
+    <h1>VMS Messages</h1>
+  </header>
 
-  <!-- Layout Container -->
-  <div class="container">
+  <!-- Sidebar + Content -->
+  <div class="layout">
     <!-- Sidebar -->
-    <aside class="sidebar">
-      <nav>
-        <ul class="nav-top">
-          <li><a href="dashboard.html">Dashboard</a></li>
-        </ul>
-        <ul class="nav-bottom">
-          <li><a href="profile.html">Profile</a></li>
-          <li><a href="messages.html" class="active">Messages</a></li>
-          <li><a href="settings.html">Settings</a></li>
-          <li><a href="#" id="logout-btn">Logout</a></li>
-        </ul>
-      </nav>
-    </aside>
+    <nav class="sidebar">
+      <ul class="top-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+      <ul class="bottom-links">
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="messages.html" class="active">Messages</a></li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="#" id="logout-btn">Logout</a></li>
+      </ul>
+    </nav>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="content">
       <h2>Messages</h2>
+
       <div id="messages-list">
         <p>No messages yet.</p>
       </div>
 
       <form id="message-form">
-        <label for="newMessage">Send a new message</label>
-        <textarea id="newMessage" name="newMessage" rows="4" placeholder="Type your message here..."></textarea>
+        <label for="message-input">Send a new message</label>
+        <textarea id="message-input" placeholder="Type your message here..."></textarea>
         <button type="submit">Send</button>
       </form>
     </main>
