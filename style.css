@@ -1,168 +1,141 @@
-/* Reset */
-* {
+/* Reset default margins */
+body, h1, h2, p, form, input, button {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f9;
+  background: #f5f7fa;
   color: #333;
-}
-
-/* =========================
-   Topbar
-========================= */
-.topbar {
-  background: #1e3a8a;
-  color: white;
-  padding: 15px 20px;
-  font-size: 20px;
-  font-weight: bold;
-  border-bottom: 4px solid #ccc; /* Grey underline */
-}
-
-/* =========================
-   Auth Pages
-========================= */
-.auth-container {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Top bar */
+.topbar {
+  background: #1e3a8a; /* Deep blue */
+  color: white;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 4px solid #808080; /* Grey underline */
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* Centered container */
+.container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  margin-top: 60px;
 }
 
-.auth-box {
+/* Auth sections (login, register, reset) */
+.auth-section {
+  display: none;
   background: white;
-  padding: 25px;
+  padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  width: 300px;
-  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 320px;
 }
 
-.auth-box h2 {
-  margin-bottom: 15px;
-  text-align: center;
-  color: #1e3a8a;
-}
-
-.auth-box label {
+.auth-section.active {
   display: block;
-  margin: 10px 0 5px;
 }
 
-.auth-box input {
-  width: 100%;
-  padding: 10px;
+.auth-section h2 {
+  margin-bottom: 1rem;
+  color: #1e3a8a;
+  text-align: center;
+}
+
+/* Form inputs */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 0.9rem;
+}
+
+input {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.auth-box button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
+/* Buttons */
+button {
   background: #1e3a8a;
   color: white;
   border: none;
+  padding: 0.75rem;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 1rem;
 }
 
-.auth-box button:hover {
-  background: #163172;
+button:hover {
+  background: #3b82f6; /* Lighter blue on hover */
 }
 
-.auth-links {
-  margin-top: 10px;
+/* Links below forms */
+.auth-section p {
   text-align: center;
+  margin-top: 1rem;
 }
 
-.auth-links a {
+.auth-section a {
   color: #1e3a8a;
   text-decoration: none;
-  font-size: 14px;
 }
 
-.auth-links a:hover {
+.auth-section a:hover {
   text-decoration: underline;
 }
 
-.hidden {
-  display: none;
-}
-
-/* =========================
-   Layout Pages (Dashboard, Profile, etc.)
-========================= */
-.layout {
-  display: flex;
-  height: calc(100vh - 60px); /* account for topbar */
-}
-
-.sidebar {
-  width: 200px;
-  background: #1e40af;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 20px;
-}
-
-.sidebar a {
-  display: block;
-  padding: 12px 20px;
-  color: white;
-  text-decoration: none;
-  transition: background 0.3s;
-}
-
-.sidebar a:hover {
-  background: #2563eb;
-}
-
-.sidebar a.active {
-  background: #f59e0b;
-  color: black;
-}
-
-.bottom-links {
-  margin-top: auto;
-  padding-bottom: 20px;
-}
-
-.content {
-  flex: 1;
-  padding: 20px;
-  background: white;
-  overflow-y: auto;
-}
-
-form label {
-  display: block;
-  margin: 10px 0 5px;
-}
-
-form input, form select, form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
+/* ============================= */
+/* Banner / Alert Messages */
+/* ============================= */
+.banner {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 4px;
+  font-size: 0.95rem;
+  text-align: center;
+  display: none; /* hidden by default */
 }
 
-form button {
-  background: #1e3a8a;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.banner.info {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #7dd3fc;
 }
 
-form button:hover {
-  background: #163172;
+.banner.success {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.banner.warning {
+  background: #fef9c3;
+  color: #854d0e;
+  border: 1px solid #fde68a;
+}
+
+.banner.error {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
 }
