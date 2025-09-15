@@ -7,15 +7,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Top Navigation -->
+  <!-- Top Banner -->
   <div class="topbar">
-    <div class="logo">VMS</div>
+    <h1>VMS</h1>
   </div>
 
   <!-- Auth Container -->
   <div class="auth-container">
-    <!-- Login Section -->
-    <div id="login-section" class="auth-box">
+    <!-- Login Form -->
+    <div class="auth-box" id="login-section">
       <h2>Login</h2>
       <form id="login-form">
         <label>Email</label>
@@ -24,14 +24,14 @@
         <input type="password" id="login-password" required>
         <button type="submit">Login</button>
       </form>
-      <p>
+      <div class="auth-links">
         <a href="#" id="show-register">Create Account</a> |
         <a href="#" id="show-reset">Forgot Password?</a>
-      </p>
+      </div>
     </div>
 
-    <!-- Register Section -->
-    <div id="register-section" class="auth-box hidden">
+    <!-- Register Form -->
+    <div class="auth-box hidden" id="register-section">
       <h2>Create Account</h2>
       <form id="register-form">
         <label>Email</label>
@@ -40,24 +40,26 @@
         <input type="password" id="register-password" required>
         <button type="submit">Register</button>
       </form>
-      <p><a href="#" id="show-login-from-register">Back to Login</a></p>
+      <div class="auth-links">
+        <a href="#" id="back-to-login-1">Back to Login</a>
+      </div>
     </div>
 
-    <!-- Reset Password Section -->
-    <div id="reset-section" class="auth-box hidden">
+    <!-- Reset Password Form -->
+    <div class="auth-box hidden" id="reset-section">
       <h2>Reset Password</h2>
       <form id="reset-form">
         <label>Email</label>
         <input type="email" id="reset-email" required>
         <button type="submit">Send Reset Email</button>
       </form>
-      <p><a href="#" id="show-login-from-reset">Back to Login</a></p>
+      <div class="auth-links">
+        <a href="#" id="back-to-login-2">Back to Login</a>
+      </div>
     </div>
   </div>
 
-  <!-- Banner Notifications -->
-  <div id="banner" class="banner"></div>
-
-  <script src="script.js" type="module"></script>
+  <!-- Firebase Script -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>

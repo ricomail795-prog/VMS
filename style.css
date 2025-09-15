@@ -1,98 +1,88 @@
-/* ===============================
-   Global Styles
-================================ */
+/* General Reset */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f4f6f8;
+  background: #f4f6f9;
   color: #333;
 }
 
-/* ===============================
-   Top Banner
-================================ */
-.top-banner {
-  background-color: #1e3a8a; /* Dark blue */
-  color: #fff;
-  padding: 12px 20px;
+/* Top Banner */
+.topbar {
+  background: #1e3a8a; /* Navy blue */
+  color: white;
+  padding: 15px 20px;
   text-align: left;
-  border-bottom: 4px solid #ccc; /* Grey underline */
-}
-
-.top-banner h1 {
-  margin: 0;
   font-size: 20px;
+  font-weight: bold;
+  border-bottom: 4px solid grey; /* Grey underline */
 }
 
-/* ===============================
-   Layout
-================================ */
-.container {
-  display: flex;
-  height: calc(100vh - 60px);
-}
-
-/* ===============================
-   Sidebar
-================================ */
-.sidebar {
-  width: 220px;
-  background-color: #1e40af; /* Sidebar blue */
-  color: #fff;
+/* Auth Container */
+.auth-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 20px 0;
+  align-items: center;
+  margin-top: 60px;
 }
 
-.sidebar nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Auth Box */
+.auth-box {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 300px;
+  margin-bottom: 20px;
 }
 
-.sidebar nav ul li {
-  margin: 10px 0;
-}
-
-.sidebar nav ul li a {
-  display: block;
-  padding: 10px 20px;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background 0.3s, color 0.3s;
-}
-
-.sidebar nav ul li a:hover {
-  background-color: #2563eb; /* Brighter blue on hover */
-}
-
-/* Active Nav (Highlight) */
-.sidebar nav ul li a.active {
-  background-color: #f59e0b; /* Yellow/Orange highlight */
-  color: #000;
-}
-
-/* Split nav sections */
-.nav-top {
-  margin-bottom: auto;
-}
-
-.nav-bottom {
-  margin-top: auto;
-}
-
-/* ===============================
-   Main Content
-================================ */
-.main-content {
-  flex: 1;
-  padding: 20px;
-  background: #fff;
-  overflow-y: auto;
-}
-
-h2 {
+.auth-box h2 {
   margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Inputs */
+.auth-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Buttons */
+.auth-box button {
+  width: 100%;
+  padding: 10px;
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.auth-box button:hover {
+  background: #163172;
+}
+
+/* Links */
+.auth-links {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.auth-links a {
+  color: #1e3a8a;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+/* Hide Sections */
+.hidden {
+  display: none;
 }
