@@ -11,15 +11,13 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-
-// 🔑 Replace with your Firebase config (from console)
 const firebaseConfig = {
-  apiKey: "AIzaSyDJ8bqNdL06oGKcZTjxD17edp8Jq_0w",
+  apiKey: "AIzaSyDJ8GbgNdLO6OcGKCzTjxDI7edp8Jq-_0w",
   authDomain: "vms-app-6a0c3.firebaseapp.com",
   projectId: "vms-app-6a0c3",
-  storageBucket: "vms-app-6a0c3.appspot.com",
-  messagingSenderId: "863866477824",
-  appId: "1:863866477824:web:05588a6d013a372f6066e5",
+  storageBucket: "vms-app-6a0c3.firebasestorage.app",
+  messagingSenderId: "868366477824",
+  appId: "1:868366477824:web:05588a6d013a372f0606e5",
   measurementId: "G-NBZBPJQ3QR"
 };
 
