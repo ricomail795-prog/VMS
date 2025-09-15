@@ -3,54 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Messages - VMS</title>
-  <link rel="stylesheet" href="style.css?v=1.0">
-  <script type="module" src="script.js?v=1.0"></script>
+  <title>VMS Messages</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Top Bar -->
+  <div class="topbar">VMS Messages</div>
+
   <!-- Sidebar -->
   <div class="sidebar">
-    <div class="nav-top">
-      <a href="dashboard.html">Dashboard</a>
-    </div>
-    <div class="nav-bottom">
+    <a href="dashboard.html">Dashboard</a>
+    <div class="sidebar-bottom">
       <a href="profile.html">Profile</a>
       <a href="messages.html" class="active">Messages</a>
       <a href="settings.html">Settings</a>
-      <a href="#" id="logout-btn">Logout</a>
+      <a href="index.html" id="logout-btn">Logout</a>
     </div>
   </div>
 
-  <!-- Top Banner -->
-  <div class="top-banner">
-    VMS Messages
-  </div>
+  <!-- Content -->
+  <div class="content">
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <h1>Messages</h1>
-    <p>Send and receive messages with attachments.</p>
-
-    <form id="message-form">
-      <label for="recipient">Recipient</label>
-      <input type="text" id="recipient" placeholder="Enter recipient name">
-
-      <label for="message">Message</label>
-      <textarea id="message" placeholder="Type your message here" rows="5"></textarea>
-
-      <label for="attachment">Attach File</label>
-      <input type="file" id="attachment">
-
-      <button type="submit">Send</button>
-    </form>
-
-    <h2>Inbox</h2>
-    <div id="inbox">
-      <p>No messages yet.</p>
-    </div>
-  </div>
-
-  <!-- Banner Notifications -->
-  <div id="banner" class="banner"></div>
-</body>
-</html>

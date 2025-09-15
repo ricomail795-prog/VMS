@@ -1,141 +1,117 @@
-/* =====================
-   Global Styles
-===================== */
-body {
+/* Reset */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f9;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* =====================
-   Sidebar
-===================== */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  height: 100vh;
+  background: #f4f4f9;
+}
+
+/* Top Bar */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 200px; /* matches sidebar width */
+  right: 0;
+  height: 60px;
+  background: #1e3a8a; /* blue */
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border-bottom: 4px solid #ccc; /* grey separator line */
+  z-index: 1000;
+}
+
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
+  width: 200px;
   height: 100%;
-  width: 220px;
-  background-color: #0d47a1; /* dark blue */
+  background: #0f172a; /* dark navy */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: white;
-  padding-top: 60px; /* space for top banner */
-}
-
-.sidebar .nav-top,
-.sidebar .nav-bottom {
-  display: flex;
-  flex-direction: column;
+  padding-top: 60px; /* push below topbar */
 }
 
 .sidebar a {
-  padding: 15px 20px;
+  display: block;
+  padding: 15px;
   text-decoration: none;
   color: white;
-  display: block;
-  transition: background 0.3s;
+  font-size: 16px;
+  transition: background 0.3s, color 0.3s;
 }
 
 .sidebar a:hover {
-  background-color: #1565c0; /* lighter blue hover */
+  background: #1e40af; /* lighter blue */
+  color: #facc15; /* yellow */
 }
 
 .sidebar a.active {
-  background-color: #ff9800; /* orange highlight for active */
-  color: #fff;
+  background: #1e40af;
+  color: #facc15;
+}
+
+/* Sidebar bottom group */
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+/* Content */
+.content {
+  margin-left: 200px; /* sidebar width */
+  margin-top: 60px;   /* topbar height */
+  padding: 20px;
+  width: calc(100% - 200px);
+  background: white;
+  overflow-y: auto;
+}
+
+/* Forms */
+form {
+  max-width: 400px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+form label {
+  display: block;
+  margin: 12px 0 6px;
   font-weight: bold;
 }
 
-/* =====================
-   Top Banner
-===================== */
-.top-banner {
-  position: fixed;
-  top: 0;
-  left: 220px; /* offset for sidebar */
-  right: 0;
-  height: 60px;
-  background-color: #1976d2; /* lighter blue */
-  color: white;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  font-size: 18px;
-  font-weight: bold;
-
-  /* Separation from sidebar */
-  border-bottom: 4px solid #ff9800; /* orange stripe */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25); /* subtle shadow */
-}
-
-/* =====================
-   Main Content
-===================== */
-.main-content {
-  margin-left: 220px; /* offset for sidebar */
-  padding: 80px 20px 20px 20px; /* space for top banner */
-}
-
-/* =====================
-   Buttons
-===================== */
-button, .btn {
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
-  background-color: #0d47a1;
-  color: white;
+form input, form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+form button {
+  display: inline-block;
+  background: #1e3a8a;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
   transition: background 0.3s;
 }
 
-button:hover, .btn:hover {
-  background-color: #1565c0;
-}
-
-/* =====================
-   Forms
-===================== */
-form {
-  background: white;
-  padding: 20px;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  max-width: 400px;
-  margin: auto;
-}
-
-input, select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-/* =====================
-   Banner Notifications
-===================== */
-#banner {
-  position: fixed;
-  top: 60px; /* below top banner */
-  left: 220px; /* beside sidebar */
-  right: 0;
-  padding: 15px;
-  text-align: center;
-  display: none;
-  font-weight: bold;
-  z-index: 1000;
-}
-
-.banner.info {
-  background-color: #2196f3;
-  color: white;
-}
-
-.banner.warning {
-  background-color: #f44336;
-  color: white;
+form button:hover {
+  background: #0f172a;
 }

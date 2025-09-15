@@ -3,64 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Settings - VMS</title>
-  <link rel="stylesheet" href="style.css?v=1.0">
-  <script type="module" src="script.js?v=1.0"></script>
+  <title>VMS Settings</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Top Bar -->
+  <div class="topbar">VMS Settings</div>
+
   <!-- Sidebar -->
   <div class="sidebar">
-    <div class="nav-top">
-      <a href="dashboard.html">Dashboard</a>
-    </div>
-    <div class="nav-bottom">
+    <a href="dashboard.html">Dashboard</a>
+    <div class="sidebar-bottom">
       <a href="profile.html">Profile</a>
       <a href="messages.html">Messages</a>
       <a href="settings.html" class="active">Settings</a>
-      <a href="#" id="logout-btn">Logout</a>
+      <a href="index.html" id="logout-btn">Logout</a>
     </div>
   </div>
 
-  <!-- Top Banner -->
-  <div class="top-banner">
-    VMS Settings
-  </div>
-
-  <!-- Main Content -->
-  <div class="main-content">
-    <h1>Settings</h1>
-    <p>Adjust your preferences below.</p>
-
-    <form id="settings-form">
-      <label for="language">Language</label>
+  <!-- Content -->
+  <div class="content">
+    <h2>Settings</h2>
+    <form>
+      <label for="language">Preferred Language</label>
       <select id="language">
-        <option value="en">English</option>
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-        <option value="de">German</option>
-        <option value="id">Indonesian</option>
-        <!-- add more languages as needed -->
+        <option>English</option>
+        <option>Spanish</option>
       </select>
 
-      <label for="theme">Day/Night Mode</label>
+      <label for="theme">Theme</label>
       <select id="theme">
-        <option value="day">Day</option>
-        <option value="night">Night</option>
+        <option>Day Mode</option>
+        <option>Night Mode</option>
       </select>
 
-      <label for="logout-time">Auto Logout Time</label>
-      <select id="logout-time">
-        <option value="15">15 minutes</option>
-        <option value="30">30 minutes</option>
-        <option value="60">1 hour</option>
-        <option value="720">Stay logged in (12 hours max)</option>
+      <label for="logout">Auto Logout</label>
+      <select id="logout">
+        <option>15 minutes</option>
+        <option>30 minutes</option>
       </select>
 
       <button type="submit">Save Settings</button>
     </form>
   </div>
 
-  <!-- Banner Notifications -->
-  <div id="banner" class="banner"></div>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
