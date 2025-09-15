@@ -1,117 +1,123 @@
 /* Reset */
-* {
+body, h2, p, a, form, label {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
   font-family: Arial, sans-serif;
-  display: flex;
-  height: 100vh;
-  background: #f4f4f9;
 }
 
-/* Top Bar */
+/* Body */
+body {
+  background-color: #f4f6f9;
+  color: #333;
+}
+
+/* Topbar */
 .topbar {
-  position: fixed;
-  top: 0;
-  left: 200px; /* matches sidebar width */
-  right: 0;
-  height: 60px;
-  background: #1e3a8a; /* blue */
+  background-color: #004080;
   color: white;
-  font-size: 20px;
+  padding: 15px 20px;
+  font-size: 1.2em;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-  border-bottom: 4px solid #ccc; /* grey separator line */
-  z-index: 1000;
+  border-bottom: 3px solid #ccc; /* Grey underline */
 }
 
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200px;
-  height: 100%;
-  background: #0f172a; /* dark navy */
+.logo {
+  margin: 0;
+}
+
+/* Auth container */
+.auth-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: 60px; /* push below topbar */
+  align-items: center;
+  margin-top: 40px;
 }
 
-.sidebar a {
-  display: block;
-  padding: 15px;
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  transition: background 0.3s, color 0.3s;
-}
-
-.sidebar a:hover {
-  background: #1e40af; /* lighter blue */
-  color: #facc15; /* yellow */
-}
-
-.sidebar a.active {
-  background: #1e40af;
-  color: #facc15;
-}
-
-/* Sidebar bottom group */
-.sidebar-bottom {
-  margin-top: auto;
-}
-
-/* Content */
-.content {
-  margin-left: 200px; /* sidebar width */
-  margin-top: 60px;   /* topbar height */
-  padding: 20px;
-  width: calc(100% - 200px);
+/* Auth box */
+.auth-box {
   background: white;
-  overflow-y: auto;
-}
-
-/* Forms */
-form {
-  max-width: 400px;
-  background: #f9f9f9;
-  padding: 20px;
+  padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  margin-bottom: 20px;
 }
 
-form label {
+.auth-box h2 {
+  margin-bottom: 15px;
+  text-align: center;
+  color: #004080;
+}
+
+/* Labels + Inputs */
+label {
   display: block;
-  margin: 12px 0 6px;
-  font-weight: bold;
+  margin: 10px 0 5px;
 }
 
-form input, form select {
+input {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 8px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-form button {
-  display: inline-block;
-  background: #1e3a8a;
+/* Buttons */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #004080;
   color: white;
-  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.3s;
+  font-size: 1em;
 }
 
-form button:hover {
-  background: #0f172a;
+button:hover {
+  background-color: #0059b3;
+}
+
+/* Links */
+p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+a {
+  color: #004080;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Hidden sections */
+.hidden {
+  display: none;
+}
+
+/* Banner notifications */
+.banner {
+  position: fixed;
+  top: -50px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 12px;
+  color: white;
+  font-weight: bold;
+  transition: top 0.5s;
+  z-index: 1000;
+}
+
+.banner.info {
+  background-color: #28a745;
+}
+
+.banner.warning {
+  background-color: #dc3545;
 }

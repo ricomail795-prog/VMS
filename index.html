@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VMS - Login</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="top-banner">
+  <!-- Top Navigation -->
+  <div class="topbar">
     <div class="logo">VMS</div>
-  </header>
+  </div>
 
-  <!-- Notification Banner -->
-  <div id="banner"></div>
-
-  <main class="auth-container">
-    <!-- Login Form -->
-    <section id="login-section" class="auth-section">
+  <!-- Auth Container -->
+  <div class="auth-container">
+    <!-- Login Section -->
+    <div id="login-section" class="auth-box">
       <h2>Login</h2>
       <form id="login-form">
         <label>Email</label>
-        <input type="email" id="login-email" required />
+        <input type="email" id="login-email" required>
         <label>Password</label>
-        <input type="password" id="login-password" required />
+        <input type="password" id="login-password" required>
         <button type="submit">Login</button>
       </form>
       <p>
         <a href="#" id="show-register">Create Account</a> |
         <a href="#" id="show-reset">Forgot Password?</a>
       </p>
-    </section>
+    </div>
 
-    <!-- Register Form -->
-    <section id="register-section" class="auth-section hidden">
+    <!-- Register Section -->
+    <div id="register-section" class="auth-box hidden">
       <h2>Create Account</h2>
       <form id="register-form">
         <label>Email</label>
-        <input type="email" id="register-email" required />
+        <input type="email" id="register-email" required>
         <label>Password</label>
-        <input type="password" id="register-password" required />
+        <input type="password" id="register-password" required>
         <button type="submit">Register</button>
       </form>
-      <p>
-        <a href="#" id="show-login-from-register">Back to Login</a>
-      </p>
-    </section>
+      <p><a href="#" id="show-login-from-register">Back to Login</a></p>
+    </div>
 
-    <!-- Reset Password Form -->
-    <section id="reset-section" class="auth-section hidden">
+    <!-- Reset Password Section -->
+    <div id="reset-section" class="auth-box hidden">
       <h2>Reset Password</h2>
       <form id="reset-form">
         <label>Email</label>
-        <input type="email" id="reset-email" required />
+        <input type="email" id="reset-email" required>
         <button type="submit">Send Reset Email</button>
       </form>
-      <p>
-        <a href="#" id="show-login-from-reset">Back to Login</a>
-      </p>
-    </section>
-  </main>
+      <p><a href="#" id="show-login-from-reset">Back to Login</a></p>
+    </div>
+  </div>
 
-  <script type="module" src="script.js"></script>
+  <!-- Banner Notifications -->
+  <div id="banner" class="banner"></div>
+
+  <script src="script.js" type="module"></script>
 </body>
 </html>
