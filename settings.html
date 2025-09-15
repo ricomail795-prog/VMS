@@ -1,80 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Settings - VMS</title>
   <link rel="stylesheet" href="style.css?v=1.0">
+  <script type="module" src="script.js?v=1.0"></script>
 </head>
 <body>
-  <!-- Top Banner -->
-  <header class="top-banner">
-    VMS Settings
-  </header>
-
-  <!-- Notification Banner -->
-  <div id="banner"></div>
-
-  <!-- Layout -->
-  <div class="dashboard-layout" style="display:flex; min-height:calc(100vh - 60px);">
-
-    <!-- Sidebar -->
-    <nav class="sidebar" style="width:220px; background:#1e3a8a; color:#fff; padding:1rem;">
-      <h3 style="color:#fff; margin-bottom:1rem;">Menu</h3>
-      <ul style="list-style:none; padding:0;">
-        <li style="margin:0.5rem 0;"><a href="dashboard.html" style="color:#fff; text-decoration:none;">Dashboard</a></li>
-        <li style="margin:0.5rem 0;"><a href="messages.html" style="color:#fff; text-decoration:none;">Messages</a></li>
-        <li style="margin:0.5rem 0;"><a href="settings.html" class="active" style="color:#facc15; text-decoration:none;">Settings</a></li>
-        <li style="margin:0.5rem 0;"><a href="profile.html" style="color:#fff; text-decoration:none;">Profile</a></li>
-        <li style="margin:0.5rem 0;">
-          <button id="logout-btn" style="width:100%; background:#ef4444; border:none; padding:0.5rem; border-radius:4px; color:#fff; cursor:pointer;">
-            Logout
-          </button>
-        </li>
-      </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <main style="flex:1; padding:2rem;">
-      <h1>Settings</h1>
-      <p>Update your preferences below:</p>
-
-      <form id="settings-form" style="margin-top:1.5rem; background:#fff; padding:1.5rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:400px;">
-        
-        <!-- Language -->
-        <label for="language">Preferred Language</label>
-        <select id="language" style="width:100%; padding:0.5rem; margin-bottom:1rem;">
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="de">German</option>
-          <option value="id">Indonesian</option>
-        </select>
-
-        <!-- Theme -->
-        <label for="theme">Theme</label>
-        <select id="theme" style="width:100%; padding:0.5rem; margin-bottom:1rem;">
-          <option value="light">Day Mode</option>
-          <option value="dark">Night Mode</option>
-        </select>
-
-        <!-- Auto Logout -->
-        <label for="logout-timer">Auto Logout</label>
-        <select id="logout-timer" style="width:100%; padding:0.5rem; margin-bottom:1rem;">
-          <option value="15">15 minutes</option>
-          <option value="30">30 minutes</option>
-          <option value="60">1 hour</option>
-          <option value="stay">Stay logged in (max 12h)</option>
-        </select>
-
-        <button type="submit" style="background:#1e3a8a; color:#fff; border:none; padding:0.75rem; border-radius:6px; cursor:pointer; width:100%;">
-          Save Settings
-        </button>
-      </form>
-    </main>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="nav-top">
+      <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div class="nav-bottom">
+      <a href="profile.html">Profile</a>
+      <a href="messages.html">Messages</a>
+      <a href="settings.html" class="active">Settings</a>
+      <a href="#" id="logout-btn">Logout</a>
+    </div>
   </div>
 
-  <!-- Firebase + Script -->
-  <script type="module" src="script.js"></script>
+  <!-- Top Banner -->
+  <div class="top-banner">
+    VMS Settings
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1>Settings</h1>
+    <p>Adjust your preferences below.</p>
+
+    <form id="settings-form">
+      <label for="language">Language</label>
+      <select id="language">
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="id">Indonesian</option>
+        <!-- add more languages as needed -->
+      </select>
+
+      <label for="theme">Day/Night Mode</label>
+      <select id="theme">
+        <option value="day">Day</option>
+        <option value="night">Night</option>
+      </select>
+
+      <label for="logout-time">Auto Logout Time</label>
+      <select id="logout-time">
+        <option value="15">15 minutes</option>
+        <option value="30">30 minutes</option>
+        <option value="60">1 hour</option>
+        <option value="720">Stay logged in (12 hours max)</option>
+      </select>
+
+      <button type="submit">Save Settings</button>
+    </form>
+  </div>
+
+  <!-- Banner Notifications -->
+  <div id="banner" class="banner"></div>
 </body>
 </html>

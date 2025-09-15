@@ -1,120 +1,141 @@
-/* Reset & Base */
-* {
+/* =====================
+   Global Styles
+===================== */
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   font-family: Arial, sans-serif;
+  background-color: #f4f6f9;
 }
 
-body {
-  background: #f4f7fa;
-  color: #333;
-  min-height: 100vh;
+/* =====================
+   Sidebar
+===================== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 220px;
+  background-color: #0d47a1; /* dark blue */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  padding-top: 60px; /* space for top banner */
+}
+
+.sidebar .nav-top,
+.sidebar .nav-bottom {
   display: flex;
   flex-direction: column;
 }
 
-/* Top Banner */
-.top-banner {
-  background: #1e3a8a;
+.sidebar a {
+  padding: 15px 20px;
+  text-decoration: none;
+  color: white;
+  display: block;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #1565c0; /* lighter blue hover */
+}
+
+.sidebar a.active {
+  background-color: #ff9800; /* orange highlight for active */
   color: #fff;
-  padding: 1rem;
-  text-align: center;
-  font-size: 1.5rem;
   font-weight: bold;
 }
 
-/* Notification Banner */
+/* =====================
+   Top Banner
+===================== */
+.top-banner {
+  position: fixed;
+  top: 0;
+  left: 220px; /* offset for sidebar */
+  right: 0;
+  height: 60px;
+  background-color: #1976d2; /* lighter blue */
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 18px;
+  font-weight: bold;
+
+  /* Separation from sidebar */
+  border-bottom: 4px solid #ff9800; /* orange stripe */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25); /* subtle shadow */
+}
+
+/* =====================
+   Main Content
+===================== */
+.main-content {
+  margin-left: 220px; /* offset for sidebar */
+  padding: 80px 20px 20px 20px; /* space for top banner */
+}
+
+/* =====================
+   Buttons
+===================== */
+button, .btn {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  background-color: #0d47a1;
+  color: white;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+button:hover, .btn:hover {
+  background-color: #1565c0;
+}
+
+/* =====================
+   Forms
+===================== */
+form {
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* =====================
+   Banner Notifications
+===================== */
 #banner {
   position: fixed;
-  top: -50px;
-  left: 0;
-  width: 100%;
+  top: 60px; /* below top banner */
+  left: 220px; /* beside sidebar */
+  right: 0;
+  padding: 15px;
   text-align: center;
-  padding: 0.75rem;
+  display: none;
   font-weight: bold;
   z-index: 1000;
-  transition: top 0.5s ease, opacity 0.5s ease;
-  opacity: 0;
 }
 
-#banner.info {
-  background: #22c55e;
-  color: #fff;
+.banner.info {
+  background-color: #2196f3;
+  color: white;
 }
 
-#banner.warning {
-  background: #ef4444;
-  color: #fff;
-}
-
-/* Auth Container */
-.auth-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.auth-section {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-}
-
-.auth-section h2 {
-  margin-bottom: 1rem;
-  text-align: center;
-  color: #1e3a8a;
-}
-
-.auth-section label {
-  display: block;
-  margin: 0.5rem 0 0.25rem;
-}
-
-.auth-section input {
-  width: 100%;
-  padding: 0.6rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.auth-section button {
-  width: 100%;
-  padding: 0.75rem;
-  border: none;
-  background: #1e3a8a;
-  color: #fff;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.auth-section button:hover {
-  background: #2563eb;
-}
-
-.auth-section p {
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.auth-section a {
-  color: #1e3a8a;
-  text-decoration: none;
-}
-
-.auth-section a:hover {
-  text-decoration: underline;
-}
-
-/* Hidden utility */
-.hidden {
-  display: none;
+.banner.warning {
+  background-color: #f44336;
+  color: white;
 }
