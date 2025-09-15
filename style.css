@@ -1,4 +1,4 @@
-/* General Reset */
+/* Reset some defaults */
 * {
   margin: 0;
   padding: 0;
@@ -7,77 +7,84 @@
 }
 
 body {
-  background-color: #f4f6f9;
+  background: #f9f9f9;
   color: #333;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* Top Banner */
-.topbar {
-  background-color: #1e56a0;
+/* ---------------- NAVBAR ---------------- */
+.navbar {
+  background: #004080;
   color: #fff;
-  padding: 15px 20px;
-  text-align: left;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
   font-size: 20px;
   font-weight: bold;
-  border-bottom: 3px solid #ccc; /* Grey underline */
 }
 
-/* Notification Banner */
-.banner {
-  display: none;
-  text-align: center;
-  padding: 10px;
-  font-weight: bold;
-}
-.banner.success {
-  display: block;
-  background: #4caf50;
-  color: white;
-}
-.banner.error {
-  display: block;
-  background: #f44336;
-  color: white;
+.navbar-links a {
+  color: #fff;
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.2s ease-in-out;
 }
 
-/* Auth Container */
-.auth-container {
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: #ffcc00;
+  text-decoration: underline;
+}
+
+/* ---------------- CONTENT ---------------- */
+.content {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  padding: 30px;
 }
 
-/* Auth Section (Card Style) */
-.auth-section {
-  display: none;
-  width: 100%;
+/* ---------------- BUTTONS ---------------- */
+button,
+.btn-primary {
+  background: #004080;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s ease-in-out;
+}
+
+button:hover,
+.btn-primary:hover {
+  background: #003060;
+}
+
+/* ---------------- AUTH FORMS ---------------- */
+.auth-form {
   max-width: 400px;
+  margin: 40px auto;
   background: #fff;
-  padding: 25px 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  border-radius: 6px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
 }
 
-.auth-section.active {
-  display: block;
-}
-
-/* Form Headings */
 .auth-form h2 {
-  text-align: center;
   margin-bottom: 20px;
-  color: #1e56a0;
+  text-align: center;
+  color: #004080;
 }
 
-/* Form Labels + Inputs */
 .auth-form label {
   display: block;
-  font-size: 14px;
   margin-bottom: 6px;
   font-weight: bold;
 }
@@ -87,41 +94,28 @@ body {
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 4px;
 }
 
-/* Buttons */
-.btn-primary {
-  width: 100%;
-  padding: 10px;
-  background-color: #1e56a0;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #163d73;
-}
-
-/* Links */
-.auth-links {
-  margin-top: 15px;
+/* ---------------- BANNER ---------------- */
+#banner {
+  display: none;
+  padding: 12px;
   text-align: center;
-  font-size: 14px;
+  font-weight: bold;
 }
 
-.auth-links a {
-  color: #1e56a0;
-  text-decoration: none;
-  margin: 0 5px;
+.banner.success {
+  background: #c8e6c9;
+  color: #256029;
 }
 
-.auth-links a:hover {
-  text-decoration: underline;
+.banner.error {
+  background: #ffcdd2;
+  color: #c62828;
+}
+
+.banner.info {
+  background: #bbdefb;
+  color: #0d47a1;
 }
