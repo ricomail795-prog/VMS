@@ -100,22 +100,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/****************************************************
+/***********************
  * Auth Handlers
- ****************************************************/
+ ***********************/
 
 // Register
 const registerForm = document.getElementById("register-form");
 if (registerForm) {
-  registerForm.addEventListener("submit", async e => {
+  registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = document.getElementById("register-email").value;
     const password = document.getElementById("register-password").value;
 
     try {
+      // Create user
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+      // Send email verification
       await sendEmailVerification(userCredential.user);
-      showBanner("✅ Account created! Please verify your email.", "info");
+
+      // Show banner
+      showBanner("✅ Account created! Please check your email for a verification link.", "info");
     } catch (error) {
       showBanner("❌ " + error.message, "warning");
     }
