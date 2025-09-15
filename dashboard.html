@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VMS Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - VMS</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Top Bar -->
-  <div class="topbar">VMS Dashboard</div>
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <h1>VMS Dashboard</h1>
+  </header>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <a href="dashboard.html" class="active">Dashboard</a>
-    <div class="sidebar-bottom">
-      <a href="profile.html">Profile</a>
-      <a href="messages.html">Messages</a>
-      <a href="settings.html">Settings</a>
-      <a href="index.html" id="logout-btn">Logout</a>
-    </div>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav>
+        <ul class="nav-top">
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        </ul>
+        <ul class="nav-bottom">
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="messages.html">Messages</a></li>
+          <li><a href="settings.html">Settings</a></li>
+          <li><a href="#" id="logout-btn">Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h2>Welcome to VMS</h2>
+      <p>This is your dashboard. Use the menu to navigate.</p>
+    </main>
   </div>
 
-  <!-- Content -->
-  <div class="content">
-    <h2>Welcome to VMS</h2>
-    <p>This is your dashboard. Use the menu to navigate.</p>
-  </div>
-
-  <script type="module" src="script.js"></script>
+  <script src="script.js" type="module"></script>
 </body>
 </html>

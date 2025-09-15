@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VMS Messages</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages - VMS</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Top Bar -->
-  <div class="topbar">VMS Messages</div>
-
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <a href="dashboard.html">Dashboard</a>
-    <div class="sidebar-bottom">
-      <a href="profile.html">Profile</a>
-      <a href="messages.html" class="active">Messages</a>
-      <a href="settings.html">Settings</a>
-      <a href="index.html" id="logout-btn">Logout</a>
-    </div>
+  <!-- Top Banner -->
+  <div class="top-banner">
+    <h1>VMS</h1>
   </div>
 
-  <!-- Content -->
-  <div class="content">
+  <!-- Layout Container -->
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav>
+        <ul class="nav-top">
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+        <ul class="nav-bottom">
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="messages.html" class="active">Messages</a></li>
+          <li><a href="settings.html">Settings</a></li>
+          <li><a href="#" id="logout-btn">Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
 
+    <!-- Main Content -->
+    <main class="main-content">
+      <h2>Messages</h2>
+      <div id="messages-list">
+        <p>No messages yet.</p>
+      </div>
+
+      <form id="message-form">
+        <label for="newMessage">Send a new message</label>
+        <textarea id="newMessage" name="newMessage" rows="4" placeholder="Type your message here..."></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="script.js" type="module"></script>
+</body>
+</html>

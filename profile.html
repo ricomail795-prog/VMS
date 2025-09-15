@@ -1,51 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile - VMS</title>
-  <link rel="stylesheet" href="style.css?v=1.0">
-  <script type="module" src="script.js?v=1.0"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="nav-top">
-      <a href="dashboard.html">Dashboard</a>
-    </div>
-    <div class="nav-bottom">
-      <a href="profile.html" class="active">Profile</a>
-      <a href="messages.html">Messages</a>
-      <a href="settings.html">Settings</a>
-      <a href="#" id="logout-btn">Logout</a>
-    </div>
-  </div>
-
   <!-- Top Banner -->
   <div class="top-banner">
-    VMS Profile
+    <h1>VMS</h1>
   </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <h1>User Profile</h1>
-    <p>Here you can view and edit your profile details.</p>
+  <!-- Layout Container -->
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav>
+        <ul class="nav-top">
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+        <ul class="nav-bottom">
+          <li><a href="profile.html" class="active">Profile</a></li>
+          <li><a href="messages.html">Messages</a></li>
+          <li><a href="settings.html">Settings</a></li>
+          <li><a href="#" id="logout-btn">Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
 
-    <form id="profile-form">
-      <label for="first-name">First Name</label>
-      <input type="text" id="first-name" placeholder="Enter first name">
+    <!-- Main Content -->
+    <main class="main-content">
+      <h2>Your Profile</h2>
+      <form id="profile-form">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" placeholder="Enter first name">
 
-      <label for="last-name">Last Name</label>
-      <input type="text" id="last-name" placeholder="Enter last name">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Enter last name">
 
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Enter email" disabled>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" disabled>
 
-      <button type="submit">Save Changes</button>
-    </form>
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter address">
+
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone" placeholder="Enter phone number">
+
+        <button type="submit">Save Profile</button>
+      </form>
+    </main>
   </div>
 
-  <!-- Banner Notifications -->
-  <div id="banner" class="banner"></div>
+  <script src="script.js" type="module"></script>
 </body>
 </html>
