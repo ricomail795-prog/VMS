@@ -1,23 +1,31 @@
-/* General Reset */
-body {
+/* Reset */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: Arial, sans-serif;
   background: #f4f6f9;
   color: #333;
 }
 
-/* Top Banner */
+/* =========================
+   Topbar
+========================= */
 .topbar {
-  background: #1e3a8a; /* Navy blue */
+  background: #1e3a8a;
   color: white;
   padding: 15px 20px;
-  text-align: left;
   font-size: 20px;
   font-weight: bold;
-  border-bottom: 4px solid grey; /* Grey underline */
+  border-bottom: 4px solid #ccc; /* Grey underline */
 }
 
-/* Auth Container */
+/* =========================
+   Auth Pages
+========================= */
 .auth-container {
   display: flex;
   flex-direction: column;
@@ -25,48 +33,48 @@ body {
   margin-top: 60px;
 }
 
-/* Auth Box */
 .auth-box {
   background: white;
   padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   width: 300px;
   margin-bottom: 20px;
 }
 
 .auth-box h2 {
-  margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: center;
+  color: #1e3a8a;
 }
 
-/* Inputs */
+.auth-box label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
 .auth-box input {
   width: 100%;
   padding: 10px;
-  margin: 8px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-/* Buttons */
 .auth-box button {
   width: 100%;
   padding: 10px;
+  margin-top: 10px;
   background: #1e3a8a;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 .auth-box button:hover {
   background: #163172;
 }
 
-/* Links */
 .auth-links {
   margin-top: 10px;
   text-align: center;
@@ -82,7 +90,79 @@ body {
   text-decoration: underline;
 }
 
-/* Hide Sections */
 .hidden {
   display: none;
+}
+
+/* =========================
+   Layout Pages (Dashboard, Profile, etc.)
+========================= */
+.layout {
+  display: flex;
+  height: calc(100vh - 60px); /* account for topbar */
+}
+
+.sidebar {
+  width: 200px;
+  background: #1e40af;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover {
+  background: #2563eb;
+}
+
+.sidebar a.active {
+  background: #f59e0b;
+  color: black;
+}
+
+.bottom-links {
+  margin-top: auto;
+  padding-bottom: 20px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background: white;
+  overflow-y: auto;
+}
+
+form label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+form input, form select, form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  background: #1e3a8a;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #163172;
 }
