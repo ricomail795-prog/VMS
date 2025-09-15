@@ -3,25 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VMS Dashboard</title>
-  <link rel="stylesheet" href="style.css?v=1.0">
+  <title>VMS - Dashboard</title>
+  <link rel="stylesheet" href="style.css?v=1.0" />
 </head>
 <body>
+  <!-- Top Navigation -->
   <header class="navbar">
     <div class="logo">VMS</div>
     <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="profile.html">Profile</a>
-      <a href="messages.html">Messages</a>
-      <a href="settings.html">Settings</a>
-      <a href="#" id="logout-btn">Logout</a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="messages.html">Messages</a></li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="#" id="logoutBtn">Logout</a></li>
+      </ul>
     </nav>
   </header>
-  <main>
+
+  <!-- Main Content -->
+  <main class="container">
     <h1>Welcome to VMS</h1>
     <p>This is your dashboard. Use the menu to navigate.</p>
   </main>
-  <div id="banner" class="banner"></div>
+
+  <!-- Script -->
   <script type="module" src="script.js?v=1.0"></script>
 </body>
 </html>
