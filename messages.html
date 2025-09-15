@@ -3,79 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Messages</title>
-
-  <!-- Dynamic cache busting -->
-  <script>
-    const version = new Date().getTime();
-    document.write(`<link rel="stylesheet" href="style.css?v=${version}">`);
-  </script>
+  <title>Messages - VMS</title>
+  <link rel="stylesheet" href="style.css?v=1.0">
 </head>
 <body>
-<!—Top Banner 
-<header class=”top-banner”>
-  <h1>VMS</h1>
-</header>
-  <div class="dashboard-layout">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    VMS Messages
+  </header>
+
+  <!-- Notification Banner -->
+  <div id="banner"></div>
+
+  <!-- Layout -->
+  <div class="dashboard-layout" style="display:flex; min-height:calc(100vh - 60px);">
+
     <!-- Sidebar -->
-    <nav class="sidebar">
-      <div class="logo">
-        <img src="logo.svg" alt="VMS Logo" />
-      </div>
-
-      <ul class="nav-links">
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="profile.html">Profile</a></li>
-      </ul>
-
-      <ul class="nav-bottom">
-        <li>
-          <a href="messages.html" class="active">
-            Messages <span id="unread-badge" class="badge"></span>
-          </a>
+    <nav class="sidebar" style="width:220px; background:#1e3a8a; color:#fff; padding:1rem;">
+      <h3 style="color:#fff; margin-bottom:1rem;">Menu</h3>
+      <ul style="list-style:none; padding:0;">
+        <li style="margin:0.5rem 0;"><a href="dashboard.html" style="color:#fff; text-decoration:none;">Dashboard</a></li>
+        <li style="margin:0.5rem 0;"><a href="messages.html" class="active" style="color:#facc15; text-decoration:none;">Messages</a></li>
+        <li style="margin:0.5rem 0;"><a href="settings.html" style="color:#fff; text-decoration:none;">Settings</a></li>
+        <li style="margin:0.5rem 0;"><a href="profile.html" style="color:#fff; text-decoration:none;">Profile</a></li>
+        <li style="margin:0.5rem 0;">
+          <button id="logout-btn" style="width:100%; background:#ef4444; border:none; padding:0.5rem; border-radius:4px; color:#fff; cursor:pointer;">
+            Logout
+          </button>
         </li>
-        <li><a href="settings.html">Settings</a></li>
-        <li><a href="index.html" onclick="logout()">Logout</a></li>
       </ul>
     </nav>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main style="flex:1; padding:2rem;">
       <h1>Messages</h1>
+      <p>Below are your messages. (We’ll hook this to Firestore soon.)</p>
 
-      <!-- Inbox -->
-      <section id="inbox" class="card">
-        <h2>Inbox</h2>
-        <ul id="messageList">
-          <!-- Messages will appear here -->
-        </ul>
+      <!-- Messages List -->
+      <section id="messages-list" style="margin-top:1.5rem; border:1px solid #ddd; padding:1rem; border-radius:8px; background:#f9fafb;">
+        <p>No messages yet.</p>
       </section>
 
-      <!-- Compose -->
-      <section id="compose" class="card">
-        <h2>New Message</h2>
-        <form id="messageForm">
-          <label>To (Username)</label>
-          <input type="text" id="recipient" required />
-
-          <label>Subject</label>
-          <input type="text" id="subject" required />
-
-          <label>Message</label>
-          <textarea id="messageBody" required></textarea>
-
-          <label>Attach File</label>
-          <input type="file" id="attachment" multiple />
-
-          <button type="submit">Send</button>
+      <!-- New Message Form -->
+      <section style="margin-top:2rem;">
+        <h2>Send a Message</h2>
+        <form id="message-form">
+          <textarea id="message-input" placeholder="Type your message..." required
+            style="width:100%; padding:0.75rem; border:1px solid #ccc; border-radius:6px; margin-bottom:0.5rem;"></textarea>
+          <button type="submit" style="background:#1e3a8a; color:#fff; border:none; padding:0.5rem 1rem; border-radius:6px; cursor:pointer;">
+            Send
+          </button>
         </form>
       </section>
     </main>
   </div>
 
-  <!-- Dynamic cache busting for JS -->
-  <script>
-    document.write(`<script src="script.js?v=${version}"><\/script>`);
-  </script>
+  <!-- Firebase + Script -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>

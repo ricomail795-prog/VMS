@@ -3,63 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Profile</title>
-  <!-- Dynamic cache busting -->
-  <script>
-    const version = new Date().getTime();
-    document.write(`<link rel="stylesheet" href="style.css?v=${version}">`);
-    document.write(`<script src="script.js?v=${version}"><\/script>`);
-  </script>
+  <title>Profile - VMS</title>
+  <link rel="stylesheet" href="style.css?v=1.0">
 </head>
 <body>
   <!-- Top Banner -->
   <header class="top-banner">
-    <h1>VMS</h1>
+    VMS Profile
   </header>
 
-  <div class="dashboard-layout">
+  <!-- Notification Banner -->
+  <div id="banner"></div>
+
+  <!-- Layout -->
+  <div class="dashboard-layout" style="display:flex; min-height:calc(100vh - 60px);">
+
     <!-- Sidebar -->
-    <nav class="sidebar">
-      <div class="logo">
-        <img src="logo.svg" alt="VMS Logo">
-      </div>
-      <ul class="nav-links">
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="profile.html" class="active">Profile</a></li>
-      </ul>
-      <ul class="nav-bottom">
-        <li>
-          <a href="messages.html">
-            Messages <span id="unread-badge" class="badge"></span>
-          </a>
+    <nav class="sidebar" style="width:220px; background:#1e3a8a; color:#fff; padding:1rem;">
+      <h3 style="color:#fff; margin-bottom:1rem;">Menu</h3>
+      <ul style="list-style:none; padding:0;">
+        <li style="margin:0.5rem 0;"><a href="dashboard.html" style="color:#fff; text-decoration:none;">Dashboard</a></li>
+        <li style="margin:0.5rem 0;"><a href="messages.html" style="color:#fff; text-decoration:none;">Messages</a></li>
+        <li style="margin:0.5rem 0;"><a href="settings.html" style="color:#fff; text-decoration:none;">Settings</a></li>
+        <li style="margin:0.5rem 0;"><a href="profile.html" class="active" style="color:#facc15; text-decoration:none;">Profile</a></li>
+        <li style="margin:0.5rem 0;">
+          <button id="logout-btn" style="width:100%; background:#ef4444; border:none; padding:0.5rem; border-radius:4px; color:#fff; cursor:pointer;">
+            Logout
+          </button>
         </li>
-        <li><a href="settings.html">Settings</a></li>
-        <li><a href="index.html" onclick="logout()">Logout</a></li>
       </ul>
     </nav>
 
     <!-- Main Content -->
-    <main class="main-content">
-      <h1>User Profile</h1>
-      <form id="profileForm" class="card">
+    <main style="flex:1; padding:2rem;">
+      <h1>Profile</h1>
+      <p>Update your personal details below:</p>
+
+      <form id="profile-form" style="margin-top:1.5rem; background:#fff; padding:1.5rem; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:400px;">
         <label for="first-name">First Name</label>
-        <input id="first-name" type="text">
+        <input type="text" id="first-name" placeholder="Enter first name" style="width:100%; padding:0.5rem; margin-bottom:1rem;">
 
-        <label for="surname">Surname</label>
-        <input id="surname" type="text">
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" placeholder="Enter last name" style="width:100%; padding:0.5rem; margin-bottom:1rem;">
 
-        <label for="address">Address</label>
-        <input id="address" type="text">
+        <label for="nationality">Nationality</label>
+        <input type="text" id="nationality" placeholder="Enter nationality" style="width:100%; padding:0.5rem; margin-bottom:1rem;">
 
-        <label for="email">Email</label>
-        <input id="email" type="email">
-
-        <label for="phone">Phone</label>
-        <input id="phone" type="tel">
-
-        <button type="submit" class="btn-primary">Save Changes</button>
+        <button type="submit" style="background:#1e3a8a; color:#fff; border:none; padding:0.75rem; border-radius:6px; cursor:pointer; width:100%;">
+          Save Profile
+        </button>
       </form>
     </main>
   </div>
+
+  <!-- Firebase + Script -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>
