@@ -1,63 +1,111 @@
-// Auth form handling
-const loginForm = document.getElementById("loginForm");
-const registerForm = document.getElementById("registerForm");
-const resetForm = document.getElementById("resetForm");
+// ==============================
+// Firebase v8 Setup
+// ==============================
+var firebaseConfig = {
+  apiKey: "AIzaSyDJ8GbgNdLO6oGKcZTjxD17edp8Jq-_0w",
+  authDomain: "vms-app-6a0c3.firebaseapp.com",
+  projectId: "vms-app-6a0c3",
+  storageBucket: "vms-app-6a0c3.appspot.com",
+  messagingSenderId: "868366477824",
+  appId: "1:868366477824:web:05588a6d013a372f6060e5",
+  measurementId: "G-NBZBPJQ3QR"
+};
 
-const registerContainer = document.getElementById("registerContainer");
-const resetContainer = document.getElementById("resetContainer");
-const backToLogin1 = document.getElementById("backToLogin1");
-const backToLogin2 = document.getElementById("backToLogin2");
-const showRegister = document.getElementById("showRegister");
-const showReset = document.getElementById("showReset");
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var auth = firebase.auth();
+var db = firebase.firestore();
 
-function showSection(section) {
-  document.querySelectorAll(".auth-container").forEach(el => el.classList.add("hidden"));
-  if (section) section.classList.remove("hidden");
-}
-
+// ==============================
 // Login
-if (loginForm) {
-  loginForm.addEventListener("submit", e => {
-    e.preventDefault();
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(() => {
-        window.location.href = "dashboard.html";
-      })
-      .catch(error => alert(error.message));
-  });
-}
+// ==============================
+document.getElementById("loginForm")?.addEventListener("submit", function(e) {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
 
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      window.location.href = "dashboard.html";
+    })
+    .catch(error => {
+      alert(error.message);
+    });
+});
+
+// ==============================
 // Register
-if (registerForm) {
-  registerForm.addEventListener("submit", e => {
-    e.preventDefault();
-    const email = document.getElementById("registerEmail").value;
-    const password = document.getElementById("registerPassword").value;
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        alert("Account created! Please verify your email.");
-        firebase.auth().currentUser.sendEmailVerification();
-        window.location.href = "index.html";
-      })
-      .catch(error => alert(error.message));
-  });
-}
+// ==============================
+document.getElementById("registerForm")?.addEventListener("submit", function(e) {
+  e.preventDefault();
+  const email = document.getElementById("registerEmail").value;
+  const password = document.getElementById("registerPassword").value;
 
+  auth.createUserWithEmailAndPassword(email, password)
+    .then((cred) => {
+      return db.collection("users").doc(cred.user.uid).set({
+        email: email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    })
+    .then(() => {
+      alert("Account created successfully!");
+      window.location.href = "index.html";
+    })
+    .catch(error => {
+      alert(error.message);
+    });
+});
+
+// ==============================
 // Reset Password
-if (resetForm) {
-  resetForm.addEventListener("submit", e => {
-    e.preventDefault();
-    const email = document.getElementById("resetEmail").value;
-    firebase.auth().sendPasswordResetEmail(email)
-      .then(() => alert("Password reset link sent!"))
-      .catch(error => alert(error.message));
+// ==============================
+document.getElementById("resetForm")?.addEventListener("submit", function(e) {
+  e.preventDefault();
+  const email = document.getElementById("resetEmail").value;
+
+  auth.sendPasswordResetEmail(email)
+    .then(() => {
+      alert("Password reset email sent!");
+    })
+    .catch(error => {
+      alert(error.message);
+    });
+});
+
+// ==============================
+// Logout
+// ==============================
+document.getElementById("logoutBtn")?.addEventListener("click", function() {
+  auth.signOut()
+    .then(() => {
+      window.location.href = "index.html";
+    });
+});
+
+// ==============================
+// Firestore Helpers
+// ==============================
+function saveProfile(uid, profileData) {
+  return db.collection("users").doc(uid).update(profileData);
+}
+
+function sendMessage(uid, message) {
+  return db.collection("messages").add({
+    uid: uid,
+    message: message,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
   });
 }
 
-// Navigation between forms
-if (showRegister) showRegister.addEventListener("click", () => showSection(registerContainer));
-if (showReset) showReset.addEventListener("click", () => showSection(resetContainer));
-if (backToLogin1) backToLogin1.addEventListener("click", () => showSection(document.querySelector(".auth-container")));
-if (backToLogin2) backToLogin2.addEventListener("click", () => showSection(document.querySelector(".auth-container")));
+function saveSettings(uid, settingsData) {
+  return db.collection("settings").doc(uid).set(settingsData);
+}
+
+function logIncident(uid, incidentData) {
+  return db.collection("incidents").add({
+    uid: uid,
+    incidentData: incidentData,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
