@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings - VMS</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
   <header>
@@ -13,7 +13,7 @@
       <a href="dashboard.html">Dashboard</a>
       <a href="profile.html">Profile</a>
       <a href="messages.html">Messages</a>
-      <a href="settings.html" class="active">Settings</a>
+      <a href="settings.html">Settings</a>
       <button id="logoutBtn">Logout</button>
     </nav>
   </header>
@@ -27,44 +27,24 @@
           <option value="dark">Dark</option>
         </select>
       </label><br>
-
-      <label>
-        <input type="checkbox" id="notifications"> Enable Notifications
+      <label>Notifications:
+        <input type="checkbox" id="notifications">
       </label><br>
-
       <button type="submit">Save Settings</button>
     </form>
   </main>
 
-  <!-- Firebase v8 -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-  <script>
-    // Your Firebase Config
-    var firebaseConfig = {
-      apiKey: "AIzaSyDJ8GbgNdLO6oGKcZTjxDI7edp8Jq-_0w",
-      authDomain: "vms-app-6a0c3.firebaseapp.com",
-      projectId: "vms-app-6a0c3",
-      storageBucket: "vms-app-6a0c3.appspot.com",
-      messagingSenderId: "868366477824",
-      appId: "1:868366477824:web:05588a6d013a372f06f6e5",
-      measurementId: "G-NBZBPJQ3QR"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-  </script>
-
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
   <script>
     const settingsForm = document.getElementById("settingsForm");
 
-    firebase.auth().onAuthStateChanged(user => {
+    auth.onAuthStateChanged(user => {
       if (!user) {
         window.location.href = "index.html";
       } else {
-        // Load settings
         db.collection("settings").doc(user.uid).get().then(doc => {
           if (doc.exists) {
             const data = doc.data();
@@ -73,23 +53,17 @@
           }
         });
 
-        // Save settings
         settingsForm.addEventListener("submit", e => {
           e.preventDefault();
-          db.collection("settings").doc(user.uid).set({
+          const settingsData = {
             theme: document.getElementById("theme").value,
             notifications: document.getElementById("notifications").checked,
-          }).then(() => {
+          };
+          saveSettings(user.uid, settingsData).then(() => {
             alert("Settings saved!");
           });
         });
       }
-    });
-
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      firebase.auth().signOut().then(() => {
-        window.location.href = "index.html";
-      });
     });
   </script>
 </body>
