@@ -3,66 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - VMS</title>
-  <link rel="stylesheet" href="style.css">
+  <title>VMS - Login</title>
+  <link rel="stylesheet" href="style.css?v=1.0">
 </head>
 <body>
-  <div class="auth-container">
+  <div class="container">
     <h2>Login</h2>
     <form id="loginForm">
       <label>Email</label>
-      <input type="email" id="loginEmail" placeholder="Enter your email" required>
+      <input type="email" id="loginEmail" required>
       <label>Password</label>
-      <input type="password" id="loginPassword" placeholder="Enter your password" required>
+      <input type="password" id="loginPassword" required>
       <button type="submit">Login</button>
     </form>
-    <p>
-      <a href="#" id="showRegister">Create Account</a> | 
-      <a href="#" id="showReset">Forgot Password?</a>
-    </p>
+    <p><a href="#" id="createAccountLink">Create Account</a> | <a href="#" id="forgotPasswordLink">Forgot Password?</a></p>
+
+    <div id="registerContainer" style="display:none;">
+      <h2>Create Account</h2>
+      <form id="registerForm">
+        <label>Email</label>
+        <input type="email" id="registerEmail" required>
+        <label>Password</label>
+        <input type="password" id="registerPassword" required>
+        <button type="submit">Register</button>
+      </form>
+      <p><a href="#" id="backToLogin">Back to Login</a></p>
+    </div>
+
+    <div id="resetContainer" style="display:none;">
+      <h2>Reset Password</h2>
+      <form id="resetForm">
+        <label>Email</label>
+        <input type="email" id="resetEmail" required>
+        <button type="submit">Send Reset Link</button>
+      </form>
+      <p><a href="#" id="backToLogin2">Back to Login</a></p>
+    </div>
   </div>
 
-  <div class="auth-container hidden" id="registerContainer">
-    <h2>Create Account</h2>
-    <form id="registerForm">
-      <label>Email</label>
-      <input type="email" id="registerEmail" required>
-      <label>Password</label>
-      <input type="password" id="registerPassword" required>
-      <button type="submit">Register</button>
-    </form>
-    <p><a href="#" id="backToLogin1">Back to Login</a></p>
-  </div>
-
-  <div class="auth-container hidden" id="resetContainer">
-    <h2>Reset Password</h2>
-    <form id="resetForm">
-      <label>Email</label>
-      <input type="email" id="resetEmail" required>
-      <button type="submit">Send Reset Link</button>
-    </form>
-    <p><a href="#" id="backToLogin2">Back to Login</a></p>
-  </div>
-
-  <!-- Firebase v8 -->
+  <!-- Firebase v8 SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-  <script>
-    // Your Firebase Config (from your screenshot)
-    var firebaseConfig = {
-      apiKey: "AIzaSyDJ8GbgNdLO6oGKcZTjxDI7edp8Jq-_0w",
-      authDomain: "vms-app-6a0c3.firebaseapp.com",
-      projectId: "vms-app-6a0c3",
-      storageBucket: "vms-app-6a0c3.appspot.com",
-      messagingSenderId: "868366477824",
-      appId: "1:868366477824:web:05588a6d013a372f06f6e5",
-      measurementId: "G-NBZBPJQ3QR"
-    };
-    firebase.initializeApp(firebaseConfig);
-  </script>
-
-  <script src="script.js"></script>
+  <!-- Your script -->
+  <script src="script.js?v=1.0"></script>
 </body>
 </html>
