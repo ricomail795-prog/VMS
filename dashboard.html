@@ -4,59 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - VMS</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">	
 </head>
 <body>
-  <header>
-    <h1>VMS</h1>
-    <nav>
-      <a href="dashboard.html" class="active">Dashboard</a>
-      <a href="profile.html">Profile</a>
-      <a href="messages.html">Messages</a>
-      <a href="settings.html">Settings</a>
-      <button id="logoutBtn">Logout</button>
-    </nav>
-  </header>
+  <div class="navbar">
+    <h2>Vessel Management System</h2>
+    <button id="logoutBtn">Logout</button>
+  </div>
 
-  <main>
-    <h2>Welcome to VMS</h2>
-    <p id="userEmail">Loading user info...</p>
-  </main>
+  <div class="container">
+    <h3>Welcome to your Dashboard</h3>
+    <ul>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="messages.html">Messages</a></li>
+      <li><a href="settings.html">Settings</a></li>
+    </ul>
+  </div>
 
-  <!-- Firebase v8 -->
+  <!-- Firebase v8 SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-  <script>
-    // Your Firebase Config
-    var firebaseConfig = {
-      apiKey: "AIzaSyDJ8GbgNdLO6oGKcZTjxDI7edp8Jq-_0w",
-      authDomain: "vms-app-6a0c3.firebaseapp.com",
-      projectId: "vms-app-6a0c3",
-      storageBucket: "vms-app-6a0c3.appspot.com",
-      messagingSenderId: "868366477824",
-      appId: "1:868366477824:web:05588a6d013a372f06f6e5",
-      measurementId: "G-NBZBPJQ3QR"
-    };
-    firebase.initializeApp(firebaseConfig);
-  </script>
-
+  <!-- Main script -->
   <script src="script.js"></script>
-  <script>
-    firebase.auth().onAuthStateChanged(user => {
-      if (!user) {
-        window.location.href = "index.html";
-      } else {
-        document.getElementById("userEmail").innerText = "Logged in as: " + user.email;
-      }
-    });
-
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      firebase.auth().signOut().then(() => {
-        window.location.href = "index.html";
-      });
-    });
-  </script>
 </body>
 </html>

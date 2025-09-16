@@ -1,0 +1,12 @@
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; }
+header { background:#003366; color:#fff; padding:1rem; display:flex; justify-content:space-between; align-items:center; }
+header h1 { margin:0; font-size:1.5rem; }
+nav a { color:#fff; margin-left:1rem; text-decoration:none; }
+main { padding:2rem; background:#fff; margin:1rem; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+.auth-form { display:flex; flex-direction:column; gap:0.5rem; max-width:400px; margin:auto; }
+input { padding:0.5rem; border:1px solid #ccc; border-radius:4px; }
+button.btn-primary { background:#003366; color:#fff; border:none; padding:0.5rem; border-radius:4px; cursor:pointer; }
+.auth-links { margin-top:0.5rem; font-size:0.9rem; }
+.auth-links a { color:#003366; text-decoration:none; }
+.auth-section { display:none; }
+.auth-section.active { display:block; }

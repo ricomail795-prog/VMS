@@ -1,112 +1,90 @@
-/* Reset */
-* {
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  background: #f4f4f4;
 }
 
-/* Header */
-header {
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+  margin-top: 0;
+}
+
+/* Navbar */
+.navbar {
   background: #003366;
-  color: white;
-  padding: 10px 20px;
+  color: #fff;
+  padding: 1rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
-header h1 {
+.navbar h2 {
   margin: 0;
-  font-size: 22px;
 }
 
-nav a, nav button {
-  color: white;
-  margin-left: 15px;
-  text-decoration: none;
-  background: none;
+.navbar button {
+  background: #ff6600;
   border: none;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-nav a.active {
-  border-bottom: 2px solid orange;
-}
-
-nav button {
-  background: #0066cc;
-  padding: 5px 10px;
+  color: #fff;
+  padding: 0.5rem 1rem;
   border-radius: 4px;
+  cursor: pointer;
 }
 
-/* Main layout */
-main {
-  padding: 20px;
+.navbar button:hover {
+  background: #e65c00;
 }
 
-/* Auth containers */
-.auth-container {
-  width: 300px;
-  margin: 80px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background: #f9f9f9;
-}
-
-.auth-container.hidden {
-  display: none;
-}
-
-.auth-container h2 {
-  margin-bottom: 15px;
-}
-
-.auth-container form {
+/* Forms */
+form {
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
 }
 
-.auth-container label {
-  margin: 5px 0 2px;
-  font-size: 14px;
+label {
+  font-weight: bold;
 }
 
-.auth-container input, .auth-container textarea, .auth-container select {
-  padding: 8px;
-  margin-bottom: 10px;
+input, textarea, select {
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-/* Buttons */
-button {
-  background: #0055aa;
-  color: white;
+button[type="submit"] {
+  background: #003366;
+  color: #fff;
   border: none;
-  padding: 8px 12px;
+  padding: 0.75rem;
   border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background: #003f7f;
+button[type="submit"]:hover {
+  background: #002244;
 }
 
-/* Messages list */
+/* Messages */
 #messagesList {
-  margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  background: #fff;
-  max-height: 300px;
-  overflow-y: auto;
+  list-style: none;
+  padding: 0;
 }
 
-#messagesList div {
-  margin-bottom: 8px;
-  padding: 6px;
-  border-bottom: 1px solid #eee;
+#messagesList li {
+  background: #f1f1f1;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
 }

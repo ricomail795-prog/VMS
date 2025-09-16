@@ -7,65 +7,60 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>VMS</h1>
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="profile.html">Profile</a>
-      <a href="messages.html" class="active">Messages</a>
-      <a href="settings.html">Settings</a>
-      <button id="logoutBtn">Logout</button>
-    </nav>
-  </header>
-
-  <main>
+  <div class="navbar">
     <h2>Messages</h2>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <div class="container">
+    <h3>Send a Message</h3>
     <form id="messageForm">
-      <textarea id="messageText" placeholder="Write a message..." required></textarea><br>
+      <textarea id="messageText" placeholder="Write your message..." required></textarea>
       <button type="submit">Send</button>
     </form>
-    <div id="messagesList"></div>
-  </main>
 
-  <!-- Firebase v8 -->
+    <h3>Inbox</h3>
+    <ul id="messagesList"></ul>
+  </div>
+
+  <!-- Firebase v8 SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-  <script>
-    // Your Firebase Config
-    var firebaseConfig = {
-      apiKey: "AIzaSyDJ8GbgNdLO6oGKcZTjxDI7edp8Jq-_0w",
-      authDomain: "vms-app-6a0c3.firebaseapp.com",
-      projectId: "vms-app-6a0c3",
-      storageBucket: "vms-app-6a0c3.appspot.com",
-      messagingSenderId: "868366477824",
-      appId: "1:868366477824:web:05588a6d013a372f06f6e5",
-      measurementId: "G-NBZBPJQ3QR"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-  </script>
-
+  <!-- Main script -->
   <script src="script.js"></script>
   <script>
     const messageForm = document.getElementById("messageForm");
     const messagesList = document.getElementById("messagesList");
 
-    firebase.auth().onAuthStateChanged(user => {
-      if (!user) {
-        window.location.href = "index.html";
-      } else {
-        // Load messages in real time
-        db.collection("messages")
-          .orderBy("createdAt", "desc")
-          .onSnapshot(snapshot => {
-            messagesList.innerHTML = "";
-            snapshot.forEach(doc => {
-              const data = doc.data();
-              const div = document.createElement("div");
-              div.textContent = (data.email || "Unknown") + ": " + data.message;
-              messagesList.appendChild(div);
-            });
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        // Load messages in real-time
+        db.collection("messages").orderBy("createdAt", "desc").onSnapshot(snapshot => {
+          messagesList.innerHTML = "";
+          snapshot.forEach(doc => {
+            const li = document.createElement("li");
+            const data = doc.data();
+            li.textContent = `${data.uid}: ${data.message}`;
+            messagesList.appendChild(li);
           });
+        });
+
+        // Send new message
+        messageForm.addEventListener("submit", e => {
+          e.preventDefault();
+          const message = document.getElementById("messageText").value;
+          sendMessage(user.uid, message).then(() => {
+            messageForm.reset();
+          });
+        });
+
+      } else {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VMS - Messages</title>
+  <link rel="stylesheet" href="style.css?v=1.0">
+</head>
+<body>
+  <header>
+    <h1>VMS</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="profile.html">Profile</a>
+      <a href="messages.html">Messages</a>
+      <a href="settings.html">Settings</a>
+      <a href="#" id="logoutBtn">Logout</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Messages</h2>
+    <form id="message-form">
+      <label>Message</label>
+      <input type="text" id="message-text" placeholder="Enter your message">
+      <button type="submit" class="btn-primary">Send</button>
+    </form>
+    <div id="messages-list"></div>
+  </main>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="script.js?v=1.0"></script>
+</body>
+</html>
