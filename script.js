@@ -1,17 +1,6 @@
-/*************************************************
- * Firebase Setup (v10 Modular)
- *************************************************/
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { 
-  getAuth, 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  sendPasswordResetEmail, 
-  signOut 
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
+// Firebase configuration from your project
 const firebaseConfig = {
-  apiKey: "AIzaSyJBdBgNdLO6oGKcZTjxD7edp8Jq-_0w",
+  apiKey: "AIzaSyDJ8GbgNdLO6oGCkCzTjxD17edp8Jq-_0w",
   authDomain: "vms-app-6a0c3.firebaseapp.com",
   projectId: "vms-app-6a0c3",
   storageBucket: "vms-app-6a0c3.appspot.com",
@@ -20,91 +9,89 @@ const firebaseConfig = {
   measurementId: "G-NBZBPJQ3QR"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 
-/*************************************************
- * Section Toggle (Login/Register/Reset)
- *************************************************/
-window.toggleSection = function(sectionId) {
-  document.querySelectorAll(".auth-section").forEach(sec => sec.style.display = "none");
-  const el = document.getElementById(sectionId);
-  if (el) el.style.display = "block";
-};
+// -------- Authentication --------
 
-/*************************************************
- * Login
- *************************************************/
-const loginForm = document.getElementById("login-form");
-if (loginForm) {
-  loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("login-email").value.trim();
-    const password = document.getElementById("login-password").value;
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("✅ Login successful");
+// Login
+document.getElementById("loginForm")?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
       window.location.href = "dashboard.html";
-    } catch (error) {
-      alert("❌ " + error.message);
-      console.error(error);
-    }
-  });
-}
+    })
+    .catch((error) => alert(error.message));
+});
 
-/*************************************************
- * Register
- *************************************************/
-const registerForm = document.getElementById("register-form");
-if (registerForm) {
-  registerForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("register-email").value.trim();
-    const password = document.getElementById("register-password").value;
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert("✅ Account created. Please log in.");
-      window.toggleSection("login-section");
-    } catch (error) {
-      alert("❌ " + error.message);
-      console.error(error);
-    }
-  });
-}
+// Register
+document.getElementById("registerForm")?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = document.getElementById("registerEmail").value;
+  const password = document.getElementById("registerPassword").value;
 
-/*************************************************
- * Reset Password
- *************************************************/
-const resetForm = document.getElementById("reset-form");
-if (resetForm) {
-  resetForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("reset-email").value.trim();
-    try {
-      await sendPasswordResetEmail(auth, email);
-      alert("📧 Reset link sent to your email.");
-      window.toggleSection("login-section");
-    } catch (error) {
-      alert("❌ " + error.message);
-      console.error(error);
-    }
-  });
-}
-
-/*************************************************
- * Logout
- *************************************************/
-const logoutBtn = document.getElementById("logoutBtn");
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    try {
-      await signOut(auth);
-      alert("👋 Logged out successfully.");
+  auth.createUserWithEmailAndPassword(email, password)
+    .then((cred) => {
+      // Create Firestore user profile
+      return db.collection("users").doc(cred.user.uid).set({
+        email: email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+    })
+    .then(() => {
+      alert("Account created successfully!");
       window.location.href = "index.html";
-    } catch (error) {
-      alert("❌ " + error.message);
-      console.error(error);
-    }
+    })
+    .catch((error) => alert(error.message));
+});
+
+// Reset Password
+document.getElementById("resetForm")?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = document.getElementById("resetEmail").value;
+
+  auth.sendPasswordResetEmail(email)
+    .then(() => alert("Password reset email sent!"))
+    .catch((error) => alert(error.message));
+});
+
+// Logout
+document.getElementById("logoutBtn")?.addEventListener("click", () => {
+  auth.signOut().then(() => {
+    window.location.href = "index.html";
+  });
+});
+
+// -------- Firestore Helpers --------
+
+// Save user profile
+function saveProfile(uid, profileData) {
+  return db.collection("users").doc(uid).update(profileData);
+}
+
+// Send message
+function sendMessage(uid, message) {
+  return db.collection("messages").add({
+    uid: uid,
+    message: message,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
   });
 }
+
+// Save settings
+function saveSettings(uid, settingsData) {
+  return db.collection("settings").doc(uid).set(settingsData);
+}
+
+// Report incident
+function logIncident(uid, incidentData) {
+  return db.collection("incidents").add({
+    uid: uid,
+    ...incidentData,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+

@@ -1,74 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VMS - Login</title>
-  <link rel="stylesheet" href="style.css?v=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - VMS</title>
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
-  <!-- Banner -->
-  <header class="banner">
-    <div class="banner-left">
-      <h1>VMS</h1>
-    </div>
-  </header>
-
-  <main>
-    <!-- Login Section -->
-    <div class="auth-section" id="login-section">
+  <main class="auth-container">
+    <!-- Login -->
+    <section id="login-section" class="auth-section">
+      <h2>Login</h2>
       <form id="login-form" class="auth-form">
-        <h2>Login</h2>
         <label for="login-email">Email</label>
-        <input type="email" id="login-email" placeholder="Enter your email" required />
+        <input type="email" id="login-email" required placeholder="Enter your email">
 
         <label for="login-password">Password</label>
-        <input type="password" id="login-password" placeholder="Enter your password" required />
+        <input type="password" id="login-password" required placeholder="Enter your password">
 
         <button type="submit" class="btn-primary">Login</button>
-
         <div class="auth-links">
           <a href="#" onclick="toggleSection('register-section')">Create Account</a> |
           <a href="#" onclick="toggleSection('reset-section')">Forgot Password?</a>
         </div>
       </form>
-    </div>
+    </section>
 
-    <!-- Register Section -->
-    <div class="auth-section" id="register-section" style="display:none;">
+    <!-- Register -->
+    <section id="register-section" class="auth-section hidden">
+      <h2>Create Account</h2>
       <form id="register-form" class="auth-form">
-        <h2>Create Account</h2>
         <label for="register-email">Email</label>
-        <input type="email" id="register-email" placeholder="Enter your email" required />
+        <input type="email" id="register-email" required placeholder="Enter your email">
 
         <label for="register-password">Password</label>
-        <input type="password" id="register-password" placeholder="Enter your password" required />
+        <input type="password" id="register-password" required placeholder="Enter your password">
 
         <button type="submit" class="btn-primary">Register</button>
-
         <div class="auth-links">
           <a href="#" onclick="toggleSection('login-section')">Back to Login</a>
         </div>
       </form>
-    </div>
+    </section>
 
-    <!-- Reset Password Section -->
-    <div class="auth-section" id="reset-section" style="display:none;">
+    <!-- Reset -->
+    <section id="reset-section" class="auth-section hidden">
+      <h2>Reset Password</h2>
       <form id="reset-form" class="auth-form">
-        <h2>Reset Password</h2>
         <label for="reset-email">Email</label>
-        <input type="email" id="reset-email" placeholder="Enter your email" required />
+        <input type="email" id="reset-email" required placeholder="Enter your email">
 
         <button type="submit" class="btn-primary">Send Reset Email</button>
-
         <div class="auth-links">
           <a href="#" onclick="toggleSection('login-section')">Back to Login</a>
         </div>
       </form>
-    </div>
+    </section>
   </main>
 
-  <!-- Firebase + Script -->
-  <script type="module" src="script.js?v=1.0"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="script.js?v=2" type="module"></script>
 </body>
 </html>

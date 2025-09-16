@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VMS - Dashboard</title>
-  <link rel="stylesheet" href="style.css?v=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - VMS</title>
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
-  <!-- Top Navigation -->
-  <header class="navbar">
-    <div class="logo">VMS</div>
+  <header>
+    <h1>VMS</h1>
     <nav>
-      <ul class="nav-links">
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="profile.html">Profile</a></li>
-        <li><a href="messages.html">Messages</a></li>
-        <li><a href="settings.html">Settings</a></li>
-        <li><a href="#" id="logoutBtn">Logout</a></li>
-      </ul>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="profile.html">Profile</a>
+      <a href="messages.html">Messages</a>
+      <a href="settings.html">Settings</a>
+      <button id="logoutBtn">Logout</button>
     </nav>
   </header>
 
-  <!-- Main Content -->
-  <main class="container">
-    <h1>Welcome to VMS</h1>
-    <p>This is your dashboard. Use the menu to navigate.</p>
+  <main>
+    <h2>Welcome to VMS</h2>
+    <p id="userEmail"></p>
   </main>
 
-  <!-- Script -->
-  <script type="module" src="script.js?v=1.0"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="script.js?v=2"></script>
+  <script>
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "index.html";
+      } else {
+        document.getElementById("userEmail").innerText = "Logged in as: " + user.email;
+      }
+    });
+  </script>
 </body>
 </html>
