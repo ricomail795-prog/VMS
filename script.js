@@ -1,9 +1,9 @@
 // Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyDJ8GbgNdLO6oGKcZTjxDI7edp8Jq-_0w",
+  apiKey: "AIzaSyDJ8GbgNdLO6OcGKCzTjxDI7edp8Jq-_0w",
   authDomain: "vms-app-6a0c3.firebaseapp.com",
   projectId: "vms-app-6a0c3",
-  storageBucket: "vms-app-6a0c3.appspot.com",
+  storageBucket: "vms-app-6a0c3.firebasestorage.app",
   messagingSenderId: "868366477824",
   appId: "1:868366477824:web:05588a6d013a372f0606e5",
   measurementId: "G-NBZBPJQ3QR"
