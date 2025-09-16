@@ -4,10 +4,11 @@ var firebaseConfig = {
   authDomain: "vms-app-6a0c3.firebaseapp.com",
   projectId: "vms-app-6a0c3",
   storageBucket: "vms-app-6a0c3.appspot.com",
-  messagingSenderId: "863866477824",
-  appId: "1:863866477824:web:05588a6d013a372f0606e5",
+  messagingSenderId: "868366477824",
+  appId: "1:868366477824:web:05588a6d013a372f6060e5",
   measurementId: "G-NBZBPJQ3QR"
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
