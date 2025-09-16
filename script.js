@@ -85,13 +85,14 @@ function sendMessage(uid, message) {
 
 // Save settings
 function saveSettings(uid, settingsData) {
-  return db.collection("settings").doc(uid).set(settingsData);
+    return db.collection("settings").doc(uid).set(settingsData);
 }
 
 // Report incident
 function logIncident(uid, incidentData) {
-  return db.collection("incidents").add({
-    uid: uid,
-    ...incidentData,
-    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-
+    return db.collection("incidents").add({
+        uid: uid,
+        ...incidentData,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+}
