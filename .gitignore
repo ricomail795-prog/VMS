@@ -1,3 +1,7 @@
 VMS Backup saved/ 
 ongoing-updates/
 *.zip
+VMS_*/
+*.zip
+VMS Backup saved/
+ongoing-updates/
