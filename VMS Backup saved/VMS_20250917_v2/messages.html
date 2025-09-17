@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages - VMS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>Messages</h2>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <div class="container">
+    <h3>Send a Message</h3>
+    <form id="messageForm">
+      <textarea id="messageText" placeholder="Write your message..." required></textarea>
+      <button type="submit">Send</button>
+    </form>
+
+    <h3>Inbox</h3>
+    <ul id="messagesList"></ul>
+  </div>
+
+  <!-- Firebase v8 SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+  <!-- Main script -->
+  <script src="script.js"></script>
+  <script>
+    const messageForm = document.getElementById("messageForm");
+    const messagesList = document.getElementById("messagesList");
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        // Load messages in real-time
+        db.collection("messages").orderBy("createdAt", "desc").onSnapshot(snapshot => {
+          messagesList.innerHTML = "";
+          snapshot.forEach(doc => {
+            const li = document.createElement("li");
+            const data = doc.data();
+            li.textContent = `${data.uid}: ${data.message}`;
+            messagesList.appendChild(li);
+          });
+        });
+
+        // Send new message
+        messageForm.addEventListener("submit", e => {
+          e.preventDefault();
+          const message = document.getElementById("messageText").value;
+          sendMessage(user.uid, message).then(() => {
+            messageForm.reset();
+          });
+        });
+
+      } else {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>
+

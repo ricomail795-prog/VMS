@@ -1,9 +1,9 @@
-// Firebase configuration (corrected v4)
+// Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyDJ8GbgNdLO6OcGKCzTjxDI7edp8Jq-_0w",
   authDomain: "vms-app-6a0c3.firebaseapp.com",
   projectId: "vms-app-6a0c3",
-  storageBucket: "vms-app-6a0c3.appspot.com", // fixed from firebasestorage.app
+  storageBucket: "vms-app-6a0c3.firebasestorage.app",
   messagingSenderId: "868366477824",
   appId: "1:868366477824:web:05588a6d013a372f0606e5",
   measurementId: "G-NBZBPJQ3QR"
@@ -44,27 +44,7 @@ document.getElementById("resetForm")?.addEventListener("submit", function(e) {
     .catch(error => alert(error.message));
 });
 
-// Firestore helpers
+// Example Firestore usage (save profile)
 function saveProfile(uid, data) {
-  return db.collection("users").doc(uid).set(data, { merge: true });
-}
-
-function sendMessage(uid, message) {
-  return db.collection("messages").add({
-    uid: uid,
-    message: message,
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  });
-}
-
-function saveSettings(uid, settingsData) {
-  return db.collection("settings").doc(uid).set(settingsData, { merge: true });
-}
-
-function logIncident(uid, incidentData) {
-  return db.collection("incidents").add({
-    uid: uid,
-    incidentData: incidentData,
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  });
+  return db.collection("users").doc(uid).set(data);
 }
