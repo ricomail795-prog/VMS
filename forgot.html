@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forgot Password - VMS</title>
+  <link rel="stylesheet" href="style.css?v=7_fixed4">
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="script.js?v=7_fixed4" defer></script>
+</head>
+<body class="centered-page">
+  <div class="login-box">
+    <h2>Reset Password</h2>
+    <form id="resetForm">
+      <input type="email" id="resetEmail" placeholder="Enter your email" required>
+      <button type="submit" id="resetBtn"><span class="btn-text">Reset</span><span class="spinner hidden"></span></button>
+    </form>
+    <div id="resetMsg" class="msg"></div>
+    <div class="links"><a href="index.html">Back to Login</a></div>
+  </div>
+</body>
+</html>
