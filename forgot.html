@@ -2,20 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Forgot Password - VMS</title>
-  <link rel="stylesheet" href="style.css?v=7_fixed4">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Password - VMS</title>
+  <link rel="stylesheet" href="style.css?v=8.2">
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="script.js?v=7_fixed4" defer></script>
+  <script src="script.js?v=8.2" defer></script>
 </head>
-<body class="centered-page">
-  <div class="login-box">
+<body data-page="forgot">
+  <header class="banner">Vessel Management System</header>
+  <div class="card">
     <h2>Reset Password</h2>
-    <form id="resetForm">
-      <input type="email" id="resetEmail" placeholder="Enter your email" required>
-      <button type="submit" id="resetBtn"><span class="btn-text">Reset</span><span class="spinner hidden"></span></button>
+    <form id="forgotForm">
+      <input type="email" id="forgotEmail" placeholder="Enter your email" required>
+      <button type="submit" class="btn">Reset</button>
     </form>
-    <div id="resetMsg" class="msg"></div>
     <div class="links"><a href="index.html">Back to Login</a></div>
   </div>
 </body>
