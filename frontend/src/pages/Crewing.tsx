@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Users, UserPlus } from 'lucide-react';
+import { Card, CardContent } from '../components/ui/card';
+import { Users } from 'lucide-react';
 
 const Crewing: React.FC = () => {
   return (

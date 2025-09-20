@@ -21,7 +21,7 @@ interface ProfileData {
 }
 
 const Profile: React.FC = () => {
-  const { user } = useAuth();
+  const { } = useAuth();
   const [profile, setProfile] = useState<ProfileData>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);

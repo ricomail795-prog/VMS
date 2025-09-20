@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiClient } from '../lib/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Ship, Wrench, Shield, Users } from 'lucide-react';
+import { Ship, Wrench, Shield } from 'lucide-react';
 
 interface DashboardData {
   total_vessels: number;
