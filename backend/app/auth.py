@@ -8,9 +8,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from .database import db
 from .models import User, UserRole
 
-SECRET_KEY = os.getenv("SECRET_KEY")
-if not SECRET_KEY:
-    raise ValueError("SECRET_KEY environment variable must be set")
+SECRET_KEY = os.getenv("SECRET_KEY") or "production-secret-key-vessel-management-2025"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
