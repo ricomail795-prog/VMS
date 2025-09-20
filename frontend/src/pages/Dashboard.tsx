@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiClient } from '../lib/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Ship, Wrench, Shield, User } from 'lucide-react';
+import { Ship, Wrench, Shield } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 interface DashboardData {
@@ -15,7 +15,7 @@ interface DashboardData {
 }
 
 const Dashboard: React.FC = () => {
-  const { user, isAdmin, isCrew } = useAuth();
+  const { user } = useAuth();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
 
