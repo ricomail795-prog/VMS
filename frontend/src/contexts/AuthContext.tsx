@@ -4,9 +4,11 @@ import { apiClient, User } from '../lib/api';
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, firstName?: string, surname?: string) => Promise<void>;
+  register: (email: string, password: string, firstName?: string, surname?: string, role?: string) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
+  isAdmin: () => boolean;
+  isCrew: () => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -53,13 +55,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const register = async (email: string, password: string, firstName?: string, surname?: string) => {
+  const register = async (email: string, password: string, firstName?: string, surname?: string, role?: string) => {
     try {
       await apiClient.register({
         email,
         password,
         first_name: firstName,
         surname: surname,
+        role: role || 'crew',
       });
     } catch (error) {
       throw error;
@@ -71,12 +74,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser(null);
   };
 
+  const isAdmin = () => {
+    return user?.role === 'admin';
+  };
+
+  const isCrew = () => {
+    return user?.role === 'crew';
+  };
+
   const value = {
     user,
     login,
     register,
     logout,
     isLoading,
+    isAdmin,
+    isCrew,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
