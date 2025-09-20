@@ -10,6 +10,7 @@ interface RegisterData {
   password: string;
   first_name?: string;
   surname?: string;
+  role?: string;
 }
 
 interface User {
@@ -112,6 +113,32 @@ class ApiClient {
 
   async getCertificates() {
     return this.request('/certificates');
+  }
+
+  async createVessel(vesselData: any) {
+    return this.request('/vessels', {
+      method: 'POST',
+      body: JSON.stringify(vesselData),
+    });
+  }
+
+  async getCrewAssignments(userId?: number, vesselId?: number) {
+    const params = new URLSearchParams();
+    if (userId) params.append('user_id', userId.toString());
+    if (vesselId) params.append('vessel_id', vesselId.toString());
+    const query = params.toString() ? `?${params.toString()}` : '';
+    return this.request(`/crew-assignments${query}`);
+  }
+
+  async createCrewAssignment(assignmentData: any) {
+    return this.request('/crew-assignments', {
+      method: 'POST',
+      body: JSON.stringify(assignmentData),
+    });
+  }
+
+  async getMyAssignment() {
+    return this.request('/my-assignment');
   }
 
   logout() {

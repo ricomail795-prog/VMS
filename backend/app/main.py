@@ -9,7 +9,9 @@ from .auth import (
     create_access_token, 
     get_current_user, 
     get_password_hash,
-    ACCESS_TOKEN_EXPIRE_MINUTES
+    ACCESS_TOKEN_EXPIRE_MINUTES,
+    require_admin,
+    require_admin_or_manager
 )
 
 app = FastAPI(title="Vessel Management System API", version="1.0.0")
@@ -138,6 +140,44 @@ async def create_safety_record(safety_data: SafetyRecord, current_user: dict = D
     record = db.create_safety_record(safety_dict)
     return record
 
+@app.post("/vessels")
+async def create_vessel(vessel_data: Vessel, admin_user: dict = Depends(require_admin)):
+    vessel_dict = vessel_data.model_dump()
+    vessel = db.create_vessel(vessel_dict)
+    return vessel
+
+@app.get("/crew-assignments")
+async def get_crew_assignments(
+    user_id: Optional[int] = None, 
+    vessel_id: Optional[int] = None,
+    current_user: dict = Depends(get_current_user)
+):
+    assignments = db.get_crew_assignments(user_id, vessel_id)
+    return assignments
+
+@app.post("/crew-assignments")
+async def create_crew_assignment(assignment_data: CrewAssignment, current_user: dict = Depends(get_current_user)):
+    assignment_dict = assignment_data.model_dump()
+    assignment_dict["user_id"] = current_user["id"]
+    
+    existing_assignment = db.get_user_current_assignment(current_user["id"])
+    if existing_assignment:
+        db.update_crew_assignment(existing_assignment["id"], {"is_active": False})
+    
+    assignment = db.create_crew_assignment(assignment_dict)
+    return assignment
+
+@app.get("/my-assignment")
+async def get_my_assignment(current_user: dict = Depends(get_current_user)):
+    assignment = db.get_user_current_assignment(current_user["id"])
+    if assignment:
+        vessel = db.get_vessel_by_id(assignment["vessel_id"])
+        return {
+            "assignment": assignment,
+            "vessel": vessel
+        }
+    return None
+
 @app.get("/dashboard")
 async def get_dashboard_data(current_user: dict = Depends(get_current_user)):
     vessels = db.get_vessels()
@@ -149,6 +189,10 @@ async def get_dashboard_data(current_user: dict = Depends(get_current_user)):
     pending_maintenance = len([m for m in maintenance_records if m["status"] == "pending"])
     open_safety_issues = len([s for s in safety_records if s["status"] == "open"])
     
+    user_assignment = None
+    if current_user["role"] == "crew":
+        user_assignment = db.get_user_current_assignment(current_user["id"])
+    
     return {
         "total_vessels": total_vessels,
         "active_vessels": active_vessels,
@@ -156,5 +200,6 @@ async def get_dashboard_data(current_user: dict = Depends(get_current_user)):
         "open_safety_issues": open_safety_issues,
         "recent_vessels": vessels[:5],
         "recent_maintenance": maintenance_records[:5],
-        "recent_safety": safety_records[:5]
+        "recent_safety": safety_records[:5],
+        "user_assignment": user_assignment
     }

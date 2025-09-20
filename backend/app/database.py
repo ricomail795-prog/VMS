@@ -119,5 +119,38 @@ class InMemoryDatabase:
         if vessel_id:
             return [record for record in self.safety_records.values() if record["vessel_id"] == vessel_id]
         return list(self.safety_records.values())
+    
+    def create_vessel(self, vessel_data: dict) -> dict:
+        vessel_id = self._get_next_id()
+        vessel_data["id"] = vessel_id
+        vessel_data["created_at"] = datetime.now()
+        self.vessels[vessel_id] = vessel_data
+        return vessel_data
+    
+    def create_crew_assignment(self, assignment_data: dict) -> dict:
+        assignment_id = self._get_next_id()
+        assignment_data["id"] = assignment_id
+        self.crew_assignments[assignment_id] = assignment_data
+        return assignment_data
+    
+    def get_crew_assignments(self, user_id: Optional[int] = None, vessel_id: Optional[int] = None) -> List[dict]:
+        assignments = list(self.crew_assignments.values())
+        if user_id:
+            assignments = [a for a in assignments if a["user_id"] == user_id]
+        if vessel_id:
+            assignments = [a for a in assignments if a["vessel_id"] == vessel_id]
+        return assignments
+    
+    def get_user_current_assignment(self, user_id: int) -> Optional[dict]:
+        for assignment in self.crew_assignments.values():
+            if assignment["user_id"] == user_id and assignment["is_active"]:
+                return assignment
+        return None
+    
+    def update_crew_assignment(self, assignment_id: int, assignment_data: dict) -> Optional[dict]:
+        if assignment_id in self.crew_assignments:
+            self.crew_assignments[assignment_id].update(assignment_data)
+            return self.crew_assignments[assignment_id]
+        return None
 
 db = InMemoryDatabase()

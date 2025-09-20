@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import JWTError, jwt
@@ -5,9 +6,11 @@ from passlib.context import CryptContext
 from fastapi import HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from .database import db
-from .models import User
+from .models import User, UserRole
 
-SECRET_KEY = "vessel-management-secret-key-change-in-production"
+SECRET_KEY = os.getenv("SECRET_KEY")
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY environment variable must be set")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -64,3 +67,20 @@ def authenticate_user(email: str, password: str) -> Optional[dict]:
     if not verify_password(password, user["hashed_password"]):
         return None
     return user
+
+def require_role(required_roles: list[UserRole]):
+    def role_checker(current_user: dict = Depends(get_current_user)) -> dict:
+        user_role = UserRole(current_user["role"])
+        if user_role not in required_roles:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Access denied. Required roles: {[role.value for role in required_roles]}"
+            )
+        return current_user
+    return role_checker
+
+def require_admin(current_user: dict = Depends(get_current_user)) -> dict:
+    return require_role([UserRole.ADMIN])(current_user)
+
+def require_admin_or_manager(current_user: dict = Depends(get_current_user)) -> dict:
+    return require_role([UserRole.ADMIN, UserRole.MANAGER])(current_user)

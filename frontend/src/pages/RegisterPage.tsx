@@ -11,6 +11,7 @@ const RegisterPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [surname, setSurname] = useState('');
+  const [role, setRole] = useState('crew');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { register } = useAuth();
@@ -22,7 +23,7 @@ const RegisterPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      await register(email, password, firstName, surname);
+      await register(email, password, firstName, surname, role);
       navigate('/login');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Registration failed');
@@ -98,6 +99,20 @@ const RegisterPage: React.FC = () => {
                 required
                 placeholder="Enter your password"
               />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="role" className="text-sm font-medium">
+                Role
+              </label>
+              <select
+                id="role"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="crew">Crew Member</option>
+                <option value="admin">Administrator</option>
+              </select>
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? 'Creating Account...' : 'Create Account'}

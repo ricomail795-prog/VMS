@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { apiClient } from '../lib/api';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Ship, Wrench, Shield } from 'lucide-react';
+import { Ship, Wrench, Shield, User } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 interface DashboardData {
   total_vessels: number;
@@ -14,6 +15,7 @@ interface DashboardData {
 }
 
 const Dashboard: React.FC = () => {
+  const { user, isAdmin, isCrew } = useAuth();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -71,7 +73,14 @@ const Dashboard: React.FC = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600">Overview of your vessel management system</p>
+        <p className="text-gray-600">
+          Welcome to your vessel management system, {user?.first_name || 'User'}
+          {user?.role && (
+            <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+              {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+            </span>
+          )}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
