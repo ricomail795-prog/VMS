@@ -10,6 +10,7 @@ class InMemoryDatabase:
         self.next_of_kin: Dict[int, dict] = {}
         self.medical_info: Dict[int, dict] = {}
         self.certificates: Dict[int, dict] = {}
+        self.electronic_signatures: Dict[int, dict] = {}
         self.vessels: Dict[int, dict] = {}
         self.crew_assignments: Dict[int, dict] = {}
         self.maintenance_records: Dict[int, dict] = {}
@@ -152,5 +153,60 @@ class InMemoryDatabase:
             self.crew_assignments[assignment_id].update(assignment_data)
             return self.crew_assignments[assignment_id]
         return None
+    
+    def get_user_next_of_kin(self, user_id: int) -> Optional[dict]:
+        for kin in self.next_of_kin.values():
+            if kin["user_id"] == user_id:
+                return kin
+        return None
+    
+    def update_user_next_of_kin(self, user_id: int, kin_data: dict) -> dict:
+        existing_kin = self.get_user_next_of_kin(user_id)
+        if existing_kin:
+            existing_kin.update(kin_data)
+            return existing_kin
+        else:
+            kin_id = self._get_next_id()
+            kin_data["id"] = kin_id
+            kin_data["user_id"] = user_id
+            self.next_of_kin[kin_id] = kin_data
+            return kin_data
+    
+    def get_user_medical_info(self, user_id: int) -> Optional[dict]:
+        for medical in self.medical_info.values():
+            if medical["user_id"] == user_id:
+                return medical
+        return None
+    
+    def update_user_medical_info(self, user_id: int, medical_data: dict) -> dict:
+        existing_medical = self.get_user_medical_info(user_id)
+        if existing_medical:
+            existing_medical.update(medical_data)
+            return existing_medical
+        else:
+            medical_id = self._get_next_id()
+            medical_data["id"] = medical_id
+            medical_data["user_id"] = user_id
+            self.medical_info[medical_id] = medical_data
+            return medical_data
+    
+    def get_user_electronic_signature(self, user_id: int) -> Optional[dict]:
+        for signature in self.electronic_signatures.values():
+            if signature["user_id"] == user_id and signature["is_active"]:
+                return signature
+        return None
+    
+    def update_user_electronic_signature(self, user_id: int, signature_data: dict) -> dict:
+        existing_signature = self.get_user_electronic_signature(user_id)
+        if existing_signature:
+            existing_signature.update(signature_data)
+            return existing_signature
+        else:
+            signature_id = self._get_next_id()
+            signature_data["id"] = signature_id
+            signature_data["user_id"] = user_id
+            signature_data["created_at"] = datetime.now()
+            self.electronic_signatures[signature_id] = signature_data
+            return signature_data
 
 db = InMemoryDatabase()

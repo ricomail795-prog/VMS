@@ -104,6 +104,42 @@ async def create_certificate(cert_data: Certificate, current_user: dict = Depend
     certificate = db.create_certificate(cert_dict)
     return certificate
 
+@app.get("/next-of-kin")
+async def get_next_of_kin(current_user: dict = Depends(get_current_user)):
+    next_of_kin = db.get_user_next_of_kin(current_user["id"])
+    return next_of_kin or {}
+
+@app.put("/next-of-kin")
+async def update_next_of_kin(kin_data: NextOfKin, current_user: dict = Depends(get_current_user)):
+    kin_dict = kin_data.model_dump(exclude_unset=True)
+    kin_dict["user_id"] = current_user["id"]
+    updated_kin = db.update_user_next_of_kin(current_user["id"], kin_dict)
+    return updated_kin
+
+@app.get("/medical-info")
+async def get_medical_info(current_user: dict = Depends(get_current_user)):
+    medical_info = db.get_user_medical_info(current_user["id"])
+    return medical_info or {}
+
+@app.put("/medical-info")
+async def update_medical_info(medical_data: MedicalInfo, current_user: dict = Depends(get_current_user)):
+    medical_dict = medical_data.model_dump(exclude_unset=True)
+    medical_dict["user_id"] = current_user["id"]
+    updated_medical = db.update_user_medical_info(current_user["id"], medical_dict)
+    return updated_medical
+
+@app.get("/electronic-signature")
+async def get_electronic_signature(current_user: dict = Depends(get_current_user)):
+    signature = db.get_user_electronic_signature(current_user["id"])
+    return signature or {}
+
+@app.put("/electronic-signature")
+async def update_electronic_signature(signature_data: ElectronicSignature, current_user: dict = Depends(get_current_user)):
+    signature_dict = signature_data.model_dump(exclude_unset=True)
+    signature_dict["user_id"] = current_user["id"]
+    updated_signature = db.update_user_electronic_signature(current_user["id"], signature_dict)
+    return updated_signature
+
 @app.get("/vessels")
 async def get_vessels(current_user: dict = Depends(get_current_user)):
     vessels = db.get_vessels()
