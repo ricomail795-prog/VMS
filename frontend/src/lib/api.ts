@@ -141,6 +141,46 @@ class ApiClient {
     return this.request('/my-assignment');
   }
 
+  async getNextOfKin() {
+    return this.request('/next-of-kin');
+  }
+
+  async updateNextOfKin(kinData: any) {
+    return this.request('/next-of-kin', {
+      method: 'PUT',
+      body: JSON.stringify(kinData),
+    });
+  }
+
+  async getMedicalInfo() {
+    return this.request('/medical-info');
+  }
+
+  async updateMedicalInfo(medicalData: any) {
+    return this.request('/medical-info', {
+      method: 'PUT',
+      body: JSON.stringify(medicalData),
+    });
+  }
+
+  async getElectronicSignature() {
+    return this.request('/electronic-signature');
+  }
+
+  async updateElectronicSignature(signatureData: any) {
+    return this.request('/electronic-signature', {
+      method: 'PUT',
+      body: JSON.stringify(signatureData),
+    });
+  }
+
+  async createCertificate(certData: any) {
+    return this.request('/certificates', {
+      method: 'POST',
+      body: JSON.stringify(certData),
+    });
+  }
+
   logout() {
     this.token = null;
     localStorage.removeItem('access_token');

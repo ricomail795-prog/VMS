@@ -149,3 +149,11 @@ class QHSERecord(BaseModel):
     status: str = "open"
     created_by: int
     created_at: Optional[datetime] = None
+
+class ElectronicSignature(BaseModel):
+    id: Optional[int] = None
+    user_id: int
+    signature_data: str
+    signature_type: str = "drawn"
+    created_at: Optional[datetime] = None
+    is_active: bool = True
